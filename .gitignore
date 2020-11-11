@@ -1,5 +1,8 @@
 ##FORTRAN
 
+#DATA OUTPUT
+*.dat
+
 # Prerequisites
 *.d
 
