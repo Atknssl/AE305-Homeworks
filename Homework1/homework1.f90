@@ -57,12 +57,11 @@ PROGRAM HOMEWORK1
    read(*,*) method
 
 !  Check if selection is valid
-!  Commented out for now, i dont know if its necessary
 
-!   if(.not.(method .eq. 1 .or. method .eq. 2)) then
-!      write(*,*) 'Unidentified input, stopping program...'
-!      stop
-!   endif
+   if(.not.(method .eq. 1 .or. method .eq. 2)) then
+      write(*,*) 'Unidentified input, stopping program...'
+      stop
+   endif
 
 !  Select altitude
    write(*,'(/,a)')'Select one of the available altitudes:'
