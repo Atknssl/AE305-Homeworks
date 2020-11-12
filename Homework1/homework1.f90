@@ -1,5 +1,6 @@
 !--------------------------------------------------
-!..Homework 1 
+!..Homework 1
+!..Team 31
 !..AE305 - Numerical Methods
 !--------------------------------------------------
 Module data
@@ -9,25 +10,25 @@ Module data
    real :: rho, thrust
 
    contains
-     Function Liftf(vel)
+     Function Liftf(vel) ! Calculate Lift
       real :: vel, Liftf
       Liftf = CL*(1./2)*rho*(vel**2)*WParea
       return
       End Function Liftf
    
-     Function Dragf(vel)
+     Function Dragf(vel) ! Calculate Drag
       real :: vel, Dragf
       Dragf = CD*(1./2)*rho*(vel**2)*WParea
       return
       End Function Dragf
 
-     Function Thrustf(dens)
+     Function Thrustf(dens) ! Calculate Thrust
       real :: dens, Thrustf
       Thrustf = TmaxSL*(dens/airdensitySL)
       return
       End Function Thrustf
 
-      Function ODE(vel)
+      Function ODE(vel) ! Slope function for velocity
          real:: vel
          real :: ODE
          ODE  = (thrust-Dragf(vel)-friccoeff*(takeoffweight-Liftf(vel)))*(grav/takeoffweight)
@@ -45,6 +46,7 @@ PROGRAM HOMEWORK1
    real, parameter:: a1 =1./4 , a2=3./4, p1=2./3
    integer :: method, selectedaltitude
 
+!  Initial values
    time=0.
    velocity=0.
    lift=0.
@@ -57,7 +59,6 @@ PROGRAM HOMEWORK1
    read(*,*) method
 
 !  Check if selection is valid
-
    if(.not.(method .eq. 1 .or. method .eq. 2)) then
       write(*,*) 'Unidentified input, stopping program...'
       stop
@@ -74,22 +75,22 @@ PROGRAM HOMEWORK1
 !  Set proper variables for selected altitude
    Select case(selectedaltitude)
       case(1)
-         write(*,*) 'Selected Sea Level' !This will be deleted later
+         write(*,*) 'Selected Sea Level'
+         ! Set density and thrust for sea level
          rho = airdensitySL
          thrust = TmaxSL*nrofengines
-         ! Set density and thrust here 
       case(2)
-         write(*,*) 'Selected 1000 m' !This will be deleted later
+         write(*,*) 'Selected 1000 m'
+         ! Set density and thrust for 1000 m
          rho = airdensity1000m
          thrust = Thrustf(rho)*nrofengines
-         ! Set density and thrust here
       case(3)
-         write(*,*) 'Selected 2000 m' !This will be deleted later
+         ! Set density and thrust 2000 m
+         write(*,*) 'Selected 2000 m'
          rho = airdensity2000m
          thrust = Thrustf(rho)*nrofengines
-         ! Set density and thrust here
       case default
-         ! Cheap validation check
+         ! Validation check
          write(*,*) 'Unidentified input, stopping program...'
          stop
    end Select
@@ -98,7 +99,7 @@ PROGRAM HOMEWORK1
    write(*,'(/,(a))',advance='no')'Enter Time Step :> '
    read(*,*) stepsize
 
-!..open the output file
+!  Open the output file
    write(*,'(/,a)',advance='no')'Enter the output file name [velocity.dat] :> '
    read(*,"(a)") fname
    if( fname .eq. " ") fname = "velocity.dat"
@@ -106,25 +107,27 @@ PROGRAM HOMEWORK1
 
 !  Use selected method
    Select case(method)
-   case(1)
-      do while ( lift .lt. takeoffweight )                             ! EULER METHOD   *tanımlanmamış degişkenler*
+   case(1) ! EULER METHOD 
+      write(*,*) 'Using Eulers Method'
+      do while ( lift .lt. takeoffweight )                               
          time  = time + stepsize                                ! New time is defined
-         velocity = velocity + ODE(velocity)*stepsize           ! New velocity is defined by Old Velocity + slope of old velocity*step size  *tanımlanmamış fonksiyon*
-         lift = Liftf(velocity)
-         write(1,"(2f12.3)") time, velocity
+         velocity = velocity + ODE(velocity)*stepsize           ! New velocity is defined
+         lift = Liftf(velocity)                                 ! Calculate next lift to check if lift off occured
+         write(1,"(3f12.3)") time, velocity
       enddo
-      write(*,*) 'Using Eulers Method' !This will be deleted later
-   case(2)
-      do while ( lift .lt. takeoffweight )                             ! RK2 METHOD  
+      write(*,'(a,f6.3)') 'Minimum time needed to take off:', time
+   case(2) ! RK2 METHOD  
+      write(*,*) 'Using RK Method'
+      do while ( lift .lt. takeoffweight )                             
          time = time + stepsize                                 ! New time is defined
-         k1 = ODE(velocity)                                     ! k1 is calculated which is slope at old velocity *tanımlanmamış fonksiyon*
-         velocityx = velocity + k1*p1*stepsize                  ! velocityx is calculated   *tanımlanmamış değişken* 
-         k2 = ODE(velocityx)                                    ! k1 is calculated which is slope at velocityx  *tanımlanmamış fonksiyon*
-         velocity = velocity + ( a1*k1 + a2*k2 )* stepsize      ! New velocity is defined by Old Velocity + average slope of old velocity and velocityx * step size  *tanımlanmamış değişken a1, a2*
-         lift = Liftf(velocity)                                   ! *tanımlanmamış değişken ve fonksiyon*     
-         write(1,"(2f12.3)") time, velocity
+         k1 = ODE(velocity)                                     ! k1 is calculated which is slope at previous velocity
+         velocityx = velocity + k1*p1*stepsize                  ! velocityx is calculated
+         k2 = ODE(velocityx)                                    ! k2 is calculated which is slope at velocityx
+         velocity = velocity + ( a1*k1 + a2*k2 )* stepsize      ! New velocity is defined
+         lift = Liftf(velocity)                                 ! Calculate next lift to check if lift off occured
+         write(1,"(3f12.3)") time, velocity
       enddo
-      write(*,*) 'Using RK Method' !This will be deleted later
+      write(*,'(a,f6.3)') 'Minimum time needed to take off:', time
    End select
 
 !..Close the output file
