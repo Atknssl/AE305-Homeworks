@@ -24,6 +24,7 @@
 \usepackage{graphicx} % takes care of graphic including machinery
 \usepackage[margin=1in,letterpaper]{geometry} % decreases margins
 \usepackage{cite} % takes care of citations
+\usepackage{setspace}
 
 \begin{document}
 \begin{center}
@@ -64,6 +65,62 @@ solution with the help of numerical methods.
 (Drag formülünü de yazmak istedim ama nereye yazarım bilemedim sonra eklerim)
 
 \section{Method}
+Euler's method can be defined as the first order Taylor Series Expansion. In this method, the space between
+the initial point of the independent variable and the desired next point is divided into discrete points. The 
+difference between respective discrete points is named as step size, $\nabla x$. Then, a first order ordinary
+differential equation at initial point, is calculated and treated as slope.
+\begin{equation}
+\frac{dy}{dx} \equiv y \prime \equiv f(x,y) \equiv SLOPE
+\end{equation}
+The slope is multiplied by the stepsize
+and added to initial dependent variable. The result gave the next dependent variable.
+
+\begin{center}
+Next Value = Previous Value + Step Size $\times $ Slope
+\end{center}
+\begin{equation}
+y(x + \nabla x ) = y(x) + \nabla x f(x,y)
+\end{equation}
+\begin{equation}
+y_{i+1} = y_i + \nabla x f(x_i , y_i)
+\label{eq:eul}
+\end{equation}
+This equation was repeated until the $x_i$ exceeded the desired independent point.
+
+Second Order Runge-Kutta method has the similar equation form with Euler's method:
+\begin{equation}
+y_{i+1} = y_i + \nabla x \phi (x_i , y_i, \nabla x)
+\label{eq:rk2}
+\end{equation}
+However, in second order RK method, $y\prime $ is not used as slope. In stead of $y\prime $, $\phi$ which is 
+called increment function is used. $\phi$ is weighted slope function over the interval.
+\begin{equation}
+\phi = a_1k_1 + a_2k_2
+\end{equation}
+\begin{center}
+$ \frac{dy}{dx} = f(x,y) $  
+
+\doublespacing
+$k_1 = f(x_i,y_i)$ 
+
+\doublespacing
+$k_2 = f(x_i+p_i\nabla x, y_i+p_i\nabla x k_1)$
+\end{center}
+where $p_i<1$  and
+We chose $p_i = 2/3 $.
+\begin{center}
+$a_1+a_2 = 1$ 
+
+\doublespacing
+$a_2p_1 = \frac{1}{2}$
+\end{center}
+Therefore, $a_1=1/4$ and $a_2=3/4$ .
+Trapezoidal integration rule is basic version of calculating area under a curve. It is based on
+dividing the area under the curve $y(x)$ into small trapezoids. Then, areas of trapezoids which was equal to 
+$\frac {1}{2}(V_i+V_{i+1})\nabla t $ is summed up:
+\begin{equation}
+\int_{0}^{N_p\nabla t} V(t) dt = \sum_{i=0}^{N_p-1} \frac{1}{2}(V_i+V_{i+1}) \nabla t 
+\end{equation}
 
 \newpage
 
