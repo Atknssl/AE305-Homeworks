@@ -4,7 +4,22 @@
 !--------------------------------------------------
 Module data
    implicit none
+   real,parameter:: WParea=29.24, takeoffweight=88250, TmaxSL=16256, nrofengines=2, CD=0.2150, CL=1.792, friccoeff=0.02, airdensitySL=1.225, airdensity1000m=1.112, airdensity2000m=1.007, grav=9.81
+   contains
+     Function Lift(vel)
+      Lift = CL*(1/2)*rho*(vel**2)*WParea
+      return
+      End Function Lift
+   
+     Function Drag(vel)
+      Drag = CD*(1/2)*rho*(vel**2)*WParea
+      return
+      End Function Drag
 
+     Function Thrust(dens)
+      Thrust = TmaxSL*(dens/airdensitySL)
+      return
+      End Function Thrust
 End module
 
 PROGRAM HOMEWORK1
@@ -13,7 +28,7 @@ PROGRAM HOMEWORK1
    implicit none
 
    character*40 :: fname
-   real :: stepsize, k1, k2, a1, a2, p1,velocity, velocityx, weight, lift, time
+   real :: stepsize, k1, k2, a1, a2, p1,velocity, velocityx, weight, lift, time, thrust, rho
    integer :: method, selectedaltitude
 
 
@@ -44,12 +59,18 @@ PROGRAM HOMEWORK1
    Select case(selectedaltitude)
       case(1)
          write(*,*) 'Selected Sea Level' !This will be deleted later
+         rho = airdensitySL
+         thrust = TmaxSL*nrofengines
          ! Set density and thrust here 
       case(2)
          write(*,*) 'Selected 1000 m' !This will be deleted later
+         rho = airdensity1000m
+         thrust = Thrust(rho)*nrofengines
          ! Set density and thrust here
       case(3)
          write(*,*) 'Selected 2000 m' !This will be deleted later
+         rho = airdensity2000m
+         thrust = Thrust(rho)*nrofengines
          ! Set density and thrust here
       case default
          ! Cheap validation check
@@ -73,6 +94,7 @@ PROGRAM HOMEWORK1
       do while ( weight .lt. lift )                             ! EULER METHOD   *tanımlanmamış degişkenler*
          time  = time + stepsize                                ! New time is defined
          velocity = velocity + ODE(velocity)*stepsize           ! New velocity is defined by Old Velocity + slope of old velocity*step size  *tanımlanmamış fonksiyon*
+         lift = Lift(velocity)
          write(1,"(3f12.3)") time, velocity
       enddo
       write(*,*) 'Using Eulers Method' !This will be deleted later
@@ -83,7 +105,7 @@ PROGRAM HOMEWORK1
          velocityx = velocity + k1*p1*stepsize                  ! velocityx is calculated   *tanımlanmamış değişken* 
          k2 = ODE(velocityx)                                    ! k1 is calculated which is slope at velocityx  *tanımlanmamış fonksiyon*
          velocity = velocity + ( a1*k1 + a2*k2 )* stepsize      ! New velocity is defined by Old Velocity + average slope of old velocity and velocityx * step size  *tanımlanmamış değişken a1, a2*
-         lift = lifteqn(lift)                                   ! *tanımlanmamış değişken ve fonksiyon*     
+         lift = Lift(velocity)                                   ! *tanımlanmamış değişken ve fonksiyon*     
       enddo
       write(*,*) 'Using RK Method' !This will be deleted later
    End select
@@ -93,3 +115,9 @@ PROGRAM HOMEWORK1
 
    stop
 END PROGRAM HOMEWORK1
+
+Function ODE(vel)
+   use data
+   ODE  = (thrust-Drag(vel)-friccoeff*(takeoffweight-Lift(vel)))*(grav/takeoffweight)
+   return
+ End
