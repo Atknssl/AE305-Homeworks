@@ -111,7 +111,7 @@ PROGRAM HOMEWORK1
          time  = time + stepsize                                ! New time is defined
          velocity = velocity + ODE(velocity)*stepsize           ! New velocity is defined by Old Velocity + slope of old velocity*step size  *tanımlanmamış fonksiyon*
          lift = Liftf(velocity)
-         write(1,"(3f12.3)") time, velocity, lift
+         write(1,"(2f12.3)") time, velocity
       enddo
       write(*,*) 'Using Eulers Method' !This will be deleted later
    case(2)
@@ -122,6 +122,7 @@ PROGRAM HOMEWORK1
          k2 = ODE(velocityx)                                    ! k1 is calculated which is slope at velocityx  *tanımlanmamış fonksiyon*
          velocity = velocity + ( a1*k1 + a2*k2 )* stepsize      ! New velocity is defined by Old Velocity + average slope of old velocity and velocityx * step size  *tanımlanmamış değişken a1, a2*
          lift = Liftf(velocity)                                   ! *tanımlanmamış değişken ve fonksiyon*     
+         write(1,"(2f12.3)") time, velocity
       enddo
       write(*,*) 'Using RK Method' !This will be deleted later
    End select
