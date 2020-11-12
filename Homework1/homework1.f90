@@ -13,7 +13,7 @@ PROGRAM HOMEWORK1
    implicit none
 
    character*40 :: fname
-   real :: stepsize
+   real :: stepsize, k1, k2, a1, a2, p1,velocity, velocityx, weight, lift, time
    integer :: method, selectedaltitude
 
 
@@ -70,10 +70,21 @@ PROGRAM HOMEWORK1
 !  Use selected method
    Select case(method)
    case(1)
-      !Eulers Method code here
+      do while ( weight .lt. lift )                             ! EULER METHOD   *tanımlanmamış degişkenler*
+         time  = time + stepsize                                ! New time is defined
+         velocity = velocity + ODE(velocity)*stepsize           ! New velocity is defined by Old Velocity + slope of old velocity*step size  *tanımlanmamış fonksiyon*
+         write(1,"(3f12.3)") time, velocity
+      enddo
       write(*,*) 'Using Eulers Method' !This will be deleted later
    case(2)
-      !RK Method code here
+      do while ( weight .lt. lift )                             ! RK2 METHOD  
+         time = time + stepsize                                 ! New time is defined
+         k1 = ODE(velocity)                                     ! k1 is calculated which is slope at old velocity *tanımlanmamış fonksiyon*
+         velocityx = velocity + k1*p1*stepsize                  ! velocityx is calculated   *tanımlanmamış değişken* 
+         k2 = ODE(velocityx)                                    ! k1 is calculated which is slope at velocityx  *tanımlanmamış fonksiyon*
+         velocity = velocity + ( a1*k1 + a2*k2 )* stepsize      ! New velocity is defined by Old Velocity + average slope of old velocity and velocityx * step size  *tanımlanmamış değişken a1, a2*
+         lift = lifteqn(lift)                                   ! *tanımlanmamış değişken ve fonksiyon*     
+      enddo
       write(*,*) 'Using RK Method' !This will be deleted later
    End select
 
