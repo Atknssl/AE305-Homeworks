@@ -40,6 +40,28 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 
 \section{Introduction}
 
+It is useful to use numerical methods in order to solve differential equations when
+the analytical solution is time consuming. In this homework, we are given an aircraft
+which rolls on the ground and takes off some time later, and we are asked to find
+the minimum time required for this aircraft to take off at different airport altitudes.
+We know that the aircraft will take off when the lift force is higher than the weight of
+the aircraft. Since the lift force is a function of velocity;
+
+\begin{equation}
+        L = C_L \cdot \frac{1}{2} \cdot \rho_{\infty} \cdot V_{\infty}^{2}
+\end{equation}
+
+first we should calculate velocity which is described as a differential equation for
+this problem:
+
+\begin{equation}
+        \frac{W}{g} \cdot \frac{dV}{dt} = T - D - \mu \cdot (W - L)
+\end{equation}
+
+Therefore we are asked to use Euler's and RK2 methods so that we can approach the
+solution with the help of numerical methods.
+
+(Drag formülünü de yazmak istedim ama nereye yazarım bilemedim sonra eklerim)
 
 \section{Method}
 
