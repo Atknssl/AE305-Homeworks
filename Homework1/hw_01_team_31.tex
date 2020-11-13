@@ -132,7 +132,7 @@ $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
 
 \section{Results and Discussion}
 
-\subsection{Calculation of velocity with Euler's Method at sea level}
+\subsection{Calculation of velocity at sea level with Euler's Method }
 \begin{figure}[ht]
 \centering \includegraphics[max height=10cm]{graphs/question1.eps}
 \caption{Calculation of velocity using Euler's Method with three different time steps at sea level.}
@@ -153,8 +153,21 @@ other step sizes.
 
  The effects of different time steps on result can be clearly seen in Figure \ref{fig:q1_closer}. If we want to obtain
  more precise result, we must decrease the step size.
+\newpage
+\subsection{Calculation of velocity at different altitudes with Euler's Method }
+\begin{figure}[ht]
+        \centering \includegraphics[max height=10cm]{graphs/altitude.eps}
+        \caption{Calculated velocities at different altitudes using Euler's method with $\Delta t = 0.5$.}
+        \label{fig:altitude}
+\end{figure}
 
-\subsection{Placeholder}
+It can be obtained from Figure \ref{fig:altitude} that it takes longer to take off at higher altitudes. 
+This is because as the altitude increases, air density decreases, which decreases the maximum available
+thrust. In addition, lift and drag forces also decrease. Decrease in drag should normally decrease 
+take off time while the decrease in thrust and lift does exactly the opposite. However, 
+the effect of decrease in both lift and thrust overcomes the effect of drag. Therefore 
+take off time increases in higher altitudes.
+
 
 \section{Conclusion}
 
