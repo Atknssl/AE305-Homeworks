@@ -105,6 +105,9 @@ PROGRAM HOMEWORK1
    if( fname .eq. " ") fname = "velocity.dat"
    open(1,file=fname,form="formatted")
 
+!  Write inital values to output file
+   write(1,"(3f12.3)") time, velocity
+
 !  Use selected method
    Select case(method)
    case(1) ! EULER METHOD 
