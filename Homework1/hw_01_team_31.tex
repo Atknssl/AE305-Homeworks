@@ -139,10 +139,12 @@ $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
      \label{fig:q1}
 \end{figure}
 
-As can be seen in Figure \ref{fig:q1}, using different time steps gives different results.
-Initially, results were approximately the same but as time progresses, margin of error increases.
-This margin of error is different for each time step. When $ \Delta t = 3 $, error grows faster than
-other step sizes.
+As can be seen in Figure \ref{fig:q1}, by using different time steps we obtain different results.
+Initially, the results were approximately the same for all time steps but as time progresses, margin of error increases.
+This increase occurs at different rates for each time step. In order to illustrate, when $ \Delta t = 3 $, the
+error grows faster than other cases. If we assume that we have the least error when $ \Delta t = 0.5 $, since it the smallest
+time step among all, we can observe that the curves of the other steps deviates more as the time step gets higher.
+Thus, when $ \Delta t = 3 $, the result is the least accurate.
 
 \newpage
 \begin{figure}[ht]
