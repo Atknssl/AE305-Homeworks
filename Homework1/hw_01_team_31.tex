@@ -132,7 +132,29 @@ $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
 
 \section{Results and Discussion}
 
-\subsection{Subsection}
+\subsection{Calculation of velocity with Euler's Method at sea level}
+\begin{figure}[ht]
+\centering \includegraphics[max height=10cm]{graphs/question1.eps}
+\caption{Calculation of velocity using Euler's Method with three different time steps at sea level.}
+     \label{fig:q1}
+\end{figure}
+
+As can be seen in Figure \ref{fig:q1}, using different time steps gives different results.
+Initially, results were approximately the same but as time progresses, margin of error increases.
+This margin of error is different for each time step. When $ \Delta t = 3 $, error grows faster than
+other step sizes.
+
+\newpage
+\begin{figure}[ht]
+        \centering \includegraphics[max height=10cm]{graphs/question1_finaltime.eps}
+        \caption{Detailed version of Figure \ref{fig:q1} focused on the endpoints.}
+        \label{fig:q1_closer}
+\end{figure}
+
+ The effects of different time steps on result can be clearly seen in Figure \ref{fig:q1_closer}. If we want to obtain
+ more precise result, we must decrease the step size.
+
+\subsection{Placeholder}
 
 \section{Conclusion}
 
