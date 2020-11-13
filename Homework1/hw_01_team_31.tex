@@ -139,12 +139,12 @@ $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
      \label{fig:q1}
 \end{figure}
 
-As can be seen in Figure \ref{fig:q1}, by using different time steps we obtain different results.
-Initially, the results were approximately the same for all time steps but as time progresses, margin of error increases.
-This increase occurs at different rates for each time step. In order to illustrate, when $ \Delta t = 3 $, the
-error grows faster than other cases. If we assume that we have the least error when $ \Delta t = 0.5 $, since it the smallest
-time step among all, we can observe that the curves of the other steps deviates more as the time step gets higher.
-Thus, when $ \Delta t = 3 $, the result is the least accurate.
+As can be seen in Figure \ref{fig:q1}, by using different time step sizes we obtain different results.
+Initially, the results were approximately the same for all time step sizes but as time progresses, the margin of error increases.
+This increase occurs at different rates for each time step size. In order to illustrate, when $ \Delta t = 3 $, the
+error grows faster than other cases. If we assume that we have the least error when $ \Delta t = 0.5 $, since it is
+the smallest time step among all, we can observe that the curves of the other steps deviates more as the time step gets
+higher. Thus, when $ \Delta t = 3 $, the result is the least accurate.
 
 \newpage
 \begin{figure}[ht]
@@ -153,8 +153,12 @@ Thus, when $ \Delta t = 3 $, the result is the least accurate.
         \label{fig:q1_closer}
 \end{figure}
 
- The effects of different time steps on result can be clearly seen in Figure \ref{fig:q1_closer}. If we want to obtain
- more precise result, we must decrease the step size.
+ The effects of using different time step sizes on the result can be clearly seen in Figure \ref{fig:q1_closer}.
+ In the first problem of the homework, we were asked to find the minimum time needed for the given aircraft to
+ lift off at sea level. When we take a closer look at the curves as we did in Figure \ref{fig:q1_closer}, the
+ end points, which gives the lift off time and velocity, are different from each other, and as we mentioned 
+ before, we approach the result more precisely for $ \Delta t = 0.5 $. That means, if we want to obtain more precise result, 
+ we must decrease the step size.
 \newpage
 \subsection{Calculation of velocity at different altitudes with Euler's Method }
 \begin{figure}[ht]
