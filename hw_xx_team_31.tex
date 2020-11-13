@@ -52,17 +52,23 @@ the aircraft. Since the lift force is a function of velocity;
         L = C_L \cdot \frac{1}{2} \cdot \rho_{\infty} \cdot V_{\infty}^{2} \cdot S
 \end{equation}
 
-first we should calculate velocity which is described as a differential equation for
-this problem:
+first we should calculate velocity which is described in a differential form for
+this problem using the force balance equation in the horizontal direction:
 
 \begin{equation}
         \frac{W}{g} \cdot \frac{dV}{dt} = T - D - \mu \cdot (W - L)
 \end{equation}
 
+where the lift and drag forces are initially zero. The next values of drag force is calculated
+by this formula:
+
+\begin{equation}
+        D = C_D \cdot \frac{1}{2} \cdot \rho_{\infty} \cdot V_{\infty}^{2} \cdot S
+\end{equation}
+
 Therefore we are asked to use Euler's and RK2 methods so that we can approach the
 solution with the help of numerical methods.
 
-(Drag formülünü de yazmak istedim ama nereye yazarım bilemedim sonra eklerim)
 
 \section{Method}
 Euler's method can be defined as the first order Taylor Series Expansion. In this method, the space between
