@@ -40,8 +40,8 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 
 \section{Introduction}
 
-It is useful to use numerical methods in order to solve differential equations when
-the analytical solution is time-consuming. In this homework, we are given an aircraft
+It is practical to use numerical methods in order to solve differential equations when
+the analytical solution is time-consuming or an analytical solution does not exist. In this homework, we are given an aircraft
 which rolls on the ground and takes off some time later, and we are asked to find
 the minimum time required for this aircraft to take off at different airport altitudes.
 We know that the aircraft will take off when the lift force is greater than the weight of
@@ -157,7 +157,7 @@ higher. Thus, when $ \Delta t = 3 $, the result is the least accurate.
  In the first problem of the homework, we were asked to find the minimum time needed for the given aircraft to
  lift off at sea level. When we take a closer look at the curves as we did in Figure \ref{fig:q1_closer}, the
  endpoints, which gives the lift-off time and velocity, are different from each other, and as we mentioned 
- before, we approach the result more precisely for $ \Delta t = 0.5 $. That means if we want to obtain more precise result, 
+ before, we approach the result more precisely for $ \Delta t = 0.5 $. That means if we want to obtain a more precise result, 
  we must decrease the step size.
 \newpage
 \subsection{Calculation of velocity at different altitudes with Euler's Method }
@@ -183,7 +183,7 @@ the effect of both the lift force and the thrust overcomes the effect of the dra
 The results in Figure \ref{fig:rk2} are more similar to each other than Figure \ref{fig:q1}. This is because RK2 method with $p_i=2/3$
 is more accurate than Euler's method. In RK2 method with $p_i=2/3$, average slopes at $t_i$ and $t_{i+p_i\Delta t}$
 are used instead of using only one slope at $ t_i $ in every iteration. This leads to more stable results than Euler's method 
-even with a larger step size. In our case, error became significant only at the endpoints. That error has happened because
+even with a larger step size. In our case, error became significant only at the endpoints. That error has occured because
 algorithm jumps to the next time step even if the true result is closer to the current evaluation point than the next evaluation point.
 To decrease this error at the endpoints, a smaller time step must be used.
 \newpage
@@ -195,8 +195,7 @@ To decrease this error at the endpoints, a smaller time step must be used.
 \end{figure}
 As can be seen from the Figure \ref{fig:rk2_05}, for $\Delta t = 0.5$, results of RK2 method with $p_i=2/3$ and Euler's method
 are approximately the same. This is not surprising since the time step size is so small that the margin of error does not change
-significantly for different numerical methods, and we gain accurate results for both methods. However, as the step size increases
-the accuracy of the result is more reliable for RK2 method.
+significantly for different numerical methods, and we gain accurate results for both methods.
 \newpage
 \begin{figure}[!h]
         \centering
@@ -211,7 +210,7 @@ the accuracy of the result is more reliable for RK2 method.
 The Figures \ref{fig:rk2_1} and \ref{fig:rk2_3} show that increasing step size caused the increase in the 
 difference between the results of Euler's method and RK2. This is another proof of larger step sizes leads to an increase in error.
 The RK2 method has less truncation error than the Euler's method; therefore, it is more accurate than Euler's method with bigger 
-time steps.  
+time steps.
 
 \newpage
 \subsection{Calculation of ground roll distance at different altitudes}
@@ -230,7 +229,7 @@ time steps.
         2000 &   772.654 \\ \hline
         \end{tabular}
         \end{center}
-        \end{table}
+\end{table}
 
 First, velocities were calculated using RK2 Method with $\Delta t = 0.5$, which is the smallest
 timestep used in this problem. Then, integral was taken for each interval using Trapezoidal Integration Method.
