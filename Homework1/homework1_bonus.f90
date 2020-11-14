@@ -108,7 +108,7 @@ Module data
           lift = Liftf(velocity)                                 ! Calculate the lift to check if lift off occured
        enddo
        
-       write(*,'(a,f12.3)') 'Minumun distance: ', integration    ! Write result to terminal
+       write(*,'(a,f12.3)') 'Minimum distance: ', integration    ! Write result to terminal
 
  !..Close the output file
     close(1)
