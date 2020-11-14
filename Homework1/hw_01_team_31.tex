@@ -24,6 +24,7 @@
 \usepackage{graphicx} % takes care of graphic including machinery
 \usepackage[margin=1in,letterpaper]{geometry} % decreases margins
 \usepackage{cite} % takes care of citations
+\usepackage{subfigure}
 
 \begin{document}
 \begin{center}
@@ -163,8 +164,37 @@ This is because as the altitude gets higher, the air density decreases, which re
 thrust. In addition to that, lift and drag forces also decreases since they are functions of the free stream
 air density. The decrease in drag should normally result in shorter take off time while the decrease in thrust and lift force acts exactly the opposite way. However, 
 the effect of both the lift force and the thrust overcomes the effect of the drag force. Therefore, take off time increases at higher altitudes.
-
-\subsection{Placeholder}
+\newpage
+\subsection{Calculation of velocity at sea level with second order Runge-Kutta Method }
+\begin{figure}[ht]
+        \centering \includegraphics[max height=10cm]{graphs/RK2.eps}
+        \caption{Calculated velocities at sea level using second order RK method with different time steps.}
+        \label{fig:rk2}
+\end{figure}
+The difference between results in Figure \ref{fig:rk2} lower than Figure \ref{fig:q1}. This is because RK2 method with $p_i=2/3$
+provided more accurate results than Euler's method for our case. In RK2 method with $p_i=2/3$, average slopes at $t_i$ and $t_{i+p_i\Delta t}$
+are used instead of using only one slope at $ t_i $ in every iteration. This leads to more stable results than Euler's methods.
+\newpage
+\subsection{Comparison of Euler's method and RK2 method at sea level with different time steps}
+\begin{figure}[ht]
+        \centering \includegraphics[max height=10cm]{graphs/compare05.eps}
+        \caption{Calculated velocities at sea level using second order RK method and Euler's method for $\Delta t=0.5$.}
+        \label{fig:rk2_05}
+\end{figure}
+As can be seen from the Figure \ref{fig:rk2_05}, for $\Delta t = 0.5$, results of RK2 method with $p_i=2/3$ and Euler's method
+are approximately the same. The reason of that is both RK2 method with $p_i=2/3$ and Euler's method with the lowest step
+size ,$\Delta t = 0.5$ for our case, provided more accurate results. Therefore, the most similar results between RK2
+method and Euler's method was seen for $\Delta t =0.5$.
+\newpage
+\begin{figure*}[htp]
+        \centering
+        \subfigure[$\Delta t=1$.]{\includegraphics[max height=6cm]{graphs/compare1.eps}}\hspace\fill
+        \subfigure[$\Delta t=3$.]{\includegraphics[max height=6cm]{graphs/compare3.eps}}
+        \caption{Calculated velocities at sea level using second order RK method and Euler's method for $\Delta t=1$ and $\Delta t=3$.}
+        \label{fig:rk2_1-3}
+\end{figure*}
+The Figure \ref{fig:rk2_1-3} shows that increasing step size caused the increase in the 
+difference between the results of Euler's method and RK2. This is another proof of higher step sizes lead to increase in error.
 
 \section{Conclusion}
 
