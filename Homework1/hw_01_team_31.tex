@@ -51,7 +51,8 @@ the aircraft. Since the lift force is a function of velocity;
         L = C_L \cdot \frac{1}{2} \cdot \rho_{\infty} \cdot V_{\infty}^{2} \cdot S
 \end{equation}
 
-first, we should calculate velocity which is described in a differential form for
+where the lift coefficient $C_L$ is assumed to be constant and equal to the maximum lift coefficient
+($C_{L,max} = 1.792$), first, we should calculate velocity which is described in a differential form for
 this problem using the force balance equation in the horizontal direction:
 
 \begin{equation}
@@ -65,7 +66,14 @@ by this formula:
         D = C_D \cdot \frac{1}{2} \cdot \rho_{\infty} \cdot V_{\infty}^{2} \cdot S
 \end{equation}
 
-Therefore we are asked to use Euler's and RK2 methods so that we can approach the
+The drag coefficient $C_D$ is also assumed to be constant ($C_D = 0.215$) and its value is 
+calculated by this equation;
+
+\begin{equation}
+        C_D = 0.0207 + 0.0605C_L^{2}
+\end{equation}
+        
+Therefore, we are asked to use Euler's and RK2 methods so that we can approach the
 solution with the help of numerical methods.
 
 
@@ -161,10 +169,10 @@ higher. Thus, when $ \Delta t = 3 $, the result is the least accurate.
 
 It can be obtained from Figure \ref{fig:altitude} that it takes longer for the given aircraft to take off at higher altitudes. 
 This is because as the altitude gets higher, the air density decreases, which results in lower maximum available
-thrust. In addition to that, lift and drag forces also decrease since they are functions of the free stream
-air density. The decrease in drag should generally result in shorter take-off time while the decrease in thrust and lift
- force acts exactly the opposite way. However, the effect of both the lift force and the thrust overcomes 
- the effect of the drag force. Therefore, take off time increases at higher altitudes.
+thrust ($ T_{A,max} = T_{A,max,SL} \frac{\rho_{\infty}}{\rho_{\infty,SL}} $). In addition to that,
+lift and drag forces also decrease since they are functions of the free stream air density. The decrease in drag should 
+generally result in shorter take-off time while the decrease in thrust and lift force acts exactly the opposite way. However, 
+the effect of both the lift force and the thrust overcomes the effect of the drag force. Therefore, take off time increases at higher altitudes.
 \newpage
 \subsection{Calculation of velocity at sea level with second order RK Method }
 \begin{figure}[ht]
@@ -238,6 +246,6 @@ when computed with bigger step sizes. We observed that using smaller time step s
 caused by the usage of different numerical methods. Therefore, if small time step sizes are used, there is no 
 significant difference between these two numerical methods.
 
-Also, we have shown that at higher altitudes, both minimum take-off time and ground roll distance is longer.
+Also, we have shown that at higher altitudes, both minimum take-off time and ground roll distance are longer.
 That is because airplane has to reach a higher velocity to take off.
 \end{document}
