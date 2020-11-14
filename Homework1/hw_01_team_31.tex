@@ -45,7 +45,7 @@ It is useful to use numerical methods in order to solve differential equations w
 the analytical solution is time consuming. In this homework, we are given an aircraft
 which rolls on the ground and takes off some time later, and we are asked to find
 the minimum time required for this aircraft to take off at different airport altitudes.
-We know that the aircraft will take off when the lift force is higher than the weight of
+We know that the aircraft will take off when the lift force is greater than the weight of
 the aircraft. Since the lift force is a function of velocity;
 
 \begin{equation}
@@ -112,7 +112,8 @@ We chose $p_i = 2/3 $.
 a_1+a_2 = 1  \nonumber \\
 a_2p_1 = \frac{1}{2} \nonumber 
 \end{eqnarray}
-Therefore, $a_1=1/4$ and $a_2=3/4$ .
+Therefore, we found $a_1=1/4$ and $a_2=3/4$ as our weights.
+\\\\
 Trapezoidal integration rule is basic version of calculating area under a curve. It is based on
 dividing the area under the curve $y(x)$ into small trapezoids. Then, areas of trapezoids which was equal to 
 $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
@@ -171,9 +172,12 @@ the effect of both the lift force and the thrust overcomes the effect of the dra
         \caption{Calculated velocities at sea level using second order RK method with different time steps.}
         \label{fig:rk2}
 \end{figure}
-The difference between results in Figure \ref{fig:rk2} lower than Figure \ref{fig:q1}. This is because RK2 method with $p_i=2/3$
-provided more accurate results than Euler's method for our case. In RK2 method with $p_i=2/3$, average slopes at $t_i$ and $t_{i+p_i\Delta t}$
-are used instead of using only one slope at $ t_i $ in every iteration. This leads to more stable results than Euler's methods.
+The results in Figure \ref{fig:rk2} are more similar to each other than Figure \ref{fig:q1}. This is because RK2 method with $p_i=2/3$
+is more accurate than Euler's method. In RK2 method with $p_i=2/3$, average slopes at $t_i$ and $t_{i+p_i\Delta t}$
+are used instead of using only one slope at $ t_i $ in every iteration. This leads to more stable results than Euler's method 
+even with a larger step size. In our case, error became significant only at the endpoints. That error is happened because
+algorithm jumps to the next time step even if the true result is closer to the current evaluation point than the time step size.
+To decrease this error at the endpoints, a smaller time step must be used.
 \newpage
 \subsection{Comparison of Euler's method and RK2 method at sea level with different time steps}
 \begin{figure}[ht]
@@ -183,7 +187,7 @@ are used instead of using only one slope at $ t_i $ in every iteration. This lea
 \end{figure}
 As can be seen from the Figure \ref{fig:rk2_05}, for $\Delta t = 0.5$, results of RK2 method with $p_i=2/3$ and Euler's method
 are approximately the same. The reason of that is both RK2 method with $p_i=2/3$ and Euler's method with the lowest step
-size ,$\Delta t = 0.5$ for our case, provided more accurate results. Therefore, the most similar results between RK2
+size, $\Delta t = 0.5$ for our case, provided more accurate results. Therefore, the most similar results between RK2
 method and Euler's method was seen for $\Delta t =0.5$.
 \newpage
 \begin{figure*}[htp]
