@@ -136,7 +136,7 @@ $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
 \subsection{Calculation of velocity at sea level with Euler's Method }
 \begin{figure}[ht]
 \centering \includegraphics[max height=10cm]{graphs/question1.eps}
-\caption{Calculation of velocity using Euler's Method with three different time steps at sea level.}
+\caption{Calculated velocities at sea level using Euler's Method with three different step sizes.}
      \label{fig:q1}
 \end{figure}
 
@@ -178,7 +178,7 @@ the effect of both the lift force and the thrust overcomes the effect of the dra
 \subsection{Calculation of velocity at sea level with second order RK Method }
 \begin{figure}[ht]
         \centering \includegraphics[max height=10cm]{graphs/RK2.eps}
-        \caption{Calculated velocities at sea level using second order RK method with different time steps.}
+        \caption{Calculated velocities at sea level using second order RK method with different step sizes.}
         \label{fig:rk2}
 \end{figure}
 The results in Figure \ref{fig:rk2} are more similar to each other than Figure \ref{fig:q1}. This is because RK2 method with $p_i=2/3$
@@ -188,7 +188,7 @@ even with a larger step size. In our case, error became significant only at the 
 algorithm jumps to the next time step even if the true result is closer to the current evaluation point than the next evaluation point.
 To decrease this error at the endpoints, a smaller time step must be used.
 \newpage
-\subsection{Comparison of Euler's method and RK2 method at sea level with different time steps}
+\subsection{Comparison of Euler's method and RK2 method at sea level with different step sizes}
 \begin{figure}[ht]
         \centering \includegraphics[max height=10cm]{graphs/compare05.eps}
         \caption{Calculated velocities at sea level using second order RK method and Euler's method for $\Delta t=0.5$.}
@@ -238,7 +238,7 @@ timestep used in this problem. Then, integral was taken for each interval using 
 As can be seen in Table \ref{tbl:takeoff}, at higher altitudes, take off distance increases dramatically.
 
 \section{Conclusion}
-We have calculated minimum take-off time using Euler's Method and second-order RK Method at different altitudes.
+We have calculated the minimum take-off time using Euler's Method and second-order RK Method at different altitudes.
 We used different time steps for each method and compared the effect of different time step sizes. 
 
 Our computations demonstrated that second-order RK Method gives more reliable results than Euler's Method
