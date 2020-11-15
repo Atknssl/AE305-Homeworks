@@ -87,7 +87,7 @@ differential equation at the initial point is calculated and treated as slope.
 \frac{dy}{dx} \equiv y \prime \equiv f(x,y) \equiv SLOPE
 \end{equation}
 The slope is multiplied by the stepsize
-and added to the initial dependent variable. The result gives the next dependent variable.
+and added to the initial value of the dependent variable. The result gives the next value of the dependent variable.
 
 \begin{center}
 Next Value = Previous Value + Step Size $\times $ Slope
@@ -106,8 +106,8 @@ Second-Order Runge-Kutta method has a similar equation form with Euler's method:
 y_{i+1} = y_i + \Delta x \phi (x_i , y_i, \Delta x)
 \label{eq:rk2}
 \end{equation}
-However, in second order RK method, instead of $y\prime $, $\phi$ which is 
-called the increment function is used. $\phi$ is weighted slope function over the interval.
+However, in second order RK method, instead of $y\prime $, $\phi$, which is 
+called the increment function, is used. $\phi$ is weighted slope function over the interval.
 \begin{eqnarray}
 \phi&=&a_1k_1 + a_2k_2\\
 \frac{dy}{dx}&=&f(x,y) \nonumber\\
@@ -144,7 +144,7 @@ As can be seen in Figure \ref{fig:q1}, by using different time step sizes, we ob
 Initially, the results were approximately the same for all time step sizes, but as time progresses, the margin of error increases.
 This increase occurs at different rates for each time step size. In order to illustrate, when $ \Delta t = 3 $, the
 error grows faster than other cases. If we assume that we have the least error when $ \Delta t = 0.5 $, since it is
-the smallest time step among all, we can observe that the curves of the other steps deviate more as the time step gets
+the smallest step size among all, we can observe that the curves of the other step sizes deviate more as the time step size gets
 higher. Thus, when $ \Delta t = 3 $, the result is the least accurate.
 
 \newpage
@@ -233,7 +233,7 @@ time steps.
 \end{table}
 
 First, velocities were calculated using RK2 Method with $\Delta t = 0.5$, which is the smallest
-timestep used in this problem. Then, integral was taken for each interval using Trapezoidal Integration Method.
+timestep used in this problem. Then, integral was taken for each interval using Trapezoidal Integration Rule.
 
 As can be seen in Table \ref{tbl:takeoff}, at higher altitudes, take off distance increases dramatically.
 
