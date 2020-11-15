@@ -87,7 +87,7 @@ differential equation at the initial point is calculated and treated as slope.
 \frac{dy}{dx} \equiv y \prime \equiv f(x,y) \equiv SLOPE
 \end{equation}
 The slope is multiplied by the stepsize
-and added to the initial dependent variable. The result gave the next dependent variable.
+and added to the initial dependent variable. The result gives the next dependent variable.
 
 \begin{center}
 Next Value = Previous Value + Step Size $\times $ Slope
@@ -99,14 +99,14 @@ y(x + \Delta x ) = y(x) + \Delta x f(x,y)
 y_{i+1} = y_i + \Delta x f(x_i , y_i)
 \label{eq:eul}
 \end{equation}
-This equation was repeated until the $x_i$ exceeded the desired independent point.
+This equation is repeated until the $x_i$ exceeds the desired independent point.
 
 Second-Order Runge-Kutta method has a similar equation form with Euler's method:
 \begin{equation}
 y_{i+1} = y_i + \Delta x \phi (x_i , y_i, \Delta x)
 \label{eq:rk2}
 \end{equation}
-However, in second order RK method, $y\prime $ is not used as slope. In stead of $y\prime $, $\phi$ which is 
+However, in second order RK method, instead of $y\prime $, $\phi$ which is 
 called the increment function is used. $\phi$ is weighted slope function over the interval.
 \begin{eqnarray}
 \phi&=&a_1k_1 + a_2k_2\\
@@ -114,16 +114,16 @@ called the increment function is used. $\phi$ is weighted slope function over th
 k_1&=&f(x_i,y_i) \nonumber\\
 k_2&=&f(x_i+p_i\Delta x, y_i+p_i\Delta x k_1) \nonumber
 \end{eqnarray}
-where $p_i<1$  and
-We chose $p_i = 2/3 $.
+where $p_i<1$.
+From the second-order Taylor Series expansion about $(x_i,y_i)$, two equations are determined:
 \begin{eqnarray}
 a_1+a_2 = 1  \nonumber \\
 a_2p_1 = \frac{1}{2} \nonumber 
 \end{eqnarray}
-Therefore, we found $a_1=1/4$ and $a_2=3/4$ as our weights.
+We chose $p_i = 2/3 $. Therefore, we found $a_1=1/4$ and $a_2=3/4$ as our weights.
 \\\\
 Trapezoidal integration rule is a basic version of calculating the area under a curve. It is based on
-dividing the area under the curve $y(x)$ into small trapezoids. Then, areas of trapezoids which was equal to 
+dividing the area under the curve $y(x)$ into small trapezoids. Then, areas of trapezoids which is equal to 
 $\frac {1}{2}(V_i+V_{i+1})\Delta t $ is summed up:
 \begin{equation}
 \int_{0}^{N_p\Delta t} V(t) dt = \sum_{i=0}^{N_p-1} \frac{1}{2}(V_i+V_{i+1}) \Delta t 

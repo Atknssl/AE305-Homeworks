@@ -51,7 +51,7 @@ Module data
  
     real :: stepsize, k1, k2, oldvelocity, velocity, velocityx, lift, time
     real :: integration = 0   ! Integration will be accumulated in this variable
-    real, parameter:: a1 =1./4 , a2=3./4, p1=2./3 ! Weights for RK2 Method
+    real, parameter:: a1 =1./4 , a2=3./4, p1=2./3 ! a1 and a2 are weights for RK2 Method
     integer :: selectedaltitude ! Altitude input is stored in this variable
  
  !  Initial values
@@ -97,7 +97,7 @@ Module data
     read(*,*) stepsize
 
  !  Use RK2 Method to find velocity and trapezoidal integration method to find distance 
-       do while ( lift .lt. takeoffweight )
+       do while ( lift .lt. takeoffweight )                      ! Check if lift off occured
           oldvelocity = velocity;                                ! Current velocity is stored to be used in integration
           time = time + stepsize                                 ! New time is defined
           k1 = ODE(velocity)                                     ! k1 is calculated which is slope at previous velocity

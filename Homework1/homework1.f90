@@ -53,7 +53,7 @@ PROGRAM HOMEWORK1
 
    character*40 :: fname
    real :: stepsize, k1, k2, velocity, velocityx, lift, time
-   real, parameter:: a1 =1./4 , a2=3./4, p1=2./3 ! Weights for RK2 Method
+   real, parameter:: a1 =1./4 , a2=3./4, p1=2./3 ! a1 and a2 are weights for RK2 Method
    integer :: method, selectedaltitude ! Inputs stored in these variables
 
 !  Initial values
@@ -122,7 +122,7 @@ PROGRAM HOMEWORK1
    Select case(method)
    case(1) ! EULER METHOD 
       write(*,*) 'Using Eulers Method'
-      do while ( lift .lt. takeoffweight )                               
+      do while ( lift .lt. takeoffweight )                      ! Check if lift off occured         
          time  = time + stepsize                                ! New time is defined
          velocity = velocity + ODE(velocity)*stepsize           ! New velocity is defined
          lift = Liftf(velocity)                                 ! Calculate the lift to check if lift off occured
@@ -131,7 +131,7 @@ PROGRAM HOMEWORK1
       write(*,'(a,f6.3)') 'Minimum time needed to take off:', time ! Write result to terminal
    case(2) ! RK2 METHOD  
       write(*,*) 'Using RK Method'
-      do while ( lift .lt. takeoffweight )                             
+      do while ( lift .lt. takeoffweight )                      ! Check if lift off occured       
          time = time + stepsize                                 ! New time is defined
          k1 = ODE(velocity)                                     ! k1 is calculated which is slope at previous velocity
          velocityx = velocity + k1*p1*stepsize                  ! velocityx is calculated
