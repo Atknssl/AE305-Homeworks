@@ -3,9 +3,9 @@
 !..Team 31
 !..AE305 - Numerical Methods
 !
-!..This program calculates take-off time of an airplane
-!..at a provided altitude using either Eulers Metod 
-!..or RK2 method for a provided timestep and 
+!..This program calculates the take-off time of an airplane
+!..at a provided altitude using either Euler's Metod 
+!..or RK2 method for a provided time step size and 
 !..outputs results to a file.
 !--------------------------------------------------
 Module data
@@ -95,7 +95,7 @@ PROGRAM HOMEWORK1
          rho = airdensity1000m
          thrust = Thrustf(rho)*nrofengines
       case(3)
-         ! Set density and thrust 2000 m
+         ! Set density and thrust for 2000 m
          write(*,*) 'Selected 2000 m'
          rho = airdensity2000m
          thrust = Thrustf(rho)*nrofengines
@@ -115,7 +115,7 @@ PROGRAM HOMEWORK1
    if( fname .eq. " ") fname = "velocity.dat"
    open(1,file=fname,form="formatted")
 
-!  Write inital values to output file
+!  Write the inital values to the output file
    write(1,"(3f12.3)") time, velocity
 
 !  Use selected method
@@ -133,9 +133,9 @@ PROGRAM HOMEWORK1
       write(*,*) 'Using RK Method'
       do while ( lift .lt. takeoffweight )                      ! Check if lift off occured       
          time = time + stepsize                                 ! New time is defined
-         k1 = ODE(velocity)                                     ! k1 is calculated which is slope at previous velocity
+         k1 = ODE(velocity)                                     ! k1 is calculated which is the slope at previous velocity
          velocityx = velocity + k1*p1*stepsize                  ! velocityx is calculated
-         k2 = ODE(velocityx)                                    ! k2 is calculated which is slope at velocityx
+         k2 = ODE(velocityx)                                    ! k2 is calculated which is the slope at velocityx
          velocity = velocity + ( a1*k1 + a2*k2 )* stepsize      ! New velocity is defined
          lift = Liftf(velocity)                                 ! Calculate the lift to check if lift off occured
          write(1,"(2f12.3)") time, velocity
