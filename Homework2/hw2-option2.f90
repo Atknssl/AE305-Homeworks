@@ -9,6 +9,7 @@ end module
 	
 program sysRK4
 	use data
+	real*8 :: y(neq)
 	character*40 :: fname
 
 !..read the input data
@@ -39,6 +40,7 @@ end
 	
 !------------------------------------------------------------------------
 subroutine SRK4(time,dt,y)
+      use data
 	real*8 :: y(neq),ytmp(neq),k1(neq),k2(neq),k3(neq),k4(neq)
 	dt2 = 0.5*dt
 		
@@ -62,7 +64,7 @@ subroutine SRK4(time,dt,y)
 !------------------------------------------------------------------------
 subroutine ODEs(time,y,f)
       use data
-	real*8 :: f(neq)
+	real*8 :: y(neq),f(neq)
 
 !..define the ODE's & return the slopes in the "f" array
 
