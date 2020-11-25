@@ -76,12 +76,17 @@ End module
 Program Rocket_Perf
  Use rocket_params_vars
  Implicit none
+ character*40 :: fname
  real*8 ::  V_c, ...
  real*8 ::  dt, time
  integer :: nstep = 0
+ integer :: part ! Which part of the homework we are solving
 
- print*,'enter eta (fraction of effective propellant thickness beyond wich burn diminishes) : '
- read*, eta_crit
+ write(*,'(a)') 'Select throat radius :'
+ write(*,'(a)') ' [1] Constant 3 cm throat radius (Part 1)'
+ write(*,'(a)') ' [2] Throat radius varies from 2 cm to 6 cm (Part 2)'
+ write(*,'(a)',advance='no') ':>'
+ read*, part
  
  print*,'enter time step size, dt [s] : '
  read*, dt
@@ -94,8 +99,13 @@ Program Rocket_Perf
   m_p = ...  ! propellant mass
   m_p_init = ...
 
-  open( 1, file = 'rocket.dat',form='formatted') 
-  write(1,*)' "t [s]" "p_c [MPa]" ... '
+  write(*,'(a)',advance='no')' Enter the output file name [rocket.dat]:>'
+	read(*,'(a)') fname
+	if( fname .eq. ' ') fname = 'rocket.dat'
+  open(1 ,file=fname, form='formatted')
+
+  write(1,*)' "t [s]" "p_c [MPa]" ... ' ! will be completed later
+
   time = 0.d0
   nstep = 0
 
