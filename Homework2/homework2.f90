@@ -53,15 +53,15 @@ Module rocket_params_vars
      real*8 :: I_sp, p_c_
        I_sp = (1/grav)*sqrt(((2*gama*R_cst*T_c)/(gama-1))*(1-(p_a/p_c_)**((gama-1)/gama)))
      return
-  End function      
+  End function I_sp   
  
-  Function ODEs( x ) result ( k )
+  Function ODEs( p_c_ ) result ( k )
    Implicit none
-    real*8 :: x
+    real*8 :: p_c_
     real*8, dimension( no_eqs ) :: k
      !r_dot=a*p_c**n (bu neden verildi anlamadım çünkü r_dot neden k2 içinde sabit kalsın?)
-     k( 1 ) =  a*x**n
-     k( 2 ) =  R_cst*T_c(((fcor(r)*2*k(1))/r)*(rho_p-rho_c(x))-m_n_dot(x)/(pi*L*r**2))
+     k( 1 ) =  a*p_c_**n
+     k( 2 ) =  R_cst*T_c*(((f_cor(r)*2*k(1))/r)*(rho_p-rho_c(p_c_))-m_n_dot(p_c_)/(pi*L*r**2))
    return
   End function
 
