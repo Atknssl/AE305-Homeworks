@@ -3,6 +3,8 @@
 #DATA OUTPUT
 *.dat
 
+#MATLAB FILE
+*.m
 # Prerequisites
 *.d
 
