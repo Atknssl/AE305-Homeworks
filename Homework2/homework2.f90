@@ -17,7 +17,7 @@ Module rocket_params_vars
   real*8 :: p_c, p_c_dot, &
           r, r_dot, &
           p_c_old, r_old, &
-          eta_crit
+          eta_crit, A_star
 
   contains
 
@@ -105,14 +105,14 @@ Program Rocket_Perf
  real*8 ::  V_c, ...
  real*8 ::  dt, time
  integer :: nstep = 0
- integer :: part ! Which part of the homework we are solving
+ real*8 :: th_radius
 
- write(*,'(a)') 'Select throat radius :'
- write(*,'(a)') ' [1] Constant 3 cm throat radius (Part 1)'
- write(*,'(a)') ' [2] Throat radius varies from 2 cm to 6 cm (Part 2)'
+ write(*,'(a)') 'Enter throat radius in centimeters :'
  write(*,'(a)',advance='no') ':>'
- read*, part
+ read*, th_radius
  
+A_star = pi * th_radius**2
+
  print*,'enter time step size, dt [s] : '
  read*, dt
 
@@ -134,23 +134,23 @@ Program Rocket_Perf
   time = 0.d0
   nstep = 0
 
-  do while(  m_p / m_p_init > 0.05d0 )
+  do while( m_p / m_p_init > 0.05d0 )
 
-     nstep = nstep + 1
+    nstep = nstep + 1
 
-     ! update solution and time
-     call RK4( ... )
+    ! update solution and time
+    call RK4( ... )
 
-     ! check chamber pressure... abort if p_c < p_a
+    ! check chamber pressure... abort if p_c < p_a
      ...
 
-     ! compute mass of propellant left
+    ! compute mass of propellant left
      ...
 
-     ! print on screen and store soln
-     if( nstep == 1 .or. mod(nstep,5)==0) &
-        write(1,'(8(2x,e12.6))') time, p_c*1.d-6, ...
-        write(*,'(8(a,e9.3))')' t = ',time,' s,   p_c = ', p_c*1d-6, ...
+    ! print on screen and store soln
+    if( nstep == 1 .or. mod(nstep,5)==0) &
+      write(1,'(8(2x,e12.6))') time, p_c*1.d-6, ...
+      write(*,'(8(a,e9.3))')' t = ',time,' s,   p_c = ', p_c*1d-6, ...
 
   enddo
 
