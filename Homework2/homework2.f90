@@ -5,8 +5,8 @@ Module rocket_params_vars
                      rho_p = 1140.d0, &
                          n = 0.305d0, &
                          a = 0.0000555d0, &
-                       r_0 = 5.d0, &
-                       r_f = 15.d0, &
+                       r_0 = 0.05d0, &
+                       r_f = 0.15d0, &
                          L = 1.25d0, &
                        T_c = 2810.d0, &
                      R_cst = 365.d0, &
