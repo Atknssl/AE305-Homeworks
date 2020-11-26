@@ -1,15 +1,19 @@
 Module rocket_params_vars
   Implicit none
   integer, parameter :: no_eqs = 2
-  real*8, parameter :: p_a = 101325.d0,  &
-                         n = ... ,    &
-
-                       ......
-
+  real*8, parameter :: p_a = 101325.d0,
+                     rho_p = 1140.d0
+                         n = 0.305d0,
+                         a = 0.0000555d0
+                       r_0 = 5.d0
+                       r_f = 15.d0
+                         L = 1.25d0
+                       T_c = 2810.d0
+                         R = 365.d0
+                      gama = 1.25d0
                       grav = 9.81d0,    &
                         pi = 4.*atan(1.d0), &
-                    A_star = ...
-
+                        ! A_star tanımlamadım
   real :: p_c, p_c_dot, &
           r, r_dot, &
           p_c_old, r_old, &
@@ -17,34 +21,47 @@ Module rocket_params_vars
 
   contains
 
-  Function f_cor()
+  Function m_n_dot(p_c_) 
+    real :: m_n_dot, p_c_
+    m_n_dot = p_c_*A_star*sqrt(gama/(R*T_c))*((gama+1)/2)**(-(gama+1)/(2*(gama-1)))
+    return
+  End Function m_n_dot 
+
+  Function rho_c(p_c_)
+    real :: rho_c, p_c_
+    rho_c = p_c_/(R*T_c)
+    return
+  End Function rho_c
+
+  Function f_cor(rad)
    ! perimeter factor
    Implicit none
     real*8 :: f_cor, eta
-     eta =  ...
+     eta = (r_f-rad)/(r_f-r_0)
      f_cor = 1.d0
-     if( eta < ... )then
-         f_cor = ...
-     endif
+     if( eta < 0 )then
+         f_cor = 0
+     else if (eta >= 0.or.eta <= 0.15)then
+         fcor = 1-exp(-7*eta)
+     end if
    return
-  End
+  End Function f_cor
 
-
-  Function I_sp()
+  Function I_sp(p_c_)
    ! specific impulse
    Implicit none
-     real*8 :: I_sp
-       I_sp = ...
+     real*8 :: I_sp, p_c_
+       I_sp = (1/grav)*sqrt(((2*gama*R*T_c)/(gama-1))*(1-(p_a/p_c_)**((gama-1)/gama)))
      return
-  End function   
+  End function      
  
-  Function ODEs( t ) result ( k )
+  Function ODEs( x ) result ( k )
    Implicit none
-    real*8 :: t
+    real*8 :: x
     real*8, dimension( no_eqs ) :: k
-     r_dot = a * p_c**n
-     k( 1 ) =  ...
-     k( 2 ) =  ...
+     !r_dot=a*p_c**n (bu neden verildi anlamadım çünkü r_dot neden k2 içinde sabit kalsın?)
+     k( 1 ) =  a*x**n
+     k( 2 ) =  R*T_c(((fcor(r)*2*k(1))/r)*(rho_p-rho_c(x))-m_n_dot(x)/(pi*L*r**2))
    return
   End function
 
@@ -52,30 +69,30 @@ Module rocket_params_vars
    Implicit none
     integer, parameter :: no_stages = 4
     real*8 :: t, del_t
-    real*8, dimension( no_eqs )  ::  k( no_stages, no_eqs )
+    real*8, dimension( no_eqs )  ::  k( no_stages, no_eqs ), phi(no_eqs)
     p_c_old = p_c
     r_old = r
     k(1, : ) = ODEs( t )
 !.. slopes at p_1 = 0.5
-    p_c = p_c_old + 0.5d0 * del_t * k(1, 1)
-    r = r_old + 0.5d0 * del_t * k(1, 2)
+    p_c = p_c_old + 0.5d0 * del_t * k(1, 2)
+    r = r_old + 0.5d0 * del_t * k(1, 1)
     k(2, : ) = ODEs( p_c )
 
 !.. slopes at p_2 = 0.5
-    p_c = p_c_old + 0.5d0 * del_t * k(2, 1)
-    r = r_old + 0.5d0 * del_t * k(2, 2)
+    p_c = p_c_old + 0.5d0 * del_t * k(2, 2)
+    r = r_old + 0.5d0 * del_t * k(2, 1)
     k(3, : ) = ODEs( p_c )
     ...
 !.. slopes at p_3 = 1.0
-    p_c = p_c_old + del_t * k(3, 1)
-    r = r_old + del_t * k(3, 2)
+    p_c = p_c_old + del_t * k(3, 2)
+    r = r_old + del_t * k(3, 1)
     k(4, : ) = ODEs( p_c )
 
-   phi = (1/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : ))         !weighted slope is calculated
-   p_c = p_c_old + phi * del_t                                    !p_c is updated
-   r = r_old + phi * del_t 
+    phi(:) = (1/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : ))         !weighted slope is calculated
+    p_c = p_c_old + phi(2) * del_t                                    !p_c is updated
+    r = r_old + phi(1) * del_t 
 
-   t = t + del_t                               !time is updated
+    t = t + del_t                               !time is updated
   return
  End subroutine
 
