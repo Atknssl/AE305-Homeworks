@@ -9,7 +9,7 @@ Module rocket_params_vars
                        r_f = 15.d0, &
                          L = 1.25d0, &
                        T_c = 2810.d0, &
-                         R = 365.d0, &
+                     R_cst = 365.d0, &
                       gama = 1.25d0, &
                       grav = 9.81d0, &
                         pi = 4.*atan(1.d0)
@@ -23,13 +23,13 @@ Module rocket_params_vars
 
   Function m_n_dot(p_c_) 
     real*8 :: m_n_dot, p_c_
-    m_n_dot = p_c_*A_star*sqrt(gama/(R*T_c))*((gama+1)/2)**(-(gama+1)/(2*(gama-1)))
+    m_n_dot = p_c_*A_star*sqrt(gama/(R_cst*T_c))*((gama+1)/2)**(-(gama+1)/(2*(gama-1)))
     return
   End Function m_n_dot 
 
   Function rho_c(p_c_)
     real*8 :: rho_c, p_c_
-    rho_c = p_c_/(R*T_c)
+    rho_c = p_c_/(R_cst*T_c)
     return
   End Function rho_c
 
@@ -51,7 +51,7 @@ Module rocket_params_vars
    ! specific impulse
    Implicit none
      real*8 :: I_sp, p_c_
-       I_sp = (1/grav)*sqrt(((2*gama*R*T_c)/(gama-1))*(1-(p_a/p_c_)**((gama-1)/gama)))
+       I_sp = (1/grav)*sqrt(((2*gama*R_cst*T_c)/(gama-1))*(1-(p_a/p_c_)**((gama-1)/gama)))
      return
   End function      
  
@@ -61,7 +61,7 @@ Module rocket_params_vars
     real*8, dimension( no_eqs ) :: k
      !r_dot=a*p_c**n (bu neden verildi anlamadım çünkü r_dot neden k2 içinde sabit kalsın?)
      k( 1 ) =  a*x**n
-     k( 2 ) =  R*T_c(((fcor(r)*2*k(1))/r)*(rho_p-rho_c(x))-m_n_dot(x)/(pi*L*r**2))
+     k( 2 ) =  R_cst*T_c(((fcor(r)*2*k(1))/r)*(rho_p-rho_c(x))-m_n_dot(x)/(pi*L*r**2))
    return
   End function
 
