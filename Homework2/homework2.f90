@@ -1,20 +1,20 @@
 Module rocket_params_vars
   Implicit none
   integer, parameter :: no_eqs = 2
-  real*8, parameter :: p_a = 101325.d0,
-                     rho_p = 1140.d0
-                         n = 0.305d0,
-                         a = 0.0000555d0
-                       r_0 = 5.d0
-                       r_f = 15.d0
-                         L = 1.25d0
-                       T_c = 2810.d0
-                         R = 365.d0
-                      gama = 1.25d0
-                      grav = 9.81d0,    &
-                        pi = 4.*atan(1.d0), &
+  real*8, parameter :: p_a = 101325.d0, &
+                     rho_p = 1140.d0, &
+                         n = 0.305d0, &
+                         a = 0.0000555d0, &
+                       r_0 = 5.d0, &
+                       r_f = 15.d0, &
+                         L = 1.25d0, &
+                       T_c = 2810.d0, &
+                         R = 365.d0, &
+                      gama = 1.25d0, &
+                      grav = 9.81d0, &
+                        pi = 4.*atan(1.d0)
                         ! A_star tanımlamadım
-  real :: p_c, p_c_dot, &
+  real*8 :: p_c, p_c_dot, &
           r, r_dot, &
           p_c_old, r_old, &
           eta_crit
@@ -22,13 +22,13 @@ Module rocket_params_vars
   contains
 
   Function m_n_dot(p_c_) 
-    real :: m_n_dot, p_c_
+    real*8 :: m_n_dot, p_c_
     m_n_dot = p_c_*A_star*sqrt(gama/(R*T_c))*((gama+1)/2)**(-(gama+1)/(2*(gama-1)))
     return
   End Function m_n_dot 
 
   Function rho_c(p_c_)
-    real :: rho_c, p_c_
+    real*8 :: rho_c, p_c_
     rho_c = p_c_/(R*T_c)
     return
   End Function rho_c
@@ -36,13 +36,13 @@ Module rocket_params_vars
   Function f_cor(rad)
    ! perimeter factor
    Implicit none
-    real*8 :: f_cor, eta
+    real*8 :: f_cor, eta, rad
      eta = (r_f-rad)/(r_f-r_0)
      f_cor = 1.d0
      if( eta < 0 )then
          f_cor = 0
      else if (eta >= 0.or.eta <= 0.15)then
-         fcor = 1-exp(-7*eta)
+         f_cor = 1-exp(-7*eta)
      end if
    return
   End Function f_cor
@@ -66,7 +66,7 @@ Module rocket_params_vars
   End function
 
   Subroutine RK4( t, del_t )
-   Implicit none
+    Implicit none
     integer, parameter :: no_stages = 4
     real*8 :: t, del_t
     real*8, dimension( no_eqs )  ::  k( no_stages, no_eqs ), phi(no_eqs)
@@ -82,13 +82,13 @@ Module rocket_params_vars
     p_c = p_c_old + 0.5d0 * del_t * k(2, 2)
     r = r_old + 0.5d0 * del_t * k(2, 1)
     k(3, : ) = ODEs( p_c )
-    ...
+
 !.. slopes at p_3 = 1.0
     p_c = p_c_old + del_t * k(3, 2)
     r = r_old + del_t * k(3, 1)
     k(4, : ) = ODEs( p_c )
 
-    phi(:) = (1/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : ))         !weighted slope is calculated
+    phi(:) = (1.0/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : ))         !weighted slope is calculated
     p_c = p_c_old + phi(2) * del_t                                    !p_c is updated
     r = r_old + phi(1) * del_t 
 
