@@ -53,23 +53,27 @@ Module rocket_params_vars
     integer, parameter :: no_stages = 4
     real*8 :: t, del_t
     real*8, dimension( no_eqs )  ::  k( no_stages, no_eqs )
-!.. soln and slopes at interval beg
-     p_c_old = p_c
-     ...
-     k( 1, : ) = ODEs( t )
+    p_c_old = p_c
+    ...
+    k(1, : ) = ODEs( t )
 !.. slopes at p_1 = 0.5
-     p_c = p_c_old + 0.5d0 * ...
-     ...
+    p_c = p_c_old + 0.5d0 * del_t * k(1, : )
+    k( 2, : ) = ODEs( p_c )
+    ...
 !.. slopes at p_2 = 0.5
-     ...
+    p_c = p_c_old + 0.5d0 * del_t * k(2, : )
+    k(3, : ) = ODEs( p_c )
+    ...
 !.. slopes at p_3 = 1.0
-    ...
-!.. update for end of interval
-    ...
-!.. update time
-    ...
-   return
-  End subroutine
+    p_c = p_c_old + del_t * k(3, : )
+    k(4, : ) = ODEs( p_c )
+
+   phi = (1/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : ))         !weighted slope is calculated
+   p_c = p_c_old + phi * del_t                               !p_c is updated
+
+   t = t + del_t                               !time is updated
+  return
+ End subroutine
 
 End module
 
