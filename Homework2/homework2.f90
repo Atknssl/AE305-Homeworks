@@ -140,10 +140,12 @@ A_star = pi * (th_radius/100)**2
     ! print on screen and store soln
     if( nstep == 1 .or. mod(nstep,5)==0) &
       write(1,'(8(4x,e12.6))') time, p_c*1.d-6 ,isp, r_dot
-      !write(*,'(8(a,e9.3))')' t = ',time,' s,   p_c = ', p_c*1d-6
+      write(*,'(8(a,e9.3))')' t = ',time,' s,   p_c = ', p_c*1d-6,' MPa, I_sp = ', isp, ' s r_dot = ',r_dot,' m/s'
 
   enddo
 
+  write(*,*) 'Number of time intervals needed = ', nstep
+  
   close(1)
 
   stop
