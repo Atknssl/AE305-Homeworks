@@ -38,6 +38,47 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 
 \section{Introduction}
 
+Numerical methods, such as Runge Kutta Method, are widely used to solve differential equations when an
+analytical solution is not possible or time-consuming. $4^{th}$ order Runge-Kutta Method is one of the
+numerical methods which gives quite accurate results due to its small truncation error. In this homework,
+a solid propellent rocket is given, and its chamber pressure $p_c$, burn rate $\dot{r}$, and the specific
+impulse $I_{sp}$ are asked to be calculated with this method until the chamber pressure $p_c$ becomes equal 
+to the atmospheric pressure $p_a$, with different time step sizes and different nozzle throat radiuses.
+
+This equation gives the rate of the chamber pressure of the given rocket with a constant burn temperature
+$T_c$:
+
+\begin{equation}
+	\frac{dp_c}{dt} = \frac{RT_c}{V_c}(\dot{m_{bs}} - \dot{m_{ce}} - \rho_{c}\dot{V_c})
+\end{equation}
+
+It is assumed that the propellant inner surface is circular and between the chamber exit and nozzle throat
+no gas mass accumulates ($\dot{m_{ce}} = \dot{m_n}$). Moreover, writing $\dot{m_{bs}} = \rho_{p}2\pi rL\dot{r}$,
+and $V_c = \pi r^{2}L$, the equation becomes:
+
+\begin{equation}
+	\frac{dp_c}{dt} = RT_c[\frac{2\dot{r}}{r}(\rho_{p} - \rho_{c}) - \frac{\dot{m_n}}{\pi r^{2}L}]
+\end{equation}
+
+It is given that $\dot{r} = ap_c^{n}$, and $\dot{m_n} = p_cA^{*}\sqrt{\frac{\gamma}{RT_c}}(\frac{\gamma +1}{2})^{-\frac{\gamma +1}{2(\gamma -1)}}$
+where $A^{*}$ is the nozzle throat area. Furthermore, though at first it was assumed that the propellant 
+inner surface is circular, it is more of a complex shape. Thus, a propellant design dependent factor
+$f_{cor}(r)$ is used to simply approach to original characteristics. Then, the equations for the rate
+of chamber pressure, and the rate of equivalent radius r become:
+
+\begin{equation}
+	\boxed{\frac{dp_c}{dt} = RT_c[f_{cor}(r)\frac{2ap_c^{n}}{r}(\rho_{p} - \frac{p_c}{RT_c}) - \frac{p_cA^{*}}{\pi r^{2}L}\sqrt{\frac{\gamma}{RT_c}}(\frac{\gamma +1}{2})^{-\frac{\gamma +1}{2(\gamma -1)}}]}
+\end{equation}
+
+\begin{equation}
+	\boxed{\frac{dr}{dt} = ap_c^{n}}
+\end{equation}
+
+Specific impulse is also asked to be calculated, and its formula is:
+
+\begin{equation}
+	\boxed{I_{sp} = \frac{1}{g}\sqrt{\frac{2\gamma RT_c}{\gamma -1}[1-(\frac{p_a}{p_c})^{\frac{\gamma -1}{\gamma}}]}}
+\end{equation}
 
 \section{Method}
 
