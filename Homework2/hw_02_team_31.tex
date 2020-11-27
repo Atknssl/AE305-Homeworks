@@ -179,18 +179,40 @@ Since the conditions are the same as mentioned above, the values calculated for 
 experience a major change for different step sizes. The point is, the accuracy of the results obtained by using RK4 Method
 is remarkably of a high degree no matter what size of a time step is used.
 
-\begin{figure} [!h]
+\subsection{Q2}
+\begin{figure}[!h]
 	\centering
-	\includegraphics[height = 8.4cm]{graphs/q2_pc.eps}
+	\includegraphics[height = 8.5cm]{graphs/q2_pc.eps}
+	\label{fig:q2p_cp}
 \end{figure}
-\begin{figure} [!h]
+As can be cleary concluded from the graph, decreasing the radius of the nozzle leads to increase in both maximum chamber pressure
+and needed time for chamber pressure to reach the ambient pressure. The reason of that is reducing the radius causes exponential
+decrease in the area of nozzle. As the area of nozzle becomes higher means the lower chamber pressure. Therefore, maximum chamber
+pressures incline, exponentially with reducing radius of the throat. Also, since nozzle area is grow, the time to total mass flow 
+of the gas exits from the nozzle extends. Because with higher radiuses, the mass flow rate reduces.
+\newpage
+\begin{figure}[!h]
 	\centering
-	\includegraphics[height = 8.4cm]{graphs/q2_isp.eps}
+	\includegraphics[height = 8.5cm]{graphs/q2_rdot.eps}
+	\label{fig:q2r_dot}
 \end{figure}
-\begin{figure} [!h]
+$\dot r$ gives the similar reaction to the different nozzle throat radiuses with the chamber of pressure. Lower radiuses cause higher 
+maximum burn rates and longer times to reach the ambient pressure. On the other hand, unlike to curves in Figure \ref{fig:q2p_cp}, every 
+curve in the Figure \ref{fig:q2r_dot} are approximately linear with different slopes, which are grow with reducing radiuses. The reason 
+of both conclusions can be explained with the same equation. $\dot{r}$ is proportional to $p_c$; therefore, both of them gives 
+the similar response to difference throat radiuses. However, since the propallent burn rate exponent in the equationis smaller than 1, 
+the growth in the maximum burn rates in Figure \ref{fig:q2p_cp} is less dramatic than the maximum chamber pressures in Figure 
+\ref{fig:q2r_dot}. The result of that is nearly linear curves.
+
+\begin{figure}[!h]
 	\centering
-	\includegraphics[height = 8.4cm]{graphs/q2_rdot.eps}
+	\includegraphics[height = 8.5cm]{graphs/q2_isp.eps}
+	\label{fig:q2I_sp}
 \end{figure}
+In Figure \ref{fig:q2I_sp}, it is shown that maximum specific impulse reduces and time to reach the ambient pressure becomes longer with
+growing throat radiuses. This answers is similar to the answer of $p_c$ It can be explained by Equation. As $p_c$ increases, the value in
+the square root is increases. Therefore, the specific impulse increases. However, since the exponent of $p_c$ is less than 1 the growth of 
+curves are different from curves of $p_c$ in Figure \ref{fig:q2p_cp}
 
 %\section{Conclusion}
 
