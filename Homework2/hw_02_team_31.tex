@@ -81,6 +81,60 @@ Specific impulse is also asked to be calculated, and its formula is:
 \end{equation}
 
 \section{Method}
+\subsection{Classical Fourth-order RK Method}
+Basic form of RK method is :
+\begin{equation}
+	y_{i+1} = y_i + \Phi(x_i, y_i, \Delta x) \Delta x
+	\label{eqn:rk}  
+\end{equation} 
+$\Phi$ can be defined as weighted slope function or increment function. It can be expressed as:
+\begin{equation}
+	\Phi = a_1k_1 + a_2k_2 + ... + a_nk_n
+\end{equation}
+where $k_1, k_2, ..., k_n$ are slopes, $a_1, a_2, ..., a_n$  are weights.\\
+In classical fourth-order RK method, four slopes is calculated for each interval. Also, weights are equal to $1/6, 1/3, 1/3, 1/6$
+, respectively. In the homework, there is the system of ordinary differential equations, $\frac{dy_i}{dt}$ and $\frac{dr_i}{dt}$. 
+Therefore, RK method becomes:
+\begin{eqnarray}
+	y_{1,i+1}&=&y_{1,i} + \frac{1}{6}(k_{1,1} + 2k_{2,1} + 2k_{3,1} + k_{4,1})\Delta x \nonumber \\
+	y_{2,i+1}&=&y_{2,i} + \frac{1}{6}(k_{1,2} + 2k_{2,2} + 2k_{3,2} + k_{4,2})\Delta x \nonumber \\
+	\mbox{Stage 1: }k_{1,1}&=&f_1(x_i, y_{1,i}, y_{2,i} ) \nonumber \\
+	k_{1,2}&=&f_2(x_i, y_{1,i}, y_{2,i}) \nonumber \\
+	y^{*}_1 &=& y_{1,i} + k_{1,1}(p_1\Delta x) \nonumber \\
+	y^{*}_2 &=& y_{2,i} + k_{1,2}(p_1\Delta x) \nonumber \\
+	\mbox{Stage 2: }k_{2,1}&=&f_1(x_{i+(p_1\Delta x)} ,y^{*}_1, y^{*}_2 ) \nonumber \\
+	k_{2,2}&=&f_2(x_{i+(p_1\Delta x)} ,y^{*}_1, y^{*}_2 ) \nonumber \\
+	y^{**}_1&=&y_{1,i} + k_{2,1}(p_2\Delta x) \nonumber \\
+	y^{**}_2&=&y_{2,i} + k_{2,2}(p_2\Delta x) \nonumber \\
+	\mbox{Stage 3: }k_{3,1}&=&f_1(x_{i+(p_2\Delta x)} ,y^{**}_1, y^{**}_2 ) \nonumber \\
+	k_{3,2}&=&f_2(x_{i+(p_2\Delta x)} ,y^{**}_1, y^{**}_2 ) \nonumber \\
+	y^{***}_1&=&y_{1,i} + k_{1,3}(p_3\Delta x) \nonumber \\
+	y^{***}_2&=&y_{2,i} + k_{2,3}(p_3\Delta x) \nonumber \\
+	\mbox{Stage 4: }k_{4,1}&=&f_1(x_{i+(p_1\Delta x)} ,y^{**}_1, y^{**}_2 ) \nonumber \\
+	k_{4,2}&=&f_2(x_{i+(p_3\Delta x)} ,y^{***}_1, y^{***}_2 ) \nonumber
+\end{eqnarray}
+where $y\prime = f(x_i,y_i)$ and $p_1=p_2=1/2$, $p_3=1$.\\
+At every stage, first the slope of $r_i$ ($k_{n,1}$) and  $p_{c_{i}}$ ($k_{n,2}$) at $p_n$ fraction of interval is calculated. 
+Then, temporary $p_{c_{i+(p_n\Delta x)}}$ and $r_{i+(p_n\Delta x)}$ values are determined, which enables to calculate the next 
+slopes $p_{n+1}$ fraction of the same interval. After four stages, weighted slopes are determined. By substituting known 
+variables into Equation \ref{eqn:rk}, next value $r_{i+1}$ and $p_{c_{i+1}}$ are calculated. 
+\subsection{Adaptive RK Method}
+Sometimes the change in solutions may not be consistent. Small step sizes cause the increase in the number of steps, which leads to
+rise in round off errors, whereas large step sizes cause the larger truncation errors. Adaptive RK method is used to capture important
+changes in the solution, at the same time it prevents overkill with small step sizes. It basically provides appropriate step sizes 
+according to the change in solution. In adaptive step size control, first the local truncation error, $E_o$, is calculated. In this 
+homework, $E_o$ is determined by using the difference between RK2 method and RK4 method.
+\begin{equation}
+	E_o = \frac{y_{RK4}-y_{RK2}}{y_{RK4}}
+\end{equation}
+Then, to check whether step size is appropriate or not, some comparisons are made:
+\begin{eqnarray}
+	1 < \left\lvert \frac{E_{allowed}}{E_o} \right\rvert &<& 5 \textrm{, leave $\Delta x$ uncahnged} \nonumber \\
+	\left\lvert \frac{E_{allowed}}{E_o} \right\rvert &>& 5  \textrm{, increase $\Delta x$ by a factor of 2} \nonumber \\
+	\left\lvert \frac{E_{allowed}}{E_o} \right\rvert &<& 1  \textrm{, decrease $\Delta x$ by a factor of 2 and redo the current step} \nonumber 
+\end{eqnarray}
+where $E_{allowed}$ is the allowed percent error tolerance and equal to $10^{-4}$  .
+
 
 \newpage
 
