@@ -119,6 +119,7 @@ Then, temporary $p_{c_{i+(p_n\Delta x)}}$ and $r_{i+(p_n\Delta x)}$ values are d
 slopes $p_{n+1}$ fraction of the same interval. After four stages, weighted slopes are determined. By substituting known 
 variables into Equation \ref{eqn:rk}, next value $r_{i+1}$ and $p_{c_{i+1}}$ are calculated. 
 \subsection{Adaptive RK Method}
+\label{section:adaptive}
 Sometimes the change in solutions may not be consistent. Small step sizes cause the increase in the number of steps, which leads to
 rise in round off errors, whereas large step sizes cause the larger truncation errors. Adaptive RK method is used to capture important
 changes in the solution, at the same time it prevents overkill with small step sizes. It basically provides appropriate step sizes 
@@ -213,6 +214,57 @@ In Figure \ref{fig:q2I_sp}, it is shown that maximum specific impulse reduces an
 growing throat radiuses. This answers is similar to the answer of $p_c$ It can be explained by Equation. As $p_c$ increases, the value in
 the square root is increases. Therefore, the specific impulse increases. However, since the exponent of $p_c$ is less than 1 the growth of 
 curves are different from curves of $p_c$ in Figure \ref{fig:q2p_cp}
+
+\subsection{Calculation using adaptive stepping}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height = 8.5 cm]{graphs/bonus_pc.eps}
+	\caption{Chamber pressure versus time graph with constant and adaptive step size.}
+	\label{fig:bonus_cp}
+\end{figure}
+
+It can be seen from Figures \ref{fig:bonus_cp}, \ref{fig:bonus_isp} and \ref{fig:bonus_rdot} that when adaptive stepping is 
+applied with allowed percent tolerance $E_o = 0.0001$, linear parts can be calculated with less steps without losing any accuracy as discussed in 
+Section \ref{section:adaptive}. When there is a sudden change, step size gets smaller accordingly and results can be calculated correctly in that region.
+
+It can be seen from Table \ref{tbl:timeint} that using adaptive stepping reduces total number of time intervals needed significantly.
+Although results are calculated three times for each time interval(twice for determining the step size and once for calculating result) 
+using adaptive stepping approach, number of time intervals needed are much lower than constant step size approach. Therefore adaptive stepping is 
+computationally cheaper without losing accuracy. 
+
+
+\begin{table}[!h]
+	\begin{center}
+	\caption{Total number of time intervals needed for computations.}
+	\vspace{1em}
+	\label{tbl:timeint}
+	\begin{tabular}{|c|c|} 
+	\hline
+	\multicolumn{1}{|c|}{\bf{Stepping Approach}} & \multicolumn{1}{c|}{\bf{Number of time intervals needed}} \\
+	\hline
+	Constant $\Delta t = 0.005$ &   4470 \\ \hline
+	Adaptive Stepping with initial $\Delta t = 0.005$ &   462 \\ \hline
+	\end{tabular}
+	\end{center}
+\end{table}
+
+
+\newpage
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height = 8.5 cm]{graphs/bonus_isp.eps}
+	\caption{Specific impulse versus time graph with constant and adaptive step size.}
+	\label{fig:bonus_isp}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height = 8.5 cm]{graphs/bonus_rdot.eps}
+	\caption{Burn rate versus time graph with constant and adaptive step size.}
+	\label{fig:bonus_rdot}
+\end{figure}
 
 %\section{Conclusion}
 
