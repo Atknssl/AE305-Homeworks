@@ -85,32 +85,58 @@ Specific impulse is also asked to be calculated, and its formula is:
 \newpage
 
 \section{Results and Discussion}
+\subsection{Calculation of $p_c$, $\dot{r}$ and $I_{sp}$ with different time step sizes}
 
-% Görmek için koydum, yazarken silin
-\begin{figure}
+\begin{figure} [ht]
 	\centering
-	\includegraphics[height = 8.5cm]{graphs/q1_pc.eps}
+	\includegraphics[height = 8.4cm]{graphs/q1_pc.eps}
+	\caption{Calculated $p_c$ values using $4^{th}$ order RK method with three different step sizes.}
+     \label{fig:q1pc}
 \end{figure}
-\begin{figure}
+
+As it can be seen in Figure \ref{fig:q1pc}, there are three curves, one for each step size. However,
+there is no significant difference between the curves, which results from the high degree of accuracy
+provided by the $4^{th}$ order RK method. This is because the truncation error for this method is so
+small that its effect on the results can be nearly neglected. In addition, using smaller step sizes
+helps to calculate more precisely, and it is obvious that the step sizes used for this problem are small
+enough. As a result, the values obtained for the chamber pressure $p_c$ of the rocket were approximately
+the same for three different step sizes.
+
+\newpage
+
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 8.5cm]{graphs/q1_isp.eps}
+	\includegraphics[height = 8.4cm]{graphs/q1_rdot.eps}
+	\caption{Calculated $\dot{r}$ values using $4^{th}$ order RK method with three different step sizes.}
+	\label{fig:q1rdot}
 \end{figure}
-\begin{figure}
+
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 8.5cm]{graphs/q1_rdot.eps}
+	\includegraphics[height = 8.4cm]{graphs/q1_isp.eps}
+	\caption{Calculated $I_{sp}$ values using $4^{th}$ order RK method with three different step sizes.}
+	\label{fig:q1Isp}
 \end{figure}
-\begin{figure}
+
+As it was for $p_c$, there are three curves, one for each step size, for also the rate of equvalent radius
+$\dot{r}$ and the specific impulse $I_{sp}$ in Figure \ref{fig:q1rdot} and in Figure \ref{fig:q1Isp}, respectively. 
+Since the conditions are the same as mentioned above, the values calculated for $\dot{r}$ and $I_{sp}$ does not 
+experience a major change for different step sizes. The point is, the accuracy of the results obtained by using RK4 Method
+is remarkably of a high degree no matter what size of a time step is used.
+
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 8.5cm]{graphs/q2_pc.eps}
+	\includegraphics[height = 8.4cm]{graphs/q2_pc.eps}
 \end{figure}
-\begin{figure}
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 8.5cm]{graphs/q2_isp.eps}
+	\includegraphics[height = 8.4cm]{graphs/q2_isp.eps}
 \end{figure}
-\begin{figure}
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 8.5cm]{graphs/q2_rdot.eps}
+	\includegraphics[height = 8.4cm]{graphs/q2_rdot.eps}
 \end{figure}
-\section{Conclusion}
+
+%\section{Conclusion}
 
 \end{document}
