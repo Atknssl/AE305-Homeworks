@@ -94,7 +94,7 @@ $\Phi$ can be defined as weighted slope function or increment function. It can b
 	\Phi = a_1k_1 + a_2k_2 + ... + a_nk_n
 \end{equation}
 where $k_1, k_2, ..., k_n$ are slopes, $a_1, a_2, ..., a_n$  are weights.\\
-In classical fourth-order RK method, four slopes is calculated for each interval. Also, weights are equal to $1/6, 1/3, 1/3, 1/6$
+In classical fourth-order RK method, four slopes are calculated for each interval. Also, weights are equal to $1/6, 1/3, 1/3, 1/6$
 , respectively. In the homework, there is the system of ordinary differential equations, $\frac{dy_i}{dt}$ and $\frac{dr_i}{dt}$. 
 Therefore, RK method becomes:
 \begin{eqnarray}
@@ -119,7 +119,7 @@ where $y\prime = f(x_i,y_i)$ and $p_1=p_2=1/2$, $p_3=1$.\\
 At every stage, first the slope of $r_i$ ($k_{n,1}$) and  $p_{c_{i}}$ ($k_{n,2}$) at $p_n$ fraction of interval is calculated. 
 Then, temporary $p_{c_{i+(p_n\Delta x)}}$ and $r_{i+(p_n\Delta x)}$ values are determined, which enables to calculate the next 
 slopes $p_{n+1}$ fraction of the same interval. After four stages, weighted slopes are determined. By substituting known 
-variables into Equation \ref{eqn:rk}, next value $r_{i+1}$ and $p_{c_{i+1}}$ are calculated. 
+variables into Equation \ref{eqn:rk}, next values $r_{i+1}$ and $p_{c_{i+1}}$ are calculated. 
 \subsection{Adaptive Stepping}
 \label{section:adaptive}
 
@@ -170,10 +170,10 @@ enough. As a result, the values obtained for the chamber pressure $p_c$ of the r
 the same for three different step sizes.
 
 \vspace{1em}
-Figure \ref{fig:q1rdot} demonstrates how the rate of equivalent radius changes with time and 
-Figure \ref{fig:q1Isp} shows the change of specific impulse with time.
+Figure \ref{fig:q1rdot} and Figure \ref{fig:q1Isp} demonstrates the change in the rate of equivalent 
+radius and the specific impulse with time, respectively.
 As it was for $p_c$, there are three curves also for the rate of equivalent radius
-$\dot{r}$ and the specific impulse $I_{sp}$ in Figure \ref{fig:q1rdot} and in Figure \ref{fig:q1Isp}, respectively. 
+$\dot{r}$ in Figure \ref{fig:q1rdot} and the specific impulse $I_{sp}$ in Figure \ref{fig:q1Isp}. 
 Since the conditions are the same as mentioned above, the values calculated for $\dot{r}$ and $I_{sp}$ does not 
 experience a major change for different step sizes. The point is, the accuracy of the results obtained by using RK4 Method
 is remarkably of a high degree for the step sizes used in this problem.
@@ -204,12 +204,12 @@ is remarkably of a high degree for the step sizes used in this problem.
 \end{figure}
 
 This figure demonstrates how the chamber pressure $p_c$ changes as time progresses with different nozzle throat radiuses.
-As can be concluded from Figure \ref{fig:q2p_cp}, decreasing the radius of the nozzle throat leads to increase in maximum chamber pressure
-and decrease in needed time for chamber pressure to reach the ambient pressure. 
+As can be concluded from Figure \ref{fig:q2p_cp}, decreasing the radius of the nozzle throat leads to an increase in maximum chamber pressure
+and reduces the time needed for the chamber pressure to reach the ambient pressure. 
 The reason of this is reducing the radius causes exponential decrease in the area of nozzle.
 As the area of nozzle decreases, mass flowing out from nozzle decreases and total gas mass inside the cavity increases. 
 This results in increasing pressure inside the chamber. As the pressure increases, propellant burns faster. 
-Therefore, with lower nozzle throat radius propellant depletes faster and flight time decreases.
+Therefore, with lower nozzle throat radius, propellant depletes faster resulting in shorter flight time.
 
 \newpage
 \begin{figure}[!h]
@@ -220,12 +220,12 @@ Therefore, with lower nozzle throat radius propellant depletes faster and flight
 \end{figure}
 
 This figure illustrates how the burn rate $\dot{r}$ changes as time progresses with different nozzle throat radiuses.
-$\dot{r}$ is proportional to $p_c$ as stated in Equation \ref{eqn:pres}; therefore, both of them gives 
-a similar response to different throat radiuses. 
+$\dot{r}$ is proportional to $p_c$ as stated in Equation \ref{eqn:pres}; therefore, both of them give 
+similar responses to different throat radiuses. 
 Lower radiuses cause higher maximum burn rates but shorter time to reach the ambient pressure. 
 However, since the propallent burn rate exponent in 
 Equation \ref{eqn:pres} is smaller than one, the growth in the maximum burn rates in Figure \ref{fig:q2r_dot} is 
-less remarkable than the maximum chamber pressures in Figure \ref{fig:q2p_cp}. Also, as mentioned above,
+less remarkable than the growth in the maximum chamber pressures in Figure \ref{fig:q2p_cp}. Also, as mentioned above,
 flight time decreases because of faster burn rate.
 
 \newpage
@@ -255,7 +255,7 @@ lowest nozzle throat radius of 2 centimeters is the most efficient, as it has th
 \end{figure}
 
 Figure \ref{fig:bonus_cp}, Figure \ref{fig:bonus_rdot} and Figure \ref{fig:bonus_isp} illustrate how the chamber pressure, 
-burn rate and specific impulse change respectively as time progresses using constant and adaptive time steps.
+burn rate and specific impulse change as time progresses, respectively, using constant and adaptive time step sizes.
 It can be seen from Figures \ref{fig:bonus_cp}, \ref{fig:bonus_isp} and \ref{fig:bonus_rdot} that when adaptive stepping is 
 applied with allowed percent tolerance $E_o = 0.0001$, linear parts can be calculated with less steps without losing any accuracy as discussed in 
 Section \ref{section:adaptive}. When there is a sudden change, step size gets smaller accordingly and results can be calculated correctly in that region.
@@ -301,6 +301,28 @@ computationally cheaper without losing accuracy.
 \newpage
 
 \section{Conclusion}
+
+Given a solid propellant rocket, the change of chamber pressure $p_c$,
+the rate of the equivalent radius $\dot{r}$ and the specific impulse $I_{sp}$ were
+requested to be calculated in the homework. These calculations were
+made by using the $4^{th}$ order RK method with three different step sizes for the first
+problem, and with different nozzle throat radiuses for the second problem.
+
+Comparing the results obtained, it can be observed that $4^{th}$ order RK method gives
+quite reliable results for this problem since the step sizes used are small
+enough to approch the exact solution, and the truncation error caused by numerical
+methods is negligible for the $4^{th}$ order RK method. Moving on to the next comparison,
+the results illustrates that the outcome of the usage of smaller nozzle throat radiuses
+is an increase in maximum chamber pressure. As the burn rate and the specific impulse
+are related proportionally to the chamber pressure, their maximum values also experiences
+an increase. The smaller the nozzle throat radius the harder the gas flows out from the chamber and
+the pressure inside the chamber increases, which accounts for the increase in the values
+mentioned before.
+
+As a final comment on the problem, it was demonstrated that the effect of adaptive stepping
+on the number of time intervals needed is extremely remarkable. It helps to increase
+the calculation speed without any loss of accuracy by using a smaller step size for
+sudden changes and bigger step size for linear regions.
 
 %Burayı merve doldursun
 
