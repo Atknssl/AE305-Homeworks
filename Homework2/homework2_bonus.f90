@@ -1,3 +1,13 @@
+!--------------------------------------------------
+!..Homework 2 Bonus
+!..Team 31
+!..AE305 - Numerical Methods
+!
+!..This program calculates the chamber pressure, 
+!..burn rate and specific impulse for given rocket
+!..using RK4 method with adaptive time step and
+!..outputs results to a file.
+!--------------------------------------------------
 Module rocket_params_vars_bonus
   Implicit none
   integer, parameter :: no_eqs = 2
@@ -20,12 +30,14 @@ Module rocket_params_vars_bonus
   contains
 
   Function m_n_dot(p_c_) 
+    ! calculate m_n dot to use in ODE
     real*8 :: m_n_dot, p_c_
     m_n_dot = p_c_*A_star*sqrt(gama/(R_cst*T_c))*((gama+1)/2)**(-(gama+1)/(2*(gama-1)))
     return
   End Function m_n_dot 
 
   Function rho_c(p_c_)
+    ! calculate rho_c to use in ODE
     real*8 :: rho_c, p_c_
     rho_c = p_c_/(R_cst*T_c)
     return
@@ -48,9 +60,15 @@ Module rocket_params_vars_bonus
   Function I_sp(p_c_)
    ! specific impulse
    Implicit none
-     real*8 :: I_sp, p_c_
-       I_sp = (1/grav)*sqrt(abs(((2*gama*R_cst*T_c)/(gama-1))*(1-((p_a/p_c_)**((gama-1)/gama)))))
-     return
+    real*8 :: I_sp, p_c_
+    ! Here, absolute of value inside square root is taken because
+    ! there is really small error caused by numerical computing makes
+    ! value inside of the square root negative for some intervals
+    ! which results in runtime error. This negative value is so small
+    ! that its practically zero. Therefore, absolute can be used without 
+    ! effecting accuracy of result. Using abs solved the runtime error.
+    I_sp = (1/grav)*sqrt(abs(((2*gama*R_cst*T_c)/(gama-1))*(1-((p_a/p_c_)**((gama-1)/gama)))))
+    return
   End function I_sp   
  
   Function ODEs( p_c_ , r_) result ( k )
@@ -74,14 +92,14 @@ Module rocket_params_vars_bonus
     ! to determine the step size. If p_c changes while calculating 
     ! step size, calculation will be wrong. Therefore, in the bonus
     ! part, RK4 must be calculated in a different function, which
-    ! does not change the inputs value. This is why this part is 
-    ! different than the other part of the question.
+    ! does not change the inputs value. This is why this part of 
+    ! code is different than the main code.
     result = RK4_(p_c,r,del_t)
 
-    r = result(1)
-    p_c = result(2)
+    r = result(1) ! r is updated
+    p_c = result(2) ! p_c is updated
 
-    t = t + del_t                               !time is updated
+    t = t + del_t !time is updated
   return
  End subroutine
 
@@ -194,6 +212,7 @@ A_star = pi * (th_radius/100)**2
       write(*,'(8(a,e9.3))')' t = ',time,' s,   p_c = ', p_c*1d-6,' MPa, I_sp = ', isp, ' s r_dot = ',r_dot,' m/s'
   enddo
   
+  ! Print the interval number for bonus part
   write(*,*) 'Number of time intervals needed = ', nstep
   close(1)
 

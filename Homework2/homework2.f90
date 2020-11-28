@@ -1,3 +1,13 @@
+!--------------------------------------------------
+!..Homework 2
+!..Team 31
+!..AE305 - Numerical Methods
+!
+!..This program calculates the chamber pressure, 
+!..burn rate and specific impulse for given rocket
+!..using RK4 method with constant time step and
+!..outputs results to a file.
+!--------------------------------------------------
 Module rocket_params_vars
   Implicit none
   integer, parameter :: no_eqs = 2
@@ -21,12 +31,14 @@ Module rocket_params_vars
   contains
 
   Function m_n_dot(p_c_) 
+    ! calculate m_n dot to use in ODE
     real*8 :: m_n_dot, p_c_
     m_n_dot = p_c_*A_star*sqrt(gama/(R_cst*T_c))*((gama+1)/2)**(-(gama+1)/(2*(gama-1)))
     return
   End Function m_n_dot 
 
   Function rho_c(p_c_)
+    ! calculate rho_c to use in ODE
     real*8 :: rho_c, p_c_
     rho_c = p_c_/(R_cst*T_c)
     return
@@ -47,21 +59,27 @@ Module rocket_params_vars
   End Function f_cor
 
   Function I_sp(p_c_)
-   ! specific impulse
-   Implicit none
-     real*8 :: I_sp, p_c_
-       I_sp = (1/grav)*sqrt(abs(((2*gama*R_cst*T_c)/(gama-1))*(1-((p_a/p_c_)**((gama-1)/gama)))))
-     return
+    ! specific impulse
+    Implicit none
+    real*8 :: I_sp, p_c_
+    ! Here, absolute of value inside square root is taken because
+    ! there is really small error caused by numerical computing makes
+    ! value inside of the square root negative for some intervals
+    ! which results in runtime error. This negative value is so small
+    ! that its practically zero. Therefore, absolute can be used without 
+    ! effecting accuracy of result. Using abs solved the runtime error.
+      I_sp = (1/grav)*sqrt(abs(((2*gama*R_cst*T_c)/(gama-1))*(1-((p_a/p_c_)**((gama-1)/gama)))))
+    return
   End function I_sp   
  
   Function ODEs( p_c_ ) result ( k )
-   Implicit none
+    Implicit none
     real*8 :: p_c_
     real*8, dimension( no_eqs ) :: k
-     r_dot = a*p_c**n
-     k( 1 ) =  r_dot
-     k( 2 ) =  R_cst*T_c*(((f_cor(r)*2* a * p_c ** n)/r)*(rho_p-rho_c(p_c_))-m_n_dot(p_c_)/(pi*L*r**2))
-   return
+    r_dot = a*p_c**n
+    k( 1 ) =  r_dot
+    k( 2 ) =  R_cst*T_c*(((f_cor(r)*2* a * p_c ** n)/r)*(rho_p-rho_c(p_c_))-m_n_dot(p_c_)/(pi*L*r**2))
+    return
   End function
 
   Subroutine RK4( t, del_t )
@@ -72,47 +90,47 @@ Module rocket_params_vars
     p_c_old = p_c
     r_old = r
     k(1, : ) = ODEs( p_c )
-!.. slopes at p_1 = 0.5
+  !.. slopes at p_1 = 0.5
     p_c = p_c_old + 0.5d0 * del_t * k(1, 2)
     r = r_old + 0.5d0 * del_t * k(1, 1)
     k(2, : ) = ODEs( p_c )
 
-!.. slopes at p_2 = 0.5
+  !.. slopes at p_2 = 0.5
     p_c = p_c_old + 0.5d0 * del_t * k(2, 2)
     r = r_old + 0.5d0 * del_t * k(2, 1)
     k(3, : ) = ODEs( p_c )
 
-!.. slopes at p_3 = 1.0
+  !.. slopes at p_3 = 1.0
     p_c = p_c_old + del_t * k(3, 2)
     r = r_old + del_t * k(3, 1)
     k(4, : ) = ODEs( p_c )
 
-    phi(:) = (1.0/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : ))         !weighted slope is calculated
-    p_c = p_c_old + phi(2) * del_t                                    !p_c is updated
-    r = r_old + phi(1) * del_t 
+    phi(:) = (1.0/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : )) !weighted slope is calculated
+    p_c = p_c_old + phi(2) * del_t ! p_c is updated
+    r = r_old + phi(1) * del_t ! r is updated
 
-    t = t + del_t                               !time is updated
+    t = t + del_t ! time is updated
   return
- End subroutine
+  End subroutine
 
 End module
 
 Program Rocket_Perf
- Use rocket_params_vars
- Implicit none
- character*40 :: fname
- real*8 ::  dt, time, isp
- integer :: nstep = 0
- real*8 :: th_radius
+  Use rocket_params_vars
+  Implicit none
+  character*40 :: fname
+  real*8 ::  dt, time, isp
+  integer :: nstep = 0
+  real*8 :: th_radius
 
- write(*,'(a)') 'Enter throat radius in centimeters :'
- write(*,'(a)',advance='no') ':>'
- read*, th_radius
+  write(*,'(a)') 'Enter throat radius in centimeters :'
+  write(*,'(a)',advance='no') ':>'
+  read*, th_radius
  
-A_star = pi * (th_radius/100)**2
+  A_star = pi * (th_radius/100)**2
 
- print*,'enter time step size, dt [s] : '
- read*, dt
+  print*,'enter time step size, dt [s] : '
+  read*, dt
 
 !.. initial params
   p_c =  p_a    ! chamber pressure
@@ -132,9 +150,10 @@ A_star = pi * (th_radius/100)**2
   do while( p_c >= p_a )
     nstep = nstep + 1
 
-      ! update solution and time
+    ! update solution and time
     call RK4(time, dt)
 
+    ! calculate isp
     isp = I_sp(p_c)
 
     ! print on screen and store soln
@@ -144,11 +163,10 @@ A_star = pi * (th_radius/100)**2
 
   enddo
 
+  ! Print the interval number for bonus part
   write(*,*) 'Number of time intervals needed = ', nstep
-  
+
   close(1)
 
   stop
 End
-
-
