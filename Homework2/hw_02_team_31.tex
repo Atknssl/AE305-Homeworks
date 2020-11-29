@@ -41,7 +41,7 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 Numerical methods, such as Runge Kutta Method, are widely used to solve differential equations when an
 analytical solution is not possible or time-consuming. $4^{th}$ order Runge-Kutta Method is one of the
 numerical methods which gives quite accurate results due to its small truncation error. In this homework,
-a solid propellent rocket is given, and its chamber pressure $p_c$, burn rate $\dot{r}$, and the specific
+a solid propellant rocket is given, and its chamber pressure $p_c$, burn rate $\dot{r}$, and the specific
 impulse $I_{sp}$ are asked to be calculated with this method until the chamber pressure $p_c$ becomes equal 
 to the atmospheric pressure $p_a$, with different time step sizes and different nozzle throat radiuses.
 
@@ -223,7 +223,7 @@ This figure illustrates how the burn rate $\dot{r}$ changes as time progresses w
 $\dot{r}$ is proportional to $p_c$ as stated in Equation \ref{eqn:pres}; therefore, both of them give 
 similar responses to different throat radiuses. 
 Lower radiuses cause higher maximum burn rates but shorter time to reach the ambient pressure. 
-However, since the propallent burn rate exponent in 
+However, since the propellant burn rate exponent in 
 Equation \ref{eqn:pres} is smaller than one, the growth in the maximum burn rates in Figure \ref{fig:q2r_dot} is 
 less remarkable than the growth in the maximum chamber pressures in Figure \ref{fig:q2p_cp}. Also, as mentioned above,
 flight time decreases because of faster burn rate.
@@ -305,15 +305,15 @@ computationally cheaper without losing accuracy.
 Given a solid propellant rocket, the change of chamber pressure $p_c$,
 the rate of the equivalent radius $\dot{r}$ and the specific impulse $I_{sp}$ were
 requested to be calculated in the homework. These calculations were
-made by using the $4^{th}$ order RK method with three different step sizes for the first
+made by using the classical $4^{th}$ order RK method with three different step sizes for the first
 problem, and with different nozzle throat radiuses for the second problem.
 
-Comparing the results obtained, it can be observed that $4^{th}$ order RK method gives
+At first, comparing the results obtained, it can be observed that $4^{th}$ order RK method gives
 quite reliable results for this problem since the step sizes used are small
-enough to approch the exact solution, and the truncation error caused by numerical
-methods is negligible for the $4^{th}$ order RK method. Moving on to the next comparison,
-the results illustrates that the outcome of the usage of smaller nozzle throat radiuses
-is an increase in maximum chamber pressure. As the burn rate and the specific impulse
+enough to give minor error between solutions with different step sizes, and the truncation error 
+caused by numerical methods is negligible for the $4^{th}$ order RK method. Moving on to the 
+next comparison, the results illustrates that the outcome of the usage of smaller nozzle throat 
+radiuses is an increase in maximum chamber pressure. As the burn rate and the specific impulse
 are related proportionally to the chamber pressure, their maximum values also experiences
 an increase. The smaller the nozzle throat radius the harder the gas flows out from the chamber and
 the pressure inside the chamber increases, which accounts for the increase in the values
@@ -324,6 +324,6 @@ on the number of time intervals needed is extremely remarkable. It helps to incr
 the calculation speed without any loss of accuracy by using a smaller step size for
 sudden changes and bigger step size for linear regions.
 
-%Burayı merve doldursun
+
 
 \end{document}
