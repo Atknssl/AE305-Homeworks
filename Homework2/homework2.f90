@@ -89,23 +89,24 @@ Module rocket_params_vars
     real*8, dimension( no_eqs )  ::  k( no_stages, no_eqs ), phi(no_eqs)
     p_c_old = p_c
     r_old = r
-    k(1, : ) = ODEs( p_c )
-  !.. slopes at p_1 = 0.5
+    k(1, : ) = ODEs( p_c ) !Slopes at the beginning of the interval are calculated
+  
+  !Slopes at p_1=0.5 fraction of the interval are calculated  
     p_c = p_c_old + 0.5d0 * del_t * k(1, 2)
     r = r_old + 0.5d0 * del_t * k(1, 1)
-    k(2, : ) = ODEs( p_c )
+    k(2, : ) = ODEs( p_c ) 
 
-  !.. slopes at p_2 = 0.5
+  !Slopes at p_2=0.5 fraction of the interval are calculated  
     p_c = p_c_old + 0.5d0 * del_t * k(2, 2)
     r = r_old + 0.5d0 * del_t * k(2, 1)
-    k(3, : ) = ODEs( p_c )
+    k(3, : ) = ODEs( p_c ) 
 
-  !.. slopes at p_3 = 1.0
+  !Slopes at p_3=1.0 fraction of the interval are calculated
     p_c = p_c_old + del_t * k(3, 2)
     r = r_old + del_t * k(3, 1)
-    k(4, : ) = ODEs( p_c )
+    k(4, : ) = ODEs( p_c ) 
 
-    phi(:) = (1.0/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : )) !weighted slope is calculated
+    phi(:) = (1.0/6)* (k(1, : )+2*k(2, : )+2*k(3, : )+k(4, : )) !weighted slopes are calculated
     p_c = p_c_old + phi(2) * del_t ! p_c is updated
     r = r_old + phi(1) * del_t ! r is updated
 
