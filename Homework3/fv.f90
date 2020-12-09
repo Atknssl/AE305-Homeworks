@@ -97,11 +97,17 @@ subroutine  GRADIENT()
         dy = xy(2,n2)-xy(2,n1)
         ne = neigh(ns,n)
         if(ne .gt. 0) then       !..real neighbor
-           qface = 0.5*(qcell(n) + ...)
-           qgrad(1,n) = ...
-           qgrad(2,n) = ...
-        elseif ... !..other neighbors
-		   ...
+           qface = 0.5*(qcell(n) + qcell(ne))
+           qgrad(1,n) = qgrad(1,n) + (1/area(n)) * qface * dy
+           qgrad(2,n) = qgrad(2,n) - (1/area(n)) * qface * dx
+        elseif(ne.eq.-1) then
+            qgrad(1,n) = uinf
+            qgrad(2,n) = vinf
+            exit
+        elseif(ne.eq.-2) then
+         qface = qcell(n)
+         qgrad(1,n) = qgrad(1,n) + (1/area(n)) * qface * dy
+         qgrad(2,n) = qgrad(2,n) - (1/area(n)) * qface * dx
         endif
      enddo 
   ENDDO
@@ -124,10 +130,14 @@ function CellFLUX(n)
      ne = neigh(ns,n)
      if( ne .gt. 0 ) then        !..real neighbor... 
          f = ( qgrad(1,n) + qgrad(1,ne) ) / 2.
-         g = ...
-     elseif ... !..other neighbors
-         ...
-	 endif
+         g = ( qgrad(2,n) + qgrad(2,ne) ) / 2.
+         elseif(ne.eq.-1) then
+            f = uinf
+            g = vinf
+        elseif(ne.eq.-2) then
+            f = 0
+            g = 0
+        endif
      Cellflux = Cellflux - (f*dy - g*dx)
   enddo 
   return
