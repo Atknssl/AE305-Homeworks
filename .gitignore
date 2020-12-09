@@ -1,5 +1,7 @@
 ##FORTRAN
 
+#PLOT OUTPUT
+*.tec
 #DATA OUTPUT
 *.dat
 
