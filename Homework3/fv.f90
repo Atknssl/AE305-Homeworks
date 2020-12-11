@@ -51,7 +51,9 @@ End module
    if( .not. ok ) then
        print*, '  ', fn, ' does not exist! \n\n'
        stop
-   endif 
+   endif
+   write(*,'(/(a))',advance='no')'Enter angle of attack :'
+   read(*,*) alpha_deg
    open(1,file=fn,form='formatted')
    read(1,*) ncell,nnode
    allocate( node(3,ncell),neigh(3,ncell),xy(2,nnode),area(ncell), &
