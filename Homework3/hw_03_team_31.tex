@@ -37,6 +37,7 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 %Report start
 
 \section{Introduction}
+\label{section:intro}
 
 Finite Volume Method is a numerical method used in order to solve partial differential
 equations representing the conservation of a quantity. In this homework, potential flow
@@ -94,6 +95,18 @@ for the calculation of this quantity as explained above.
 \newpage
 
 \section{Results and Discussion}
+\subsection{Flowfield Around A Cylinder}
+
+\begin{figure} [ht]
+	\centering
+	\includegraphics[height = 10cm]{graph/15deg/Cylinder_15angle_pressure0000.png}
+	\caption{Potential flow over a circular cylinder at $\alpha=15$ calculated by FV method.}
+    \label{fig:q1pc}
+\end{figure}
+
+According to the boundary conditions mentioned in Section \ref{section:adaptive}, FV fortran code
+is completed. Afterwards, flowfield around a cylinder calculated using the unstructured grid provided.
+
 
 \section{Conclusion}
 
