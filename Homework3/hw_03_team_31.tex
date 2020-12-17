@@ -208,9 +208,66 @@ Also, the velocity vectors near the cylinder is tangent to the boundary. On the 
 cylinder, the direction of the velocity vector is too close to normal of surface. However, the 
 magnitude of velocity is too small. Because normal components of velocity are zero at the boundary.
 
+\newpage
 
+\subsection{NACA0012 airfoil mesh}
 
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 10cm]{graph/medium/medium_62650000.png}
+	\caption{Unstructured mesh of NACA0012 airfoil}
+    \label{fig:airfoilmesh}
+\end{figure}
 
+\vspace{2cm}
+
+Unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
+unstructured mesh consists of 6265 triangular grids.
+
+\newpage
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 10cm]{graph/medium/medium_62650001.png}
+	\caption{Unstructured mesh of NACA0012 airfoil near the airfoil}
+    \label{fig:airfoilmeshclose}
+\end{figure}
+
+\vspace{2cm}
+
+It can be seen from Figure \ref{fig:airfoilmesh} and Figure \ref{fig:airfoilmeshclose} that, grids around 
+airfoil are smaller for better accuracy, whereas grid far from airfoil are relatively bigger.
+\newpage
+
+\subsection{Pressure distribution around NACA0012 airfoil at $\alpha = 0$}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 10cm]{graph/medium/medium_streamline0000.png}
+	\caption{Streamlines around NACA0012 airfoil}
+    \label{fig:airfoilstreamline}
+\end{figure}
+
+When potential flow equation is solved using Finite Volume method using unstructured mesh in Figure \ref{fig:airfoilmesh},
+flow around NACA0012 airfoil can be found. This flow can be illustrated using streamlines, as can be seen in 
+Figure \ref{fig:airfoilstreamline}. As expected, air flows faster at the airfoil camber, and air stagnates at the 
+leading edge and the trailing edge. Moreover, pressure coefficient can be calculated using Bernoulli's Equation 
+as the speed of the flow is known.
+
+\newpage
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 10cm]{graph/medium/medium_pressure0000.png}
+	\caption{Pressure coefficient around NACA0012 airfoil}
+    \label{fig:airfoilpressure}
+\end{figure}
+
+It can be seen from Figure \ref{fig:airfoilpressure} that pressure distribution on the upper and the lower surfaces are the same.
+This is because airfoil is symmetric and airfoil is at zero angle of attack. If the angle of attack was different from zero, 
+pressure distribution on the upper and lower surfaces would be different. It can also be seen that at leading edge and trailing edge,
+pressure is relatively larger; and around maximum camber point, pressure is relatively lower. This is because air flows slower at the 
+leading and the trailing edge and flows faster around maximum camber point.
 
 \section{Conclusion}
 
