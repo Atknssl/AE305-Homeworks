@@ -40,10 +40,10 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 \label{section:intro}
 
 Finite Volume Method is a numerical method used in order to solve partial differential
-equations representing the conservation of a quantity. In this homework, potential flow
+equations representing the conservation of a quantity. In this homework, a potential flow
 field over a circular cylinder at various values of angle of attack and a symmetric NACA
 airfoil at zero angle of attack is requested to be calculated. For a potential flow,
-velocity field is obtained by the Laplace's equation:
+the velocity field is obtained by the Laplace's equation:
 
 \begin{equation}
 	\vec{\nabla} \cdot \vec{\nabla}\phi = \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} = 0.
@@ -60,8 +60,8 @@ of linear algebraic equations.
 	\frac{\partial \phi}{\partial t} = \nu \left(\frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2}\right)
 \end{equation}
 
-where $\nu$ is an artificial diffusion coefficient. Steady state boundary conditions are
-set to calculate the steady state solution as the time derivative goes to zero during the
+where $\nu$ is an artificial diffusion coefficient. Steady-state boundary conditions are
+set to calculate the steady-state solution as the time derivative goes to zero during the
 integration. The integral form of the above equation is:
 
 \begin{equation}
@@ -88,10 +88,10 @@ penetration boundary condition (Wall BC):
 The conserved quantity for this problem is the potential $\phi$, and the FV method is applied
 for the calculation of this quantity as explained above.\\
 \newpage
-In this homework, Bernoulli Equation is also used to calculate pressure coefficient. Bernoulli equation
-implies that for inviscid, irrotational and incompressible flows, when body forces are neglected,
-total pressure is constant at every point in the flow. The total pressure is equal to summation 
-of static and dynamic pressures.
+In this homework, Bernoulli Equation is also used to calculate the pressure coefficient. Bernoulli equation
+implies that for inviscid, irrotational, and incompressible flows, when body forces are neglected,
+the total pressure is constant at every point in the flow. The total pressure is equal to the summation of 
+static and dynamic pressures.
 \begin{eqnarray}
 	P_1+q_1&=&P_2+q_2 \nonumber \\
 	P_1+\frac{1}{2}\rho_1V_{1}^{2}&=&P_2+\frac{1}{2}\rho_2V_{2}^{2}\:=\:\mbox{constant}
@@ -118,34 +118,34 @@ In this homework, Finite Volume Method is used. In this method, an integral cons
         \frac{\partial}{\partial t}\int_{\Omega_e} q\,d\Omega + \oint_{S_e} \vec{F} \cdot \vec{dS} =0     
         \label{eqn:fvm}
 \end{equation}
-is applied to each control volume $\Omega_e$, and its boundries $S_e$ in a discrete form. First, solution domain is divided into small triangular cells and a computational mesh is created. 
+is applied to each control volume $\Omega_e$, and its boundaries $S_e$ in a discrete form. First, the solution domain is divided into small triangular cells and a computational mesh is created. 
 Then, all cells are labeled and neighbour cells to their surfaces are identified. Then, conservation law is applied to all cells.\\
-A pseudo time derivative is substituted into Laplace's equation which is multiplied by artificial 
+A pseudo time derivative is substituted into Laplace's equation which is multiplied by artificial
 diffusion coefficient,$\nu$. The equation becomes
 \begin{equation}
         \frac{\partial \phi}{\partial t} - \nu \vec{\nabla}\cdot\vec{\nabla}\phi = 0
         \label{eqn:pseudodiff}
 \end{equation}
 where $\vec{F}=-\nu\vec{\nabla}\phi$\\
-Since a steady state solution is obtained as the derivative goes to zero and steady boundary conditions 
-are specified,Laplace’s equation is satisfied. 
+Since a steady-state solution is obtained as the derivative goes to zero and steady boundary conditions 
+are specified, Laplace’s equation is satisfied. 
 The integral form of Equation \ref{eqn:pseudodiff} becomes
 \begin{eqnarray}
         \frac{\partial}{\partial t}\int_{\Omega} \phi\,d\Omega + \oint_S \vec{F} \cdot \vec{dS} =0\ \\
         \mbox{where}\: \vec{F}=f\vec{i}+g\vec{j}=-(\nu\frac{\partial \phi}{x}\vec{i}+\nu\frac{\partial \phi}{y}\vec{j})\nonumber
         \label{eqnarray:genel}
 \end{eqnarray}
-Equation \ref{eqn:fvm} and Equation \ref{eqnarray:genel} have the same form. Therefore, finite volume method can be applied.\\
-A simple discete form of the Equation \ref{eqnarray:genel} applied to a two dimensional triangular cell $e$ is then given by
+Equation \ref{eqn:fvm} and Equation 14 have the same form. Therefore, the finite volume method can be applied.\\
+A simple discrete form of Equation 14 applied to a two-dimensional triangular cell $e$ is then given by
 \begin{equation}
         \frac{d(\phi_e\Omega_e)}{t}+\sum_{s=1}^{3} (\vec{F} \cdot \vec{dS})\ =0
         \label{eqn:diff}
 \end{equation}
 where $\phi_e$ is the average $\phi$ over element e, $\Omega_e$ is the area of triangle $e$ ,and
 $\vec{S} = \Delta y_{e,s}\vec{i}-\Delta x_{e,s}\vec{j}$\\
-In this homework, averaging of cell-based quantities approach is used to calculate flux values. According to this approach,
-it should be taken that averages of the cell-based flux values of the cells sharing the same surface to compute the flux 
-through this surface.Therefore, the second term of \ref{eqn:diff} becomes
+In this homework, the averaging of cell-based quantities approach is used to calculate flux values. According to this approach,
+the averages of the cell-based flux values of the cells sharing the same surface should be taken to compute the flux
+through this surface. Therefore, the second term of \ref{eqn:diff} becomes
 \begin{eqnarray}
 	\sum_{s=1}^{3} (\vec{F} \cdot \vec{dS})&=&\sum_{s=1}^{3} (\vec{F_{e,s}} \cdot \vec{dS_{e,s}}) \nonumber \\
 	&=&\sum_{s=1}^{3}[\frac{1}{2}(f_{e}+f_{e,ns})\Delta y_{e,s}-\frac{1}{2}(g_{e}+g_{e,ns})\Delta x_{e,s}] 
@@ -155,12 +155,12 @@ Equation \ref{eqn:diff} for element e becomes
 \begin{equation}
         \Omega_e \frac{d\phi_e}{dt} +\sum_{s=1}^{3} [f_{e,s}\Delta y_{e,s}-g_{e,s}\Delta x_{e,s}]=0
 \end{equation}
-By using Taylor Series Expansion in time, time derivative is approxiamted. These steps leads to the explicit Euler time
+By using Taylor Series Expansion in time, the time derivative is approximated. These steps lead to the explicit Euler time
 integration:
 \begin{equation}
         \phi_{e}^{k+1} =\phi_{e}^{k} - \frac{\Delta t}{\Omega_e}\sum_{s=1}^{3}[f_{e,s}^{k}\Delta y_{e,s}-g_{e,s}^{k}\Delta x_{e,s}]
 \end{equation}
-Since $\vec{F}$ is diffusive flux, average gradient vectors are calculated by
+Since $\vec{F}$ is diffusive flux, the average gradient vectors are calculated by
 \begin{eqnarray}
 \bar{\frac{\partial \phi}{\partial x}}\bigg|_{e}&=&\frac{1}{\Omega_e}\sum_{s=1}^{3}\frac{1}{2}(\phi_e+\phi{ns})\Delta y_{e,s} \nonumber \\
 \bar{\frac{\partial \phi}{\partial y}}\bigg|_{e}&=&-\frac{1}{\Omega_e}\sum_{s=1}^{3}\frac{1}{2}(\phi_e+\phi{ns})\Delta x_{e,s}	\nonumber
@@ -181,7 +181,7 @@ Since $\vec{F}$ is diffusive flux, average gradient vectors are calculated by
 \vspace{1cm}
 
 According to the boundary conditions mentioned in Section \ref{section:intro}, FV fortran code
-is completed. Afterwards, flowfield around a cylinder is calculated using the unstructured grid provided.
+is completed. Afterwards, the flowfield around a cylinder is calculated using the unstructured grid provided.
 
 \newpage
 
@@ -195,12 +195,12 @@ is completed. Afterwards, flowfield around a cylinder is calculated using the un
 
 \vspace{1cm}
 
-In Figure \ref{fig:q2st0},\ref{fig:q2st15},and \ref{fig:q2st-15}, it can be observed that streamlines 
+In Figure \ref{fig:q2st0},\ref{fig:q2st15}, and \ref{fig:q2st-15}, it can be observed that streamlines
 are parallel and horizontal lines far from the cylinder, and they are in the direction of the free stream velocity,
-which results from the Farfield boundary condition. However, as approached the cylinder, streamlines are squeezed,
-and do not across on each other and through the cylinder, since the normal component of velocity at 
-the surface of cylinder is equal to zero. This is a consequence of the no penetration boundary condition, which
-is also called Wall boundary condition.
+which results from the Farfield boundary condition. However, as approached the cylinder, streamlines are squeezed.
+Moreover, they do not cross on each other and through the cylinder, since the normal component of velocity at
+the surface of the cylinder is equal to zero. This is a consequence of the no penetration boundary condition, which
+is also called the Wall boundary condition.
 
 \newpage
 
@@ -247,10 +247,10 @@ is also called Wall boundary condition.
 
 According to Figure \ref{fig:q2v0},\ref{fig:q2v15},and \ref{fig:q2v-15}, velocity vectors 
 have the same direction, and magnitudes ($\vec{V}_{\infty}$) far from cylinder, which 
-satisfies the Farfield boundry condition. Also, the velocity vectors near the cylinder is tangent 
+satisfies the Farfield boundary condition. Also, the velocity vectors near the cylinder are tangent
 to the boundary. On the front and back of the cylinder, there are two points where the direction
-of the velocity vector is too close to normal of surface. However, the magnitude of velocity is 
-so small that they can be considered as zero, satisfying the Wall boundary condition. These points
+of the velocity vector is too close to the normal of the surface. However, the magnitude of velocity is
+so small that it can be considered as zero, satisfying the Wall boundary condition. These points
 are called stagnation points.
 
 \newpage
@@ -271,12 +271,12 @@ are called stagnation points.
 
 \newpage
 In Figure \ref{fig:q3fv}, the pressure coefficient over the cylinder is calculated by using the 
-Bernouilli Equation and FV method.On the other hand, in Figure \ref{fig:q3a}, the pressure coefficient 
-over the cylinder is plotted by analytical solution. As can be seen from Figure \ref{fig:q3fv} 
-highest pressure coefficient is calculated at the front half and rear half of the cylinder, whereas 
-the lowest pressure coefficient is computed at the upper half and lower half of the cylinder. This result 
-is coincide with the analytical solution. Since stagnation points, where velocities are equal to zero, 
-are at the front and rear halves of the cylinder, from Equation \label{eqn:C_p_new}, the highest pressure 
+Bernouilli Equation and the FV method. On the other hand, in Figure \ref{fig:q3a}, the pressure coefficient
+over the cylinder is plotted by the analytical solution. As can be seen from Figure \ref{fig:q3fv} 
+The highest pressure coefficient is calculated at the front half and rear half of the cylinder, whereas
+the lowest pressure coefficient is computed at the upper half and lower half of the cylinder. This result
+coincides with the analytical solution. Since stagnation points, where velocities are equal to zero, 
+are at the front and rear halves of the cylinder, from Equation 11, the highest pressure
 coefficients are observed at these halves.
 
 \subsection{NACA0012 airfoil mesh}
@@ -291,7 +291,7 @@ coefficients are observed at these halves.
 
 \vspace{1cm}
 
-Unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
+Unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This
 unstructured mesh consists of 6265 triangular grids.
 
 \newpage
@@ -305,8 +305,8 @@ unstructured mesh consists of 6265 triangular grids.
 
 \vspace{1cm}
 
-It can be seen from Figure \ref{fig:airfoilmesh} and Figure \ref{fig:airfoilmeshclose} that, grids around 
-the airfoil are smaller for better accuracy, whereas grid far from the airfoil are relatively bigger.
+It can be seen from Figure \ref{fig:airfoilmesh} and Figure \ref{fig:airfoilmeshclose} that, the grids around
+the airfoil are smaller for better accuracy, whereas the grids far from the airfoil are relatively bigger.
 \newpage
 
 \subsection{Pressure distribution around NACA0012 airfoil at $\alpha = 0$}
@@ -320,10 +320,10 @@ the airfoil are smaller for better accuracy, whereas grid far from the airfoil a
 
 \vspace{1cm}
 
-When potential flow equation is solved using Finite Volume method using unstructured mesh in Figure \ref{fig:airfoilmesh},
+When the potential flow equation is solved using the Finite Volume Method and unstructured mesh in Figure \ref{fig:airfoilmesh},
 flow around NACA0012 airfoil can be found. This flow can be illustrated using streamlines, as can be seen in 
 Figure \ref{fig:airfoilstreamline}. As expected, air flows faster around the thicker sections of the airfoil, 
-and air stagnates at the leading edge and the trailing edge. Moreover, pressure coefficient can be calculated using Bernoulli's Equation 
+and air stagnates at the leading edge and the trailing edge. Moreover, the pressure coefficient can be calculated using Bernoulli's Equation
 as the speed of the flow is known.
 
 \newpage
@@ -339,10 +339,9 @@ as the speed of the flow is known.
 
 It can be seen from Figure \ref{fig:airfoilpressure} that pressure distribution on the upper and the lower surfaces are the same.
 This is because airfoil is symmetric and airfoil is at zero angle of attack. If the angle of attack was different from zero, 
-pressure distribution on the upper and lower surfaces would be different. It can also be seen that at leading edge and trailing edge,
-pressure is relatively larger; and around the maximum thickness, pressure is relatively lower. This is because air flows slower at the 
+pressure distribution on the upper and lower surfaces would be different. It can also be seen that at the leading edge and the trailing edge,
+the pressure is relatively larger; and around the maximum thickness, the pressure is relatively lower. This is because air flows slower at the
 leading and the trailing edge and flows faster at the thicker part of the airfoil.
-
 \newpage
 
 \subsection{Solutions with different grid sizes}
@@ -358,7 +357,7 @@ leading and the trailing edge and flows faster at the thicker part of the airfoi
 
 \vspace{1cm}
 
-Coarse unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
+Coarse unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This
 unstructured mesh consists of 847 triangular grids.
 
 \newpage
@@ -380,7 +379,7 @@ unstructured mesh consists of 847 triangular grids.
 \newpage
 
 It can be seen from Figure \ref{fig:airfoilcoarsestreamline} that, when coarse grid is 
-use for calculation, streamlines obeys no penetration boundary condition but magnitude 
+used for calculation, streamlines obeys no penetration boundary condition but the magnitude 
 of velocity is not calculated correctly around the airfoil.
 
 \vspace{1cm}
@@ -394,10 +393,10 @@ of velocity is not calculated correctly around the airfoil.
 
 \vspace{1cm}
 
-Around the leading and the trailing edge, pressure coefficient distribution is 
+Around the leading and the trailing edge, pressure coefficient distribution is
 closer to the correct distribution but still not correct enough. Around the maximum
-thickness, pressure distribution is way off the correct result. Therefore, coarse
-mesh is not suitable for precise calculation of pressure around an airfoil.
+thickness, the pressure distribution is way off the correct result. Therefore, the coarse
+mesh is not suitable for a precise calculation of pressure around an airfoil.
 
 \newpage
 
@@ -432,7 +431,7 @@ unstructured mesh consists of 20948 triangular grids.
 
 \newpage
 
-When a fine grid is used to calculate flow around the airfoil, velocity distribution
+When a fine grid is used to calculate flow around the airfoil, the velocity distribution
 can be found correctly around the airfoil. Figure \ref{fig:airfoilfinestreamline} 
 illustrates that streamlines are calculated according to the no penetration boundary 
 condition and air flows faster around the thicker part of the airfoil.
@@ -448,16 +447,16 @@ condition and air flows faster around the thicker part of the airfoil.
 
 \vspace{1cm}
 
-As Figure \ref{fig:airfoilfinepressure} shows, pressure distribution can be 
-calculate more precisely when a finer grid is used. But the usage of finer grid
+As Figure \ref{fig:airfoilfinepressure} shows, the pressure distribution can be 
+calculated more precisely when a finer grid is used. But the usage of finer grid
 greatly increases the computation time, so unnecessarily fine grid should be avoided 
 to maximize efficiency.
 
 \subsubsection{Medium grid}
 
 Calculations of Section \ref{sec:medium} is done using a medium grid, which consists of 
-6255 triangular grids. When the results of this section is considered, it can be seen that
-medium grid is precise enough to give correct results and because of its relatively lower triangle count, result
+6255 triangular grids. When the results of this section are considered, it can be seen that
+the medium grid is precise enough to give correct results and because of its relatively lower triangle count, the result
 can be calculated faster. Therefore, using a medium grid is more efficient.
 
 \newpage
