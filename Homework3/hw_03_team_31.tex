@@ -283,6 +283,64 @@ pressure distribution on the upper and lower surfaces would be different. It can
 pressure is relatively larger; and around maximum camber point, pressure is relatively lower. This is because air flows slower at the 
 leading and the trailing edge and flows faster around maximum camber point.
 
+\newpage
+
+\subsection{Solutions with different grid sizes}
+
+\subsubsection{Coarse grid}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/coarse/coarse_8470000.png}
+	\caption{Coarse unstructured mesh of NACA0012 airfoil}
+    \label{fig:airfoilmeshcoarse}
+\end{figure}
+
+\vspace{2cm}
+
+Coarse unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
+unstructured mesh consists of 847 triangular grids.
+
+\newpage
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/coarse/coarse_8470001.png}
+	\caption{Coarse unstructured mesh of NACA0012 airfoil near the airfoil}
+    \label{fig:airfoilmeshcoarseclose}
+\end{figure}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/coarse/coarse_streamline0000.png}
+	\caption{Streamlines around NACA0012 airfoil with coarse grid}
+    \label{fig:airfoilcoarsestreamline}
+\end{figure}
+
+\newpage
+
+It can be seen from Figure \ref{fig:airfoilcoarsestreamline} that, when coarse grid is 
+use for calculation, streamlines obeys no penetration boundary condition but magnitude 
+of velocity is not calculated correctly around the airfoil.
+
+\vspace{2cm}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/coarse/coarse_pressure0000.png}
+	\caption{Pressure coefficient around NACA0012 airfoil with coarse grid}
+    \label{fig:airfoilcoarsepressure}
+\end{figure}
+
+\vspace{2cm}
+
+Around the leading and the trailing edge, pressure coefficient distribution is 
+closer to the correct distribution but still not correct enough. Around the maximum
+camber point, pressure distribution is way off the correct result. Therefore, coarse
+mesh is not suitable for precise calculation of pressure around an airfoil.
+
+\newpage
+
 \section{Conclusion}
 
 \end{document}
