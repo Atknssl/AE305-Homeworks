@@ -341,6 +341,57 @@ mesh is not suitable for precise calculation of pressure around an airfoil.
 
 \newpage
 
+\subsubsection{Fine grid}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/fine/fine_209480000.png}
+	\caption{Fine unstructured mesh of NACA0012 airfoil}
+    \label{fig:airfoilmeshfine}
+\end{figure}
+
+Fine unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
+unstructured mesh consists of 20948 triangular grids.
+
+\newpage
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/fine/fine_209480001.png}
+	\caption{Fine unstructured mesh of NACA0012 airfoil near the airfoil}
+    \label{fig:airfoilmeshfineclose}
+\end{figure}
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/fine/fine_streamline0000.png}
+	\caption{Streamlines around NACA0012 airfoil with fine grid}
+    \label{fig:airfoilfinestreamline}
+\end{figure}
+
+\newpage
+
+When a fine grid is used to calculate flow around the airfoil, velocity distribution
+can be found correctly around the airfoil. Figure \ref{fig:airfoilfinestreamline} 
+illustrates that streamlines are calculated according to the no penetration boundary 
+condition and air flows faster around the cambered part of the airfoil.
+
+\vspace{2cm}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/fine/fine_pressure0000.png}
+	\caption{Pressure coefficient around NACA0012 airfoil with fine grid}
+    \label{fig:airfoilfinepressure}
+\end{figure}
+
+\vspace{2cm}
+
+As Figure \ref{fig:airfoilfinepressure} shows, pressure distribution can be 
+calculate more precisely when a finer grid is used. But the usage of finer grid
+greatly increases the computation time, so unnecessarily fine grid should be avoided 
+to maximize efficiency.
+
+
 \section{Conclusion}
 
 \end{document}
