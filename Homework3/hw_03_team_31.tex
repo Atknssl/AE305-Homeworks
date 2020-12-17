@@ -87,6 +87,7 @@ penetration boundary condition (Wall BC):
 
 The conserved quantity for this problem is the potential $\phi$, and the FV method is applied
 for the calculation of this quantity as explained above.\\
+\newpage
 In this homework, Bernoulli Equation is also used to calculate pressure coefficient. Bernoulli equation
 implies that for inviscid, irrotational and incompressible flows, when body forces are neglected,
 total pressure is constant at every point in the flow. The total pressure is equal to summation 
@@ -119,28 +120,28 @@ In this homework, Finite Volume Method is used. In this method, an integral cons
 \end{equation}
 is applied to each control volume $\Omega_e$, and its boundries $S_e$ in a discrete form. First, solution domain is divided into small triangular cells and a computational mesh is created. 
 Then, all cells are labeled and neighbour cells to their surfaces are identified. Then, conservation law is applied to all cells.\\
-A pseudo time derivative is substituted into Laplace equation which is multiplied by artificial 
+A pseudo time derivative is substituted into Laplace's equation which is multiplied by artificial 
 diffusion coefficient,$\nu$. The equation becomes
 \begin{equation}
-        \frac{\partial \Phi}{\partial t} - \nu \vec{\nabla}\cdot\vec{\nabla}\Phi = 0
+        \frac{\partial \phi}{\partial t} - \nu \vec{\nabla}\cdot\vec{\nabla}\phi = 0
         \label{eqn:pseudodiff}
 \end{equation}
-where $\vec{F}=-\nu\vec{\nabla}\Phi$\\
-Since a steady state solution is obtained as the derivative goes to zero and steady boundry conditions 
+where $\vec{F}=-\nu\vec{\nabla}\phi$\\
+Since a steady state solution is obtained as the derivative goes to zero and steady boundary conditions 
 are specified,Laplace’s equation is satisfied. 
 The integral form of Equation \ref{eqn:pseudodiff} becomes
 \begin{eqnarray}
-        \frac{\partial}{\partial t}\int_{\Omega} \Phi\,d\Omega + \oint_S \vec{F} \cdot \vec{dS} =0\ \\
-        \mbox{where}\: \vec{F}=f\vec{i}+g\vec{j}=-(\nu\frac{\partial \Phi}{x}\vec{i}+\nu\frac{\partial \Phi}{y}\vec{j})\nonumber
-        \label{eqn:genel}
+        \frac{\partial}{\partial t}\int_{\Omega} \phi\,d\Omega + \oint_S \vec{F} \cdot \vec{dS} =0\ \\
+        \mbox{where}\: \vec{F}=f\vec{i}+g\vec{j}=-(\nu\frac{\partial \phi}{x}\vec{i}+\nu\frac{\partial \phi}{y}\vec{j})\nonumber
+        \label{eqnarray:genel}
 \end{eqnarray}
-Equation \ref{eqn:fvm} and Equation \ref{eqn:genel} have the same form. Therefore, finite volume method can be applied.\\
-A simple discete form of the Equation \ref{eqn:genel} applied to a two dimensional triangular cell $e$ is then given by
+Equation \ref{eqn:fvm} and Equation \ref{eqnarray:genel} have the same form. Therefore, finite volume method can be applied.\\
+A simple discete form of the Equation \ref{eqnarray:genel} applied to a two dimensional triangular cell $e$ is then given by
 \begin{equation}
-        \frac{d(\Phi_e\Omega_e)}{t}+\sum_{s=1}^{3} (\vec{F} \cdot \vec{dS})\ =0
+        \frac{d(\phi_e\Omega_e)}{t}+\sum_{s=1}^{3} (\vec{F} \cdot \vec{dS})\ =0
         \label{eqn:diff}
 \end{equation}
-where $\Phi_e$ is the average $\Phi$ over element e, $\Omega_e$ is the area of triangle $e$ ,and
+where $\phi_e$ is the average $\phi$ over element e, $\Omega_e$ is the area of triangle $e$ ,and
 $\vec{S} = \Delta y_{e,s}\vec{i}-\Delta x_{e,s}\vec{j}$\\
 In this homework, averaging of cell-based quantities approach is used to calculate flux values. According to this approach,
 it should be taken that averages of the cell-based flux values of the cells sharing the same surface to compute the flux 
@@ -152,17 +153,17 @@ through this surface.Therefore, the second term of \ref{eqn:diff} becomes
 
 Equation \ref{eqn:diff} for element e becomes
 \begin{equation}
-        \Omega_e \frac{d\Phi_e}{dt} +\sum_{s=1}^{3} [f_{e,s}\Delta y_{e,s}-g_{e,s}\Delta x_{e,s}]=0
+        \Omega_e \frac{d\phi_e}{dt} +\sum_{s=1}^{3} [f_{e,s}\Delta y_{e,s}-g_{e,s}\Delta x_{e,s}]=0
 \end{equation}
 By using Taylor Series Expansion in time, time derivative is approxiamted. These steps leads to the explicit Euler time
 integration:
 \begin{equation}
-        \Phi_{e}^{k+1} =\Phi_{e}^{k} - \frac{\Delta t}{\Omega_e}\sum_{s=1}^{3}[f_{e,s}^{k}\Delta y_{e,s}-g_{e,s}^{k}\Delta x_{e,s}]
+        \phi_{e}^{k+1} =\phi_{e}^{k} - \frac{\Delta t}{\Omega_e}\sum_{s=1}^{3}[f_{e,s}^{k}\Delta y_{e,s}-g_{e,s}^{k}\Delta x_{e,s}]
 \end{equation}
 Since $\vec{F}$ is diffusive flux, average gradient vectors are calculated by
 \begin{eqnarray}
-\bar{\frac{\partial \Phi}{\partial x}}\bigg|_{e}&=&\frac{1}{\Omega_e}\sum_{s=1}^{3}\frac{1}{2}(\Phi_e+\Phi{ns})\Delta y_{e,s} \nonumber \\
-\bar{\frac{\partial \Phi}{\partial y}}\bigg|_{e}&=&-\frac{1}{\Omega_e}\sum_{s=1}^{3}\frac{1}{2}(\Phi_e+\Phi{ns})\Delta x_{e,s}	\nonumber
+\bar{\frac{\partial \phi}{\partial x}}\bigg|_{e}&=&\frac{1}{\Omega_e}\sum_{s=1}^{3}\frac{1}{2}(\phi_e+\phi{ns})\Delta y_{e,s} \nonumber \\
+\bar{\frac{\partial \phi}{\partial y}}\bigg|_{e}&=&-\frac{1}{\Omega_e}\sum_{s=1}^{3}\frac{1}{2}(\phi_e+\phi{ns})\Delta x_{e,s}	\nonumber
 \end{eqnarray}
 \newpage
 
