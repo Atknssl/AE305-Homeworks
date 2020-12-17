@@ -160,45 +160,59 @@ Since $\vec{F}$ is diffusive flux, average gradient vectors are calculated by
 According to the boundary conditions mentioned in Section \ref{section:intro}, FV fortran code
 is completed. Afterwards, flowfield around a cylinder calculated using the unstructured grid provided.
 
+\newpage
+
 \subsection{Flowfield Around A Cylinder with Different Angle of Attacks}
 \begin{figure} [ht]
 	\centering
-	\includegraphics[height = 10cm]{graph/0deg/Cylinder_0angle_streamline0000.png}
+	\includegraphics[height = 9.5cm]{graph/0deg/Cylinder_0angle_streamline0000.png}
 	\caption{Streamlines over a circular cylinder at $\alpha=0$ calculated by FV method.}
     \label{fig:q2st0}
 \end{figure}
-\begin{figure} [ht]
-	\centering
-	\includegraphics[height = 10cm]{graph/15deg/Cylinder_15angle_streamline0000.png}
-	\caption{Streamlines over a circular cylinder at $\alpha=15$ calculated by FV method.}
-    \label{fig:q2st15}
-\end{figure}
-\begin{figure} [ht]
-	\centering
-	\includegraphics[height = 10cm]{graph/neg15deg/Cylinder_neg15angle_streamline0000.png}
-	\caption{Streamlines over a circular cylinder at $\alpha=-15$ calculated by FV method.}
-    \label{fig:q2st-15}
-\end{figure}
+
 In Figure \ref{fig:q2st0},\ref{fig:q2st15},and \ref{fig:q2st-15}, it can be observed that streamlines 
 are parallel and horizontal lines far from cylinder. It can be named as Farfield boundary condition. 
 However, as approached the cylinder, streamlines are squeeze. Streamlines do not across each other 
 and over the cylinder. Also, no penetration is observed since normal component of velocity at the 
 surface of cylinder is equal to zero. It can be called as wall boundary condition. 
-\begin{figure} [ht]
+
+\newpage
+
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 10cm]{graph/0deg/Cylinder_0angle_vector0000.png}
+	\includegraphics[height = 9.5cm]{graph/15deg/Cylinder_15angle_streamline0000.png}
+	\caption{Streamlines over a circular cylinder at $\alpha=15$ calculated by FV method.}
+    \label{fig:q2st15}
+\end{figure}
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/neg15deg/Cylinder_neg15angle_streamline0000.png}
+	\caption{Streamlines over a circular cylinder at $\alpha=-15$ calculated by FV method.}
+    \label{fig:q2st-15}
+\end{figure}
+
+\newpage
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[height = 9.5cm]{graph/0deg/Cylinder_0angle_vector0000.png}
 	\caption{The velocity vectors over a circular cylinder at $\alpha=0$ calculated by FV method.}
     \label{fig:q2v0}
 \end{figure}
-\begin{figure} [ht]
+
+\begin{figure} [!h]
 	\centering
-	\includegraphics[height = 10cm]{graph/15deg/Cylinder_15angle_vector0000.png}
+	\includegraphics[height = 9.5cm]{graph/15deg/Cylinder_15angle_vector0000.png}
 	\caption{The velocity vectors a circular cylinder at $\alpha=15$ calculated by FV method.}
     \label{fig:q2v15}
 \end{figure}
+
+\newpage
+
 \begin{figure} [ht]
 	\centering
-	\includegraphics[height = 10cm]{graph/neg15deg/Cylinder_neg15angle_vector0000.png}
+	\includegraphics[height = 9.5cm]{graph/neg15deg/Cylinder_neg15angle_vector0000.png}
 	\caption{The velocity vectors a circular cylinder at $\alpha=-15$ calculated by FV method.}
     \label{fig:q2v-15}
 \end{figure}
@@ -214,7 +228,7 @@ magnitude of velocity is too small. Because normal components of velocity are ze
 
 \begin{figure} [!h]
 	\centering
-	\includegraphics[height = 10cm]{graph/medium/medium_62650000.png}
+	\includegraphics[height = 9.5cm]{graph/medium/medium_62650000.png}
 	\caption{Unstructured mesh of NACA0012 airfoil}
     \label{fig:airfoilmesh}
 \end{figure}
@@ -228,7 +242,7 @@ unstructured mesh consists of 6265 triangular grids.
 
 \begin{figure} [!h]
 	\centering
-	\includegraphics[height = 10cm]{graph/medium/medium_62650001.png}
+	\includegraphics[height = 9.5cm]{graph/medium/medium_62650001.png}
 	\caption{Unstructured mesh of NACA0012 airfoil near the airfoil}
     \label{fig:airfoilmeshclose}
 \end{figure}
@@ -243,7 +257,7 @@ airfoil are smaller for better accuracy, whereas grid far from airfoil are relat
 
 \begin{figure} [!h]
 	\centering
-	\includegraphics[height = 10cm]{graph/medium/medium_streamline0000.png}
+	\includegraphics[height = 9.5cm]{graph/medium/medium_streamline0000.png}
 	\caption{Streamlines around NACA0012 airfoil}
     \label{fig:airfoilstreamline}
 \end{figure}
@@ -258,7 +272,7 @@ as the speed of the flow is known.
 
 \begin{figure} [!h]
 	\centering
-	\includegraphics[height = 10cm]{graph/medium/medium_pressure0000.png}
+	\includegraphics[height = 9.5cm]{graph/medium/medium_pressure0000.png}
 	\caption{Pressure coefficient around NACA0012 airfoil}
     \label{fig:airfoilpressure}
 \end{figure}
