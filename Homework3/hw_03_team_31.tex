@@ -227,6 +227,7 @@ satisfying the Wall boundary condition. These points are called stagnation point
 \newpage
 
 \subsection{NACA0012 airfoil mesh}
+\label{sec:medium}
 
 \begin{figure} [!h]
 	\centering
@@ -386,13 +387,21 @@ condition and air flows faster around the cambered part of the airfoil.
     \label{fig:airfoilfinepressure}
 \end{figure}
 
-\vspace{2cm}
+\vspace{1cm}
 
 As Figure \ref{fig:airfoilfinepressure} shows, pressure distribution can be 
 calculate more precisely when a finer grid is used. But the usage of finer grid
 greatly increases the computation time, so unnecessarily fine grid should be avoided 
 to maximize efficiency.
 
+\subsubsection{Medium grid}
+
+Calculations of Section \ref{sec:medium} is done using a medium grid, which consists of 
+6255 triangular grids. When the results of this section is considered, it can be seen that
+medium grid is precise enough to give correct results and because of its relatively lower triangle count, result
+can be calculated faster. Therefore, using a medium grid is more efficient.
+
+\newpage
 
 \section{Conclusion}
 
