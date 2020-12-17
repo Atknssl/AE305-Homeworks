@@ -82,12 +82,32 @@ penetration boundary condition (Wall BC):
 \end{eqnarray}
 
 \begin{equation}
-	(\vec{n}\cdot\vec{V}_{\infty})_{wall} = 0 or (\vec{F}\cdot\vec{S})_{wall} = 0.
+	(\vec{n}\cdot\vec{V}_{\infty})_{wall} = 0 \:\mbox{or}\: (\vec{F}\cdot\vec{S})_{wall} = 0.
 \end{equation}
 
 The conserved quantity for this problem is the potential $\phi$, and the FV method is applied
-for the calculation of this quantity as explained above.
-
+for the calculation of this quantity as explained above.\\
+In this homework, Bernoulli Equation is also used to calculate pressure coefficient. Bernoulli equation
+implies that for inviscid, irrotational and incompressible flows, when body forces are neglected,
+total pressure is constant at every point in the flow. The total pressure is equal to summation 
+of static and dynamic pressures.
+\begin{eqnarray}
+	P_1+q_1&=&P_2+q_2 \nonumber \\
+	P_1+\frac{1}{2}\rho_1V_{1}^{2}&=&P_2+\frac{1}{2}\rho_2V_{2}^{2}\:=\:\mbox{constant}
+	\label{eqn:bernouilli}
+\end{eqnarray}
+The pressure coefficient is calculated by
+\begin{equation}
+C_p=\frac{P-P_\infty}{q_\infty}
+	\label{eqn:C_p}
+\end{equation}
+By substituting Equation \ref{eqn:bernouilli} and Equation \ref{eqn:C_p}, $C_p$ equation becomes
+\begin{eqnarray}
+	C_p&=&\frac{q_\infty-q_}{q_infty} \nonumber \\
+	&=&1-\frac{q}{q_infty}   \nonumber \\
+	C_p&=&1-\frac{V^2}{V_{\infty}^{2}} 
+	\label{eqn:C_p_new}
+\end{eqnarray}
 
 
 \section{Method}
@@ -224,32 +244,39 @@ is also called Wall boundary condition.
 
 \vspace{1cm}
 
-According to Figure \ref{fig:q2v0},\ref{fig:q2v15},and \ref{fig:q2v-15}, velocity vectors have the 
-same direction, and magnitudes ($\vec{V}_{\infty}$) far from cylinder, which satisfies the Farfield boundry condition.
-Also, the velocity vectors near the cylinder is tangent to the boundary. On the front and back of the 
-cylinder, there are two points where the direction of the velocity vector is too close to normal
-of surface. However, the magnitude of velocity is so small that they can be considered as zero,
-satisfying the Wall boundary condition. These points are called stagnation points.
+According to Figure \ref{fig:q2v0},\ref{fig:q2v15},and \ref{fig:q2v-15}, velocity vectors 
+have the same direction, and magnitudes ($\vec{V}_{\infty}$) far from cylinder, which 
+satisfies the Farfield boundry condition. Also, the velocity vectors near the cylinder is tangent 
+to the boundary. On the front and back of the cylinder, there are two points where the direction
+of the velocity vector is too close to normal of surface. However, the magnitude of velocity is 
+so small that they can be considered as zero, satisfying the Wall boundary condition. These points
+are called stagnation points.
 
 \newpage
 
-\subsection{Pressure coefficient distribution over a circular cylinder}
-
-\begin{figure} [!h]
+\subsection{Pressure Coefficient Distribution Over the Cylinder}
+\begin{figure} [ht]
 	\centering
 	\includegraphics[height = 9.5cm]{graph/0deg/Cylinder_0angle_pressure0001.png}
-	\caption{Pressure coefficient distribution at $\alpha$ = 0 using FV method}
-    \label{fig:pc_0}
+	\caption{The pressure coefficient distribution over the circular cylinder at $\alpha=0$ calculated by FV method.}
+	\label{fig:q3fv}
 \end{figure}
-
-\begin{figure} [!h]
+\begin{figure} [ht]
 	\centering
 	\includegraphics[height = 9.5cm]{graph/0deg/pc_analytical.jpg}
-	\caption{Analytical soultion of pressure coefficient distribution at $\alpha$ = 0}
-    \label{fig:pc_analytical}
+	\caption{The analytical solution of the pressure coefficient distribution over the circular cylinder at $\alpha=0$.}
+	\label{fig:q3a}
 \end{figure}
 
 \newpage
+In Figure \ref{fig:q3fv}, the pressure coefficient over the cylinder is calculated by using the 
+Bernouilli Equation and FV method.On the other hand, in Figure \ref{fig:q3a}, the pressure coefficient 
+over the cylinder is plotted by analytical solution. As can be seen from Figure \ref{fig:q3fv} 
+highest pressure coefficient is calculated at the front half and rear half of the cylinder, whereas 
+the lowest pressure coefficient is computed at the upper half and lower half of the cylinder. This result 
+is coincide with the analytical solution. Since stagnation points, where velocities are equal to zero, 
+are at the front and rear halves of the cylinder, from Equation \label{eqn:C_p_new}, the highest pressure 
+coefficients are observed at these halves.
 
 \subsection{NACA0012 airfoil mesh}
 \label{sec:medium}
