@@ -157,6 +157,8 @@ Since $\vec{F}$ is diffusive flux, average gradient vectors are calculated by
     \label{fig:q1p}
 \end{figure}
 
+\vspace{1cm}
+
 According to the boundary conditions mentioned in Section \ref{section:intro}, FV fortran code
 is completed. Afterwards, flowfield around a cylinder is calculated using the unstructured grid provided.
 
@@ -169,6 +171,8 @@ is completed. Afterwards, flowfield around a cylinder is calculated using the un
 	\caption{Streamlines over a circular cylinder at $\alpha=0$ calculated by FV method.}
     \label{fig:q2st0}
 \end{figure}
+
+\vspace{1cm}
 
 In Figure \ref{fig:q2st0},\ref{fig:q2st15},and \ref{fig:q2st-15}, it can be observed that streamlines 
 are parallel and horizontal lines far from the cylinder, and they are in the direction of the free stream velocity,
@@ -217,6 +221,9 @@ is also called Wall boundary condition.
 	\caption{The velocity vectors over a circular cylinder at $\alpha=-15$ calculated by FV method.}
     \label{fig:q2v-15}
 \end{figure}
+
+\vspace{1cm}
+
 According to Figure \ref{fig:q2v0},\ref{fig:q2v15},and \ref{fig:q2v-15}, velocity vectors have the 
 same direction, and magnitudes ($\vec{V}_{\infty}$) far from cylinder, which satisfies the Farfield boundry condition.
 Also, the velocity vectors near the cylinder is tangent to the boundary. On the front and back of the 
@@ -236,7 +243,7 @@ satisfying the Wall boundary condition. These points are called stagnation point
     \label{fig:airfoilmesh}
 \end{figure}
 
-\vspace{2cm}
+\vspace{1cm}
 
 Unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
 unstructured mesh consists of 6265 triangular grids.
@@ -250,7 +257,7 @@ unstructured mesh consists of 6265 triangular grids.
     \label{fig:airfoilmeshclose}
 \end{figure}
 
-\vspace{2cm}
+\vspace{1cm}
 
 It can be seen from Figure \ref{fig:airfoilmesh} and Figure \ref{fig:airfoilmeshclose} that, grids around 
 the airfoil are smaller for better accuracy, whereas grid far from the airfoil are relatively bigger.
@@ -264,6 +271,8 @@ the airfoil are smaller for better accuracy, whereas grid far from the airfoil a
 	\caption{Streamlines around NACA0012 airfoil}
     \label{fig:airfoilstreamline}
 \end{figure}
+
+\vspace{1cm}
 
 When potential flow equation is solved using Finite Volume method using unstructured mesh in Figure \ref{fig:airfoilmesh},
 flow around NACA0012 airfoil can be found. This flow can be illustrated using streamlines, as can be seen in 
@@ -279,6 +288,8 @@ as the speed of the flow is known.
 	\caption{Pressure coefficient around NACA0012 airfoil}
     \label{fig:airfoilpressure}
 \end{figure}
+
+\vspace{1cm}
 
 It can be seen from Figure \ref{fig:airfoilpressure} that pressure distribution on the upper and the lower surfaces are the same.
 This is because airfoil is symmetric and airfoil is at zero angle of attack. If the angle of attack was different from zero, 
@@ -299,7 +310,7 @@ leading and the trailing edge and flows faster around maximum camber point.
     \label{fig:airfoilmeshcoarse}
 \end{figure}
 
-\vspace{2cm}
+\vspace{1cm}
 
 Coarse unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
 unstructured mesh consists of 847 triangular grids.
@@ -326,7 +337,7 @@ It can be seen from Figure \ref{fig:airfoilcoarsestreamline} that, when coarse g
 use for calculation, streamlines obeys no penetration boundary condition but magnitude 
 of velocity is not calculated correctly around the airfoil.
 
-\vspace{2cm}
+\vspace{1cm}
 
 \begin{figure} [!h]
 	\centering
@@ -335,7 +346,7 @@ of velocity is not calculated correctly around the airfoil.
     \label{fig:airfoilcoarsepressure}
 \end{figure}
 
-\vspace{2cm}
+\vspace{1cm}
 
 Around the leading and the trailing edge, pressure coefficient distribution is 
 closer to the correct distribution but still not correct enough. Around the maximum
@@ -352,6 +363,8 @@ mesh is not suitable for precise calculation of pressure around an airfoil.
 	\caption{Fine unstructured mesh of NACA0012 airfoil}
     \label{fig:airfoilmeshfine}
 \end{figure}
+
+\vspace{1cm}
 
 Fine unstructured mesh of NACA0012 airfoil is generated using Easymesh software. This 
 unstructured mesh consists of 20948 triangular grids.
@@ -378,7 +391,7 @@ can be found correctly around the airfoil. Figure \ref{fig:airfoilfinestreamline
 illustrates that streamlines are calculated according to the no penetration boundary 
 condition and air flows faster around the cambered part of the airfoil.
 
-\vspace{2cm}
+\vspace{1cm}
 
 \begin{figure} [!h]
 	\centering
