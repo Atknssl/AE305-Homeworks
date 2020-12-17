@@ -88,21 +88,21 @@ penetration boundary condition (Wall BC):
 The conserved quantity for this problem is the potential $\phi$, and the FV method is applied
 for the calculation of this quantity as explained above.\\
 \newpage
-In this homework, Bernoulli Equation is also used to calculate the pressure coefficient. Bernoulli equation
+In this homework, Bernoulli's Equation is also used to calculate the pressure coefficient. Bernoulli's equation
 implies that for inviscid, irrotational, and incompressible flows, when body forces are neglected,
 the total pressure is constant at every point in the flow. The total pressure is equal to the summation of 
 static and dynamic pressures.
 \begin{eqnarray}
 	P_1+q_1&=&P_2+q_2 \nonumber \\
 	P_1+\frac{1}{2}\rho_1V_{1}^{2}&=&P_2+\frac{1}{2}\rho_2V_{2}^{2}\:=\:\mbox{constant}
-	\label{eqn:bernouilli}
+	\label{eqn:bernoulli}
 \end{eqnarray}
 The pressure coefficient is calculated by
 \begin{equation}
 C_p=\frac{P-P_\infty}{q_\infty}
 	\label{eqn:C_p}
 \end{equation}
-By substituting Equation \ref{eqn:bernouilli} and Equation \ref{eqn:C_p}, $C_p$ equation becomes
+By substituting Equation \ref{eqn:bernoulli} and Equation \ref{eqn:C_p}, $C_p$ equation becomes
 \begin{eqnarray}
 	C_p&=&\frac{q_\infty-q}{q_{\infty}} \nonumber \\
 	&=&1-\frac{q}{q_{\infty}}   \nonumber \\
@@ -271,7 +271,7 @@ are called stagnation points.
 
 \newpage
 In Figure \ref{fig:q3fv}, the pressure coefficient over the cylinder is calculated by using the 
-Bernouilli Equation and the FV method. On the other hand, in Figure \ref{fig:q3a}, the pressure coefficient
+Bernoulli's Equation and the FV method. On the other hand, in Figure \ref{fig:q3a}, the pressure coefficient
 over the cylinder is plotted by the analytical solution. As can be seen from Figure \ref{fig:q3fv} 
 The highest pressure coefficient is calculated at the front half and rear half of the cylinder, whereas
 the lowest pressure coefficient is computed at the upper half and lower half of the cylinder. This result
@@ -482,7 +482,7 @@ using Easymesh software in order to replace the circular cylinder. The calculati
 and the potential flow and the pressure distribution are plotted also for the airfoil.
 According to the observations made, the results for the airfoil were similar to that of
 the cylinder. Boundary conditions were satisfied at farfield as well as at the boundary of
-the airfoil. The plot of the pressure coefficient distribution calculated by Bernouilli's
+the airfoil. The plot of the pressure coefficient distribution calculated by Bernoulli's
 equation illustrates that the $C_{p}$ values are the same for the upper and lower boundaries
 resulting from the symmetry of the airfoil, and the minimum pressure coefficients occurred at
 the leading and the trailing edges where the stagnations points are, as expected. 
