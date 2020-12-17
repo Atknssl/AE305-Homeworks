@@ -276,8 +276,8 @@ the airfoil are smaller for better accuracy, whereas grid far from the airfoil a
 
 When potential flow equation is solved using Finite Volume method using unstructured mesh in Figure \ref{fig:airfoilmesh},
 flow around NACA0012 airfoil can be found. This flow can be illustrated using streamlines, as can be seen in 
-Figure \ref{fig:airfoilstreamline}. As expected, air flows faster at the airfoil camber, and air stagnates at the 
-leading edge and the trailing edge. Moreover, pressure coefficient can be calculated using Bernoulli's Equation 
+Figure \ref{fig:airfoilstreamline}. As expected, air flows faster around the thicker sections of the airfoil, 
+and air stagnates at the leading edge and the trailing edge. Moreover, pressure coefficient can be calculated using Bernoulli's Equation 
 as the speed of the flow is known.
 
 \newpage
@@ -294,8 +294,8 @@ as the speed of the flow is known.
 It can be seen from Figure \ref{fig:airfoilpressure} that pressure distribution on the upper and the lower surfaces are the same.
 This is because airfoil is symmetric and airfoil is at zero angle of attack. If the angle of attack was different from zero, 
 pressure distribution on the upper and lower surfaces would be different. It can also be seen that at leading edge and trailing edge,
-pressure is relatively larger; and around maximum camber point, pressure is relatively lower. This is because air flows slower at the 
-leading and the trailing edge and flows faster around maximum camber point.
+pressure is relatively larger; and around the maximum thickness, pressure is relatively lower. This is because air flows slower at the 
+leading and the trailing edge and flows faster at the thicker part of the airfoil.
 
 \newpage
 
@@ -350,7 +350,7 @@ of velocity is not calculated correctly around the airfoil.
 
 Around the leading and the trailing edge, pressure coefficient distribution is 
 closer to the correct distribution but still not correct enough. Around the maximum
-camber point, pressure distribution is way off the correct result. Therefore, coarse
+thickness, pressure distribution is way off the correct result. Therefore, coarse
 mesh is not suitable for precise calculation of pressure around an airfoil.
 
 \newpage
@@ -389,7 +389,7 @@ unstructured mesh consists of 20948 triangular grids.
 When a fine grid is used to calculate flow around the airfoil, velocity distribution
 can be found correctly around the airfoil. Figure \ref{fig:airfoilfinestreamline} 
 illustrates that streamlines are calculated according to the no penetration boundary 
-condition and air flows faster around the cambered part of the airfoil.
+condition and air flows faster around the thicker part of the airfoil.
 
 \vspace{1cm}
 
