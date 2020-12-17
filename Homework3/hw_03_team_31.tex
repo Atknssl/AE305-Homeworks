@@ -456,11 +456,40 @@ to maximize efficiency.
 
 Calculations of Section \ref{sec:medium} is done using a medium grid, which consists of 
 6255 triangular grids. When the results of this section are considered, it can be seen that
-the medium grid is precise enough to give correct results and because of its relatively lower triangle count, the result
-can be calculated faster. Therefore, using a medium grid is more efficient.
+the medium grid is precise enough to give correct results and because of its relatively
+lower triangle count, the result can be calculated faster. Therefore, using a medium grid
+is more efficient.
 
 \newpage
 
 \section{Conclusion}
 
+Given an unstructured grid of a circular cylinder, the potential flow, and the pressure 
+coefficient distribution around it are requested to be calculated in the first part of
+the problem. Afterwards, it is asked to replace the circular cylinder with a symmetric
+NACA airfoil and repeat the calculations made for the cylinder in the second part of the
+problem with coarse, medium, and fine grids.
+
+First, the FV method fortran code is completed according to the steady-state boundary
+conditions and compiled for the circular cylinder. It was observed that the flow velocity
+is equal to the free stream velocity at farfield and its normal component to the surface
+of the cylinder is zero, which implies that the boundary conditions are satisfied. Comparing
+the pressure coefficient distribution obtained by the FV method with the analytical solution,
+the points where the minimum and the maximum pressure occurs are the same for both solutions.
+
+In the second part of the problem, an unstructured grid of the NACA0012 airfoil is obtained
+using Easymesh software in order to replace the circular cylinder. The calculations were repeated,
+and the potential flow and the pressure distribution are plotted also for the airfoil.
+According to the observations made, the results for the airfoil were similar to that of
+the cylinder. Boundary conditions were satisfied at farfield as well as at the boundary of
+the airfoil. The plot of the pressure coefficient distribution calculated by Bernouilli's
+equation illustrates that the $C_{p}$ values are the same for the upper and lower boundaries
+resulting from the symmetry of the airfoil, and the minimum pressure coefficients occurred at
+the leading and the trailing edges where the stagnations points are, as expected. 
+
+Finally, the grid size used for the mesh is an important issue. Using coarse grids makes the calculation
+faster but yields incorrect results. In contrast, fine grids enable to obtain accurate results
+but the calculation duration is too long. Therefore, medium sized grids are used for the calculations
+of this problem in order to approach the correct answer more precisely than the coarse grids could do,
+and also in a relatively shorter time than the time needed for fine grids.
 \end{document}
