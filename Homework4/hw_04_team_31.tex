@@ -37,6 +37,42 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 %Report start
 
 \section{Introduction}
+Finite Difference Method uses finite difference relations which are obtained from Taylor
+series expansions in order to approximate the partial derivatives in a partial differential
+equation. The equations representing the partial differentials are called Finite Difference
+Equations. In this homework, given a convection diffusion wave equation:
+
+\begin{equation}
+	\frac{\partial \omega}{\partial t} + V\frac{\partial \omega}{\partial x} = \nu\frac{\partial^2 \omega}{\partial x^2}
+	\label{eqn:gaussian}
+\end{equation}
+
+where V is the constant convection velocity, and $\nu$ is the diffusion (viscosity) coefficient,
+and $\omega$ is distributed initially as follows:
+\begin{equation}
+	\omega(x,t=0) = exp(-b ln2(x/\Delta x)^2)
+\end{equation}
+
+where $\Delta x = 0.1$, and $b = 0.025$, it is requested to solve Equation \ref{eqn:gaussian} by modifying the given fortran code and
+using forward-time central-space FDE, and prove that the equation is conditionally stable by
+using different $\sigma$ (Courant number) and d values where $\sigma$ and d values are as the following:
+
+\begin{eqnarray}
+	\sigma &=& \frac{V\Delta t}{\Delta x} \nonumber \\
+	d &=& \frac{\nu\Delta t}{\Delta x^2}
+\end{eqnarray}
+It is also asked to solve both Equation \ref{eqn:gaussian} and convection equation, where d equals
+zero, by forward-time backward-space FDE and compare the solution. Afterwards, given a high order
+accuracy FDE, first it is requested to perform consistency analysis on it and then solving
+Equation \ref{eqn:gaussian} by using this FDE:
+
+\begin{eqnarray}
+\frac{-\omega^{n+1}_{i}+4\omega^{n}_{i}-3\omega^{n-1}_{i}}{2\Delta t} + V\frac{\omega^{n}_{i+1}-\omega^{n}_{i-1}}{2\Delta x} = \nu\frac{\omega^{n}_{i+1}-2\omega^{n}_{i}+\omega^{n}_{i-1}}{\Delta x^2}
+\end{eqnarray}
+
+Finally, implicit FDE (backward-time central-space) is used to solve Equation \ref{eqn:gaussian}.
+In all solutions the range of x is such that -L/2$\leq$x$\leq$L/2 where L=40.
+
 
 \section{Method}
 
