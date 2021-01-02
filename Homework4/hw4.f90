@@ -3,10 +3,10 @@
 !-------------------------------------------------------------------
 Module vars
    integer, parameter :: imax=401, ntout=1 
-   integer :: ntmax, method, eq
+   integer :: ntmax, method
    real, dimension(imax) :: wave_n, wave_np1, wave_nm1
    real :: sigma, dx=0.1, x1 , pi= 3.1415926 !ACOS(-1.)
-   real :: d = 0.005, b=0.025
+   real :: d, b=0.025
  End module
  
  program EXPLICIT_FDE
@@ -44,16 +44,6 @@ Module vars
  !------------------------------------------------------------------------
  subroutine INIT
    use vars
-   write(*,'(a)')'Select equation'
-   write(*,'(a)')' [1] Convection equation'
-   write(*,'(a)')' [2] Convection diffusion equation'
-   read(*,*) eq
-   if((eq .ne. 1) .and. (eq .ne. 2)) then
-    write(*,'(a)') "Invalid selection"
-    stop
-   elseif(eq .eq.1) then
-    d = 0
-   endif
    write(*,'(a)')'Select method'
    write(*,'(a)')' [1] Forward time central spatial'
    write(*,'(a)')' [2] Forward time backward spatial'
@@ -64,23 +54,13 @@ Module vars
     stop
    endif
    
-   write(*,'(/(a))',advance='no')'  Enter sigma and ntmax : '
-   read(*,*) sigma, ntmax
+   write(*,'(/(a))',advance='no')'  Enter sigma, d and ntmax : '
+   read(*,*) sigma, d, ntmax
    x1=-imax*dx/2.
    x = x1
    do i = 1,imax             !..Initialize the wave 
- !   if( x .gt. -1. .and. x .lt. 1. ) then
- !      wave_n(i) = SIN(pi*x)                    !..sin wave
- !   endif
-    !  if( x .gt. -1. .and. x .lt. 0. ) then
-    !     wave_n(i) = 1. + x                       !..triangular wave
-    !  else if( x .gt. 0. .and. x .lt. 1. ) then
-    !     wave_n(i) = 1. - x
-    !  else
-    !     wave_n(i) = 0.
-    !  endif
-    wave_n(i) = exp(-b * log(2.) * (x/dx)**2)
-     x = x+dx
+      wave_n(i) = exp(-b * log(2.) * (x/dx)**2)
+      x = x+dx
    enddo
    call IO(0)
  
