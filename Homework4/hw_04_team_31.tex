@@ -75,6 +75,107 @@ In all solutions the range of x is such that -L/2$\leq$x$\leq$L/2 where L=40.
 
 
 \section{Method}
+\subsection{Finite Difference Method}
+Finite Difference method is used to solve partial differential equations by 
+approximating partial derivatives in these equations with finite difference relations.
+In this homework, 1-D, linear, convection diffusion equation and convection equation are solved
+with combination of finite difference approximations.
+\begin{equation}
+	\frac{\partial w}{\partial t} + V\frac{\partial w}{\partial x}=\nu\frac{\partial^2 w}{\partial x^2}
+	\label{eqn:cde}
+\end{equation}
+is convective diffusion equation and
+\begin{equation}
+	\frac{\partial w}{\partial t} + V\frac{\partial w}{\partial x}=0 
+	\label{eqn:ce}
+\end{equation}
+is convective equation.\\
+Two different derivations is used for the explicit finite difference equation of 
+Equation \ref{eqn:cde} in this homework.The first derivation of FDE is also used for the explicit 
+FDE of Equation \ref{eqn:ce}. In both derivations, the first term of
+the equation forward time approximation is used.
+\begin{equation}
+	\frac{\partial w}{\partial t}\vert^{n}=\frac{w^{n+1}-{w^n}}{\Delta t}+O(\Delta t)
+	\label{eqn:ft}
+\end{equation}
+In the first derivation, for second and third terms of the Equation \ref{eqn:cde}, 
+central space approximations of
+$\frac{\partial w}{\partial x}\vert_{i}$ of order ($\Delta x^2$) and 
+$\frac{\partial^2 w}{\partial x^2}\vert_{i}$ of order ($\Delta x^2$), respectively, are used.
+\begin{equation}
+	\frac{\partial w}{\partial x}\vert_{i}=\frac{w_{i+1}-w_{i-1}}{2\Delta x}+O(\Delta x^2)
+	\label{eqn:cs1}
+\end{equation}
+\begin{equation}
+	\frac{\partial^2 w}{\partial x^2}\vert_{i}=\frac{w_{i+1}-2w_i+w_{i-1}}{\Delta x^2}+O(\Delta x^2)
+	\label{eqn:cs2}
+\end{equation}
+By substituting Equation \ref{eqn:ft}, \ref{eqn:cs1}, and \ref{eqn:cs2} into Equation \ref{eqn:cde}, it becomes:
+\begin{equation}
+	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n}-w_{i-1}^{n}}{2\Delta x}
+	=\frac{w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n}}{\Delta x^2}+O(\Delta x^2, \Delta t)
+\end{equation}
+The explicit FDE of Equation \ref{eqn:cde} based on forward time and central spatial differences is obtained:
+\begin{equation}
+	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n})+O(\Delta x^2,\Delta t)
+\end{equation}
+where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
+\\To derive the explicit FDE of Equation \ref{eqn:ce}, Equation \ref{eqn:ft} and \ref{eqn:cs1} are
+substituted into Equation \ref{eqn:ce}
+\begin{equation}
+	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n}-w_{i-1}^{n}}{2\Delta x}
+	=0+O(\Delta x^2, \Delta t)
+\end{equation}
+The explicit FDE of Equation \ref{eqn:ce} based on forward time and central spatial differences is obtained:
+\begin{equation}
+	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}w_{i+1}^{n}-w_{i-1}^{n}+O(\Delta x^2, \Delta t)
+\end{equation}
+where $\sigma = \frac{V\Delta t}{\Delta x }$.
+\\In the second derivation, instead of central space approximation, backward space approximation is used.
+Backward space approximation of $\frac{\partial w}{\partial x}\vert$ of order ($\Delta x$)
+\begin{equation}
+	\frac{\partial w}{\partial x}\vert_{i}=\frac{w_{i}-w_{i-1}}{\Delta x}+O(\Delta x)
+	\label{eqn:bs1}
+\end{equation}
+Backward space approximation of $\frac{\partial^2 w}{\partial x^2}\vert$ of order ($\Delta x$)
+\begin{equation}
+	\frac{\partial^2 w}{\partial x^2}\vert_{i}=\frac{w_{i}-2w_{i-1}+w_{i-2}}{\Delta x^2}+O(\Delta x)
+	\label{eqn:bs2}
+\end{equation}
+By substituting Equation \ref{eqn:ft}, \ref{eqn:bs1}, and \ref{eqn:bs2} into Equation \ref{eqn:cde}
+\begin{equation}
+	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i}^{n}-w_{i-1}^{n}}{\Delta x}
+	=\frac{w_{i}^{n}-2w_{i-1}^{n}+w_{i-2}^{n}}{\Delta x^2}+O(\Delta x,\Delta t)
+\end{equation}
+The explicit FDE of Equation \ref{eqn:cde} based on forward time and backward spatial
+differences is obtained:
+\begin{equation}
+	w_{i}^{n+1}= w_{i}^{n}-\sigma(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i}^{n}-2w_{i-1}^{n}+w_{i-2}^{n})+O(\Delta x,\Delta t)
+\end{equation}
+where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
+\\ To obtain the implicit FDE of Equation \ref{eqn:cde}, backward time central space method is used.
+Backward time difference is used for the first term of Equation \ref{eqn:cde}
+\begin{equation}
+	\frac{\partial w}{\partial t}\vert^{n}=\frac{w^{n}-w^{n-1}}{\Delta x}+O(\Delta t)
+	\label{eqn:bt}
+\end{equation}
+Equation \ref{eqn:cs1} and \ref{eqn:cs2} are used to approximate the second and third
+terms of Equation \ref{eqn:cde}, respectively. Equation \ref{eqn:bt}, \ref{eqn:cs1}
+and \ref{eqn:cs2} are inserted in the Equation \ref{eqn:cde}
+\begin{equation}
+	\frac{w_{i}^{n}-{w_{i}^{n-1}}}{\Delta t}+\frac{w_{i+1}^{n-1}-w_{i-1}^{n-1}}{2\Delta x}
+	=\frac{w_{i+1}^{n-1}-2w_{i}^{n-1}+w_{i-1}^{n-1}}{\Delta x^2}+O(\Delta x^2, \Delta t)
+\end{equation}
+To define a PDE as implicit, it should be discretized at time level $n+1$. So, equation becomes
+\begin{equation}
+	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n+1}-w_{i-1}^{n+1}}{2\Delta x}
+	=\frac{w_{i+1}^{n+1}-2w_{i}^{n+1}+w_{i-1}^{n+1}}{\Delta x^2}+O(\Delta x^2, \Delta t)	
+\end{equation}
+The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method is obtained:
+\begin{equation}
+	w_{i}^{n}= (\frac{\sigma}{2}-d)w_{i+1}^{n+1}+(2d+1)w_{i}^{n+1}-(\frac{\sigma}{2}-d)w_{i-1}^{n+1})+O(\Delta x^2,\Delta t)	
+\end{equation}
+where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 
 \section{Results and Discussion}
 
