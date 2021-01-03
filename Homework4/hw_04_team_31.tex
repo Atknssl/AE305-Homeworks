@@ -178,6 +178,72 @@ The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method i
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 
 \section{Results and Discussion}
+\subsection{Stability of the Solution of the Explicit FDE of Convection Diffusion Equation}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.5$ at different time steps.}
+ 	\label{fig:FTCSsigma05d05}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d025.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.25$ at different time steps.}
+	 \label{fig:FTCSsigma05d025}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d075.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.75$ at $nt=0$ and $nt=25$.}
+	 \label{fig:FTCSsigma05d075}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma025d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.25$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTCSsigma025d05}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma075d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.75$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTCSsigma075d05}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma12d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTCSsigma12d05}
+\end{figure}
+\newpage
+Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
+Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
+different d value ($d=0.25$) at various time steps. As can be seen from the Figure \ref{fig:FTCSsigma05d05}
+and \ref{fig:FTCSsigma05d025}, as time step increases, the both curves continue to oscillate; however, wave lengths
+of both curves increase whereas the strength of waves decreases. In fact, the decrease in wave length of graph 
+in Figure \ref{fig:FTCSsigma05d05} is more rapid than in Figure \ref{fig:FTCSsigma05d025}.
+Overall, the solution of expilicit FDE is stable for $\sigma= 0.5$ and $d=0.5$, and $d=0.25$ since 
+curves did not grow. \\
+\indent Figure \ref{fig:FTCSsigma05d075} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.75$ at the initial condition
+and $25^{th}$ time step. The curve in the graph has some deterioration at $nt = 25$. Therefore,
+the explicit FDE is unstable for $\sigma= 0.5$ and $d=0.75$.\\
+\indent Figure \ref{fig:FTCSsigma025d05} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.25$ and $d=0.5$ at various time steps.
+Figure \ref{fig:FTCSsigma075d05} shows the solution of the same explicit FDE but with 
+different $\sigma$ value ($\sigma=0.75$) at various time steps. In both Figure \ref{fig:FTCSsigma025d05}
+and \ref{fig:FTCSsigma075d05}, the wave lengths of curves increases and waves become more weak 
+with increasing time steps. Therefore, it can be said that the solution of the explicit is stable 
+FDE for $d=0.5$ and $\sigma = 0.25$, and $\sigma = 0.25$.\\
+\indent Figure \ref{fig:FTCSsigma12d05} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 1.2$ and $d=0.5$ at various time steps. The curve in the
+Figure \ref{fig:FTCSsigma12d05} grows, its strength increases and it becomes distrupted with 
+increasing time step. Consequently the solution of the explicit FDE is unstable for $\sigma=1.2$ and $d=0.5$\\
+\indent To conclude this subsection, since the explicit FDE of the convection diffusion equation is stable for some $d$ 
+and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is conditionally stables.
 
 \subsubsection{Consistency Analysis of the Given FDE}
 Consistency is one of the conditions to be able to approximate to the PDE. What is meant by consistency is
