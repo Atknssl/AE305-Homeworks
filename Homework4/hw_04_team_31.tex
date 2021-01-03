@@ -173,10 +173,10 @@ To define a PDE as implicit, it should be discretized at time level $n+1$. So, e
 \end{equation}
 The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method is obtained:
 \begin{equation}
-	w_{i}^{n}= (\frac{\sigma}{2}-d)w_{i+1}^{n+1}+(2d+1)w_{i}^{n+1}-(\frac{\sigma}{2}-d)w_{i-1}^{n+1})+O(\Delta x^2,\Delta t)	
+	(\frac{\sigma}{2}-d)w_{i+1}^{n+1}+(2d+1)w_{i}^{n+1}-(\frac{\sigma}{2}-d)w_{i-1}^{n+1} = w_{i}^{n}+O(\Delta x^2,\Delta t)
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
-
+\newpage
 \section{Results and Discussion}
 \subsection{Stability of the Solution of the Explicit FDE of Convection Diffusion Equation}
 \begin{figure}[!ht] 
@@ -217,7 +217,7 @@ where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta 
 	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
 	 \label{fig:FTCSsigma12d05}
 \end{figure}
-\newpage
+
 Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
 method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
 Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
@@ -243,9 +243,84 @@ method for Equation \ref{eqn:cde} with $\sigma= 1.2$ and $d=0.5$ at various time
 Figure \ref{fig:FTCSsigma12d05} grows, its strength increases and it becomes distrupted with 
 increasing time step. Consequently the solution of the explicit FDE is unstable for $\sigma=1.2$ and $d=0.5$\\
 \indent To conclude this subsection, since the explicit FDE of the convection diffusion equation is stable for some $d$ 
-and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is conditionally stables.
+and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is conditionally stable.
+\newpage
+\subsection{Comparison of convective eqution with FTBS}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma025d0.eps}
+	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.25$ at different time steps.}
+	 \label{fig:FTBSsigma025d0}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma05d0.eps}
+	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.5$ at different time steps.}
+	 \label{fig:FTBSsigma05d0}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma075d0.eps}
+	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.75$ at different time steps.}
+	 \label{fig:FTBSsigma075d0}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma12d0.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ at $nt=0$ and $nt=55$.}
+	 \label{fig:FTBSsigma12d0}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma025d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.25$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTBSsigma025d05}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma05d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.5$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTBSsigma05d05}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma075d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.75$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTBSsigma075d05}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTBSsigma12d05}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma15d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.5$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTBSsigma15d05}
+\end{figure}
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d025.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.25$ at different time steps.}
+	 \label{fig:FTBSsigma12d025}
+\end{figure}
+\newpage
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d075.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.75$ at different time steps.}
+	 \label{fig:FTBSsigma12d075}
+\end{figure}
 
-\subsubsection{Consistency Analysis of the Given FDE}
+
+\newpage
+\subsection{Consistency Analysis of the Given FDE}
 Consistency is one of the conditions to be able to approximate to the PDE. What is meant by consistency is
 that as the step sizes goes to zero, FDE should converge to the PDE. For a given FDE written at a point
 (i,n), consistency analysis is to expand the discrete values with Taylor series expansions, and leaving
