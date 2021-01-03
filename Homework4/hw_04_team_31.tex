@@ -179,6 +179,43 @@ where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta 
 
 \section{Results and Discussion}
 
+\subsubsection{Consistency Analysis of the Given FDE}
+Consistency is one of the conditions to be able to approximate to the PDE. What is meant by consistency is
+that as the step sizes goes to zero, FDE should converge to the PDE. For a given FDE written at a point
+(i,n), consistency analysis is to expand the discrete values with Taylor series expansions, and leaving
+the original PDE terms on the left hand-side and all the other terms on the right hand-side. If the right
+hand side goes to zero as the step sizes goes to zero, the FDE is consistent. This precedure is carried
+out for the following FDE: 
+
+\begin{equation}
+	\frac{-\omega^{n+1}_{i}+4\omega^{n}_{i}-3\omega^{n-1}_{i}}{2\Delta t} + V\frac{\omega^{n}_{i+1}-\omega^{n}_{i-1}}{2\Delta x} = \nu\frac{\omega^{n}_{i+1}-2\omega^{n}_{i}+\omega^{n}_{i-1}}{\Delta x^2}
+	\label{equation:q4}
+\end{equation}
+
+First, all terms except the $\omega^{n}_{i}$ term, are expanded aorund $\omega^{n}_{i}$ with TSE:
+
+\begin{eqnarray}
+	\omega^{n+1}_i &=& w^n_i + \Delta t \omega_t|^n_i + \frac{\Delta t^2}{2} \omega_{tt}|^n_i + \frac{\Delta t^3}{6} \omega_{ttt}|^n_i ... \nonumber \\
+	\omega^{n-1}_i &=& w^n_i - \Delta t \omega_t|^n_i + \frac{\Delta t^2}{2} \omega_{tt}|^n_i - \frac{\Delta t^3}{6} \omega_{ttt}|^n_i ... \nonumber \\
+	\omega^n_{i+1} &=& w^n_i + \Delta x \omega_x|^n_i + \frac{\Delta x^2}{2} \omega_{xx}|^n_i + \frac{\Delta x^3}{6} \omega_{xxx}|^n_i ... \nonumber \\
+	\omega^n_{i-1} &=& w^n_i - \Delta x \omega_x|^n_i + \frac{\Delta x^2}{2} \omega_{xx}|^n_i - \frac{\Delta x^3}{6} \omega_{xxx}|^n_i ... 
+\end{eqnarray}
+
+Then the above relations are substituted into Equation \ref{equation:q4}:
+
+\begin{equation}
+	\omega_t|^n_i - \Delta t \omega_{tt}|^n_i + \frac{\Delta t^2}{6} \omega_{ttt}|^n_i + V\omega_x|^n_i + V\frac{\Delta x^2}{6}\omega_{xxx}|^n_i = \nu\omega_{xx}|^n_i + O(\Delta t^4,\Delta x^4)
+\end{equation}
+
+Collecting the original PDE terms to the RHS:
+
+\begin{equation}
+	[\omega_t + V\omega_x - \nu\omega_{xx}]|^n_i = \Delta t \omega_{tt}|^n_i - \frac{\Delta t^2}{6} \omega_{ttt}|^n_i - V\frac{\Delta x^2}{6}\omega_{xxx}|^n_i + O(\Delta t^4,\Delta x^4)
+\end{equation}
+
+Since the right hand-side terms goes to zero as $\Delta t$ and $\Delta x$ approach to zero, the FDE given
+in Equation \ref{equation:q4} is consistent.
+
 \section{Conclusion}
 
 \end{document}
