@@ -246,6 +246,13 @@ increasing time step. Consequently the solution of the explicit FDE is unstable 
 and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is conditionally stable.
 \newpage
 \subsection{Comparison of convective eqution with FTBS}
+Figures \ref{fig:FTBSsigma025d0}, \ref{fig:FTBSsigma05d0}, \ref{fig:FTBSsigma075d0}, and \ref{fig:FTBSsigma12d0}
+demonstrate solutions of convection equation using FTBS with different $\sigma$ values at various time
+steps. It can be observed that for $\sigma$ values less than 1.2, the solutions obtained are convergent.
+However, for $\sigma = 1.2$, wave curve is distorted and the solution is divergent. Besides, comparing Figures
+\ref{fig:FTBSsigma025d0}, \ref{fig:FTBSsigma05d0}, and \ref{fig:FTBSsigma075d0}, it can be seen that the
+amplitudes of the wave curves decrease faster, whereas the wave lengths of the curves experience a more rapid
+increase for smaller $\sigma$ values.
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma025d0.eps}
@@ -272,6 +279,19 @@ and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is c
 	 \label{fig:FTBSsigma12d0}
 \end{figure}
 \newpage
+Figures \ref{fig:FTBSsigma025d05}, \ref{fig:FTBSsigma05d05}, \ref{fig:FTBSsigma075d05}, and \ref{fig:FTBSsigma12d05}
+illustrate the solutions of convection diffusion equation using FTBS with various $\sigma$ values at different time
+steps while keeping d value constant. As can be seen from these figures, for $\sigma = 1.2$, a convergent solution
+is obtained for the convection diffusion equation. Nonetheless, for $\sigma$ values smaller than 1.2, calculations
+gave divergent solutions. 
+\\
+\indent Figures \ref{fig:FTBSsigma12d05}, \ref{fig:FTBSsigma12d025}, and \ref{fig:FTBSsigma12d075} monitor the 
+solutions of convection diffusion equation using FTBS with various d values at different time steps
+while keeping $\sigma$ value constant. When the d value is decreased to 0.25 from 0.5, the solution remains
+convergent. Nevertheless, if the d value is increased, such as 0.75, distortion in wave curve is observed and
+the solution obtained is divergent. Comparing Figures \ref{fig:FTBSsigma12d05} and \ref{fig:FTBSsigma12d025},
+it is observed that the decrease in the amplitude of the waves is more significant for higher d values. In addition,
+the wave length increases faster for d = 0.5 compared to the increase in the wave length for d = 0.25.
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma025d05.eps}
@@ -298,12 +318,12 @@ and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is c
 	 \label{fig:FTBSsigma12d05}
 \end{figure}
 \newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma15d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.5$ and $d=0.5$ at different time steps.}
-	 \label{fig:FTBSsigma15d05}
-\end{figure}
+%\begin{figure}[!ht] 
+%	\centering 
+%	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma15d05.eps}
+%	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.5$ and $d=0.5$ at different time steps.}
+%	 \label{fig:FTBSsigma15d05}
+%\end{figure}
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d025.eps}
@@ -317,6 +337,11 @@ and $\sigma$ values and it is unstable for some $d$ and $\sigma$ values, it is c
 	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.75$ at different time steps.}
 	 \label{fig:FTBSsigma12d075}
 \end{figure}
+
+Overall, if the solutions of the convection diffusion equation and the convection equation are
+compared, it can be denoted that for $\sigma$ values lower than 1.2 the FTBS equation gives convergent
+solutions for the convection equation whereas for the convection diffusion equation the solutions
+obtained by FTBS equation is divergent.
 
 
 \newpage
