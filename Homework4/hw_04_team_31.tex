@@ -37,17 +37,17 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 %Report start
 
 \section{Introduction}
-Finite Difference Method uses finite difference relations which are obtained from Taylor
+Finite Difference Method uses finite-difference relations which are obtained from Taylor
 series expansions in order to approximate the partial derivatives in a partial differential
 equation. The equations representing the partial differentials are called Finite Difference
-Equations. In this homework, given a convection diffusion wave equation:
+Equations. In this homework, given a convection-diffusion wave equation:
 
 \begin{equation}
 	\frac{\partial \omega}{\partial t} + V\frac{\partial \omega}{\partial x} = \nu\frac{\partial^2 \omega}{\partial x^2}
 	\label{eqn:gaussian}
 \end{equation}
 
-where V is the constant convection velocity, and $\nu$ is the diffusion (viscosity) coefficient,
+where V is the constant convection velocity, $\nu$ is the diffusion (viscosity) coefficient,
 and $\omega$ is distributed initially as follows:
 \begin{equation}
 	\omega(x,t=0) = exp(-b ln2(x/\Delta x)^2)
@@ -62,8 +62,8 @@ using different $\sigma$ (Courant number) and d values where $\sigma$ and d valu
 	d &=& \frac{\nu\Delta t}{\Delta x^2}
 \end{eqnarray}
 It is also asked to solve both Equation \ref{eqn:gaussian} and convection equation, where d equals
-zero, by forward-time backward-space FDE and compare the solution. Afterwards, given a high order
-accuracy FDE, first it is requested to perform consistency analysis on it and then solving
+zero, by forward-time backward-space FDE and compare the solutions. Afterwards, given a high order
+accuracy FDE, first, it is requested to perform consistency analysis on it and then solving
 Equation \ref{eqn:gaussian} by using this FDE:
 
 \begin{eqnarray}
@@ -78,8 +78,8 @@ In all solutions the range of x is such that -L/2$\leq$x$\leq$L/2 where L=40.
 \subsection{Finite Difference Method}
 Finite Difference method is used to solve partial differential equations by 
 approximating partial derivatives in these equations with finite difference relations.
-In this homework, 1-D, linear, convection diffusion equation and convection equation are solved
-with combination of finite difference approximations.
+In this homework, 1-D, linear, convection-diffusion equation and convection equation are solved
+with a combination of finite difference approximations.
 \begin{equation}
 	\frac{\partial w}{\partial t} + V\frac{\partial w}{\partial x}=\nu\frac{\partial^2 w}{\partial x^2}
 	\label{eqn:cde}
@@ -90,7 +90,7 @@ is convective diffusion equation and
 	\label{eqn:ce}
 \end{equation}
 is convective equation.\\
-Two different derivations is used for the explicit finite difference equation of 
+Two different derivations are used for the explicit finite difference equation of 
 Equation \ref{eqn:cde} in this homework.The first derivation of FDE is also used for the explicit 
 FDE of Equation \ref{eqn:ce}. In both derivations, the first term of
 the equation forward time approximation is used.
@@ -122,7 +122,7 @@ The explicit FDE of Equation \ref{eqn:cde} based on forward time and central spa
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \\To derive the explicit FDE of Equation \ref{eqn:ce}, Equation \ref{eqn:ft} and \ref{eqn:cs1} are
-substituted into Equation \ref{eqn:ce}
+substituted into Equation \ref{eqn:ce}:
 \begin{equation}
 	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n}-w_{i-1}^{n}}{2\Delta x}
 	=0+O(\Delta x^2, \Delta t)
@@ -133,17 +133,17 @@ The explicit FDE of Equation \ref{eqn:ce} based on forward time and central spat
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$.
 \\In the second derivation, instead of central space approximation, backward space approximation is used.
-Backward space approximation of $\frac{\partial w}{\partial x}\vert$ of order ($\Delta x$)
+Backward space approximation of $\frac{\partial w}{\partial x}\vert$ of order ($\Delta x$):
 \begin{equation}
 	\frac{\partial w}{\partial x}\vert_{i}=\frac{w_{i}-w_{i-1}}{\Delta x}+O(\Delta x)
 	\label{eqn:bs1}
 \end{equation}
-Backward space approximation of $\frac{\partial^2 w}{\partial x^2}\vert$ of order ($\Delta x$)
+Backward space approximation of $\frac{\partial^2 w}{\partial x^2}\vert$ of order ($\Delta x$):
 \begin{equation}
 	\frac{\partial^2 w}{\partial x^2}\vert_{i}=\frac{w_{i}-2w_{i-1}+w_{i-2}}{\Delta x^2}+O(\Delta x)
 	\label{eqn:bs2}
 \end{equation}
-By substituting Equation \ref{eqn:ft}, \ref{eqn:bs1}, and \ref{eqn:bs2} into Equation \ref{eqn:cde}
+By substituting Equation \ref{eqn:ft}, \ref{eqn:bs1}, and \ref{eqn:bs2} into Equation \ref{eqn:cde}:
 \begin{equation}
 	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i}^{n}-w_{i-1}^{n}}{\Delta x}
 	=\frac{w_{i}^{n}-2w_{i-1}^{n}+w_{i-2}^{n}}{\Delta x^2}+O(\Delta x,\Delta t)
@@ -155,19 +155,19 @@ differences (FTBS) is obtained:
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \\ To obtain the implicit FDE of Equation \ref{eqn:cde}, backward time central space method is used.
-Backward time difference is used for the first term of Equation \ref{eqn:cde}
+Backward time difference is used for the first term of Equation \ref{eqn:cde}:
 \begin{equation}
 	\frac{\partial w}{\partial t}\vert^{n}=\frac{w^{n}-w^{n-1}}{\Delta x}+O(\Delta t)
 	\label{eqn:bt}
 \end{equation}
 Equation \ref{eqn:cs1} and \ref{eqn:cs2} are used to approximate the second and third
 terms of Equation \ref{eqn:cde}, respectively. Equation \ref{eqn:bt}, \ref{eqn:cs1}
-and \ref{eqn:cs2} are inserted in the Equation \ref{eqn:cde}
+and \ref{eqn:cs2} are inserted in the Equation \ref{eqn:cde}:
 \begin{equation}
 	\frac{w_{i}^{n}-{w_{i}^{n-1}}}{\Delta t}+\frac{w_{i+1}^{n-1}-w_{i-1}^{n-1}}{2\Delta x}
 	=\frac{w_{i+1}^{n-1}-2w_{i}^{n-1}+w_{i-1}^{n-1}}{\Delta x^2}+O(\Delta x^2, \Delta t)
 \end{equation}
-To define a PDE as implicit, it should be discretized at time level $n+1$. So, equation becomes
+To define a PDE as implicit, it should be discretized at time level $n+1$. So, equation becomes:
 \begin{equation}
 	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n+1}-w_{i-1}^{n+1}}{2\Delta x}
 	=\frac{w_{i+1}^{n+1}-2w_{i}^{n+1}+w_{i-1}^{n+1}}{\Delta x^2}+O(\Delta x^2, \Delta t)	
@@ -180,7 +180,7 @@ The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method i
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \newpage
 \subsection{Thomas Algorithm}
-As a consequence of the usage of the BTCS Euler Implicit method to solve the convection diffusion
+As a consequence of the usage of the BTCS Euler Implicit method to solve the convection-diffusion
 equation, the tridiagonal system of equations is obtained. The general form of the tridiagonal system
 equation with k unknowns:
 \begin{equation}
@@ -212,8 +212,8 @@ where $a_1$ and $c_k$ is not used.\\System of equations can be written as follow
 	\end{Bmatrix}
 	\label{eqn:matrx}
 \end{equation}
-The first term of Equation \ref{eqn:matrx} has the 3 non-zero diagonals and
-it is the tridiagonal matrix. Equation \ref{eqn:matrx} can be solved with Thomas
+The first term of Equation \ref{eqn:matrx} has 3 non-zero diagonals so
+it is a tridiagonal matrix. Equation \ref{eqn:matrx} can be solved with Thomas
 Algorihtm.
 \section{Results and Discussion}
 \subsection{Formulation of explicit FDE based on FTCS }
@@ -250,7 +250,7 @@ Explicit FDE is already formulated in Method section. Explicit FDE is given in E
 Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
 method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
 Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
-different d value ($d=0.25$) at various time steps. As can be seen from the Figure \ref{fig:FTCSsigma05d05}
+different d value ($d=0.25$) at various time steps. As can be seen from the Figures \ref{fig:FTCSsigma05d05}
 and \ref{fig:FTCSsigma05d025}, as time step increases, both curves continue to oscillate with a decrease in their
 amplitudes. It can be seen that the solution of the explicit FDE is convergent for $d=0.5$
 and $d=0.25$ while keeping $\sigma$ constant and equal to 0.5. Since the stability is a condition
@@ -285,13 +285,13 @@ Figure \ref{fig:FTCSsigma025d05} and Figure \ref{fig:FTCSsigma075d05} illustrate
 method for Equation \ref{eqn:cde} for $d=0.5$ with different sigma values, $\sigma= 0.25$ and $\sigma=0.75$,
 respectively, at various time steps. In both Figure \ref{fig:FTCSsigma025d05}
 and \ref{fig:FTCSsigma075d05}, the wave lengths of curves increases and the amplitudes of the waves are reduced
-with increasing time steps. Overall, it can be said that the solution of the explicit is convergent, hence stable 
-FDE for $d=0.5$ and $\sigma = 0.25$, and $\sigma = 0.25$ since there is no distortion observed.\\
+with increasing time steps. Overall, it can be said that the solution of the explicit FDE is convergent, hence stable 
+for $d=0.5$ with $\sigma = 0.25$, and $\sigma = 0.75$ since there is no distortion observed.\\
 \indent Figure \ref{fig:FTCSsigma12d05} demonstrates the solution of the explicit FTCS
 method for Equation \ref{eqn:cde} with $\sigma= 1.2$ and $d=0.5$ at various time steps. For the curve in the
-Figure \ref{fig:FTCSsigma12d05}, the amplitude of the wave increases and the wave becomes distrupted with 
+Figure \ref{fig:FTCSsigma12d05}, the amplitude of the wave increases, and the wave becomes disrupted with
 increasing time step. Consequently, the solution of the explicit FDE is unstable for $\sigma=1.2$ and $d=0.5$\\
-\indent To conclude this subsection, since the explicit FDE of the convection diffusion equation is stable for some $d$ 
+\indent To conclude this subsection since the explicit FDE of the convection-diffusion equation is stable for some $d$ 
 and $\sigma$ values whereas it can be unstable for some other combinations of $d$ and $\sigma$ values, it is conditionally stable.
 \newpage
 \subsection{Comparison of convective eqution with FTBS}
@@ -387,19 +387,19 @@ the wave length increases faster for d = 0.5 compared to the increase in the wav
 	 \label{fig:FTBSsigma12d075}
 \end{figure}
 
-Overall, if the solutions of the convection diffusion equation and the convection equation are
+Overall, if the solutions of the convection-diffusion equation and the convection equation are
 compared, it can be denoted that for $\sigma$ values lower than 1.2 the FTBS equation gives convergent
-solutions for the convection equation whereas for the convection diffusion equation the solutions
+solutions for the convection equation whereas for the convection-diffusion equation the solutions
 obtained by FTBS equation is divergent.
 
 
 \newpage
 \subsection{Consistency Analysis of the Given FDE}
-Consistency is one of the conditions to be able to approximate to the PDE. What is meant by consistency is
-that as the step sizes goes to zero, FDE should converge to the PDE. For a given FDE written at a point
-(i,n), consistency analysis is to expand the discrete values with Taylor series expansions, and leaving
-the original PDE terms on the left hand-side and all the other terms on the right hand-side. If the right
-hand side goes to zero as the step sizes goes to zero, the FDE is consistent. This precedure is carried
+Consistency is one of the conditions to be able to approximate the PDE. What is meant by consistency is
+that as the step sizes go to zero, FDE should converge to the PDE. For a given FDE written at a point
+(i,n), consistency analysis is to expand the discrete values with Taylor series expansions and leaving
+the original PDE terms on the left-hand-side and all the other terms on the right-hand side. If the right
+hand side goes to zero as the step sizes go to zero, the FDE is consistent. This procedure is carried
 out for the following FDE: 
 
 \begin{equation}
@@ -429,10 +429,10 @@ Collecting the original PDE terms to the RHS:
 	\label{equation:consistency}
 \end{equation}
 
-Since the right hand-side terms goes to zero as $\Delta t$ and $\Delta x$ approach to zero, the FDE given
+Since the right-hand-side terms go to zero as $\Delta t$ and $\Delta x$ approach to zero, the FDE given
 in Equation \ref{equation:q4} is consistent.
 
-In order to understand the effect of the leading error term on the right hand side the leading term's time
+In order to understand the effect of the leading error term on the right-hand side the leading term's time
 derivatives are converted to spatial derivatives using the Equation \ref{eqn:cde} as follows:
 
 \begin{equation}
@@ -471,7 +471,7 @@ and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
 
 \newpage
 
-\section{Solution of the given FDE}
+\subsection{Solution of the given FDE}
 
 \begin{figure}[!ht] 
 	\centering 
@@ -482,10 +482,9 @@ and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
 
  \vspace{1cm}
 
-Stability of given FDE is numerically experimented for $\sigma$ and $d$ values between 0 and 2 with 0.05 spacing. 
-Some of the results this experimentation is given in Figures \ref{fig:Q4_1}, \ref{fig:Q4_2} and \ref{fig:Q4_3}. 
-As a result, it is concluded that given FDE is unconditionally unstable.
-
+ Stability of given FDE is numerically experimented for $\sigma$ and $d$ values between 0 and 2 with 0.05 spacing. 
+ Some of the results this experimentation is given in Figures \ref{fig:Q4_1}, \ref{fig:Q4_2} and \ref{fig:Q4_3}. 
+ As a result, it is concluded that given FDE is unconditionally unstable.
 \newpage
 
 \begin{figure}[!ht] 
@@ -516,10 +515,10 @@ As a result, it is concluded that given FDE is unconditionally unstable.
 \vspace{1cm}
 
 Implicit FDE derived in Equation \ref{eqn:implicit} is solved for various $\sigma$ and $d$ values. 
-It is found that solition converges for every $\sigma$ and $d$ combination. Therefore implicit method 
+It is found that solution converges for every $\sigma$ and $d$ combination. Therefore implicit method 
 is unconditionally stable. Figures \ref{fig:b_1}, \ref{fig:b_2} and \ref{fig:b_3} shows some of the solutions. 
-As this method is unconditionally stable, larger timestep can be used for calculations. But it should be noted that, 
-accuracy of the solution decreases as timestep increases. Because of that, time step size is still limited if one wants 
+As this method is unconditionally stable, a larger timestep can be used for calculations. But it should be noted that the
+accuracy of the solution decreases as timestep increases. Because of that, the time step size is still limited if one wants
 an accurate solution.
 
 \newpage
@@ -541,29 +540,26 @@ an accurate solution.
 \newpage
 
 \section{Conclusion}
-In this homework, convection diffusion equation was solved by using different
-finite difference equations and convection equation was solved with the explicit
-FTBS equation. First, in the solution of the convection diffusion equation,
-the explicit FTCS equation was used and it was showed that the solution was
-conditionally stable. Because for some combination of $\sigma$ and $d$ values
-convergent ,hence stable solutions were detemined whereas solution were unstable
-for other combinations, such as $\sigma =1.2$ and $d=0.5$ or  $\sigma =0.5$ and $d=0.75$
+In this homework, the convection-diffusion equation was solved by using different
+finite-difference equations and convection equation was solved with the explicit
+FTBS equation. First, in the solution of the convection-diffusion equation,
+the explicit FTCS equation was used and it was shown that the solution was
+conditionally stable. The reason of is that for some combination of $\sigma$ and $d$ values,
+convergent, hence stable solutions were determined whereas solutions were unstable
+for other combinations, such as $\sigma =1.2$ and $d=0.5$ or  $\sigma =0.5$ and $d=0.75$.
 Then, the explicit FTBC equation was used to solve the convection equation. The results showed
-that as the value of $\sigma$ increased up to some value, the solutions were stable and 
+that as the value of $\sigma$ increased up to some value, the solutions were stable and
 the shrinkage in the waves of solution curves is less significant. Also, the solution
-were distorted and unstable for $\sigma=1.2$. Afterwards, the solution of the convection
-diffusion equation were calculated with the explicit FTBS method. It was seen that
-with constant d value ($d=0.5$), unstable and distrupted solution curves were observed
+was distorted and unstable for $\sigma=1.2$. Afterwards, the solution of the convection-diffusion equation was calculated with the explicit FTBS method. It was seen that
+with constant d value ($d=0.5$), unstable and disrupted solution curves were observed
 for some $\sigma$ values such as 0.25, 0.5, and 0.75. On the other hand, for constant 
 $\sigma=1.2$, with increased d value up to some value, the change in the waves of solutions,
-which were convergent, became more insignificant. When $d$ were increased to 0.75, divergent
-solution were observed. At the next part of the homework, consistency analysis were made,
-and it were determined that Equation \ref{equation:q4} is consistent. However,it was seen that
+which were convergent, became more insignificant. When $d$ were increased to 0.75, a divergent
+solution was observed. At the next part of the homework, consistency analysis was made,
+and it was determined that Equation \ref{equation:q4} is consistent. However, it was seen that
 from the solutions of the Equation \ref{equation:q4} with different $\sigma$ and d values,
-it is divergent and unstable. At the last part of the homework, the solution of the convection
-diffusion equation was calculated with the BTCS Euler implicit method. The all solutions obtained in
-Subsection 4.1 were convergent with different $\sigma$ and d values. Therefore, it may be more
-reasonable to solve the convection diffusion equation with the implicit FDE since it provided convergent
-solutions in more large range of $\sigma$ and d values than the explicit FDEs.
-
+it is divergent and unstable. In the last part of the homework, the solution of the convection-diffusion equation was calculated with the BTCS Euler implicit method. All solutions obtained in
+Subsection 3.6 were convergent with different $\sigma$ and d values. Therefore, it may be more
+reasonable to solve the convection-diffusion equation with the implicit FDE since it provided convergent
+solutions in a more large range of $\sigma$ and d values than the explicit FDEs.
 \end{document}
