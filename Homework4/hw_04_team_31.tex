@@ -389,10 +389,52 @@ Collecting the original PDE terms to the RHS:
 
 \begin{equation}
 	[\omega_t + V\omega_x - \nu\omega_{xx}]|^n_i = \Delta t \omega_{tt}|^n_i - \frac{\Delta t^2}{6} \omega_{ttt}|^n_i - V\frac{\Delta x^2}{6}\omega_{xxx}|^n_i + O(\Delta t^4,\Delta x^4)
+	\label{equation:consistency}
 \end{equation}
 
 Since the right hand-side terms goes to zero as $\Delta t$ and $\Delta x$ approach to zero, the FDE given
 in Equation \ref{equation:q4} is consistent.
+
+In order to understand the effect of the leading error term on the right hand side the leading term's time
+derivatives are converted to spatial derivatives using the Equation \ref{eqn:cde} as follows:
+
+\begin{equation}
+	\frac{\partial \omega}{\partial t} = \nu\frac{\partial^2 \omega}{\partial x^2} - V\frac{\partial \omega}{\partial x}
+\end{equation}
+
+Differentiating with respect to time:
+
+\begin{eqnarray}
+	\frac{\partial^2 \omega}{\partial t^2} &=& \nu\frac{\partial^2}{\partial x^2}(\frac{\partial \omega}{\partial t}) - V\frac{\partial}{\partial x}(\frac{\partial \omega}{\partial t}) \nonumber \\
+	\frac{\partial^2 \omega}{\partial t^2} &=& \nu\frac{\partial^2}{\partial x^2}(\nu\frac{\partial^2 \omega}{\partial x^2} - V\frac{\partial \omega}{\partial x}) - V\frac{\partial}{\partial x}(\nu\frac{\partial^2 \omega}{\partial x^2} - V\frac{\partial \omega}{\partial x}) \nonumber \\
+	\frac{\partial^2 \omega}{\partial t^2} &=& \nu^2\frac{\partial^4 \omega}{\partial x^4} - 2V\nu\frac{\partial^3 \omega}{\partial x^3} + V^2\frac{\partial^2 \omega}{\partial x^2}
+	\label{eqnarray:t2}
+\end{eqnarray}
+
+Differentiating the last equation one more time:
+
+\begin{eqnarray}
+	\frac{\partial^3 \omega}{\partial t^3} &=& \nu^2\frac{\partial^4}{\partial x^4}(\frac{\partial \omega}{\partial t}) - 2V\nu\frac{\partial^3}{\partial x^3}(\frac{\partial \omega}{\partial t}) + V^2\frac{\partial^2}{\partial x^2}(\frac{\partial \omega}{\partial t}) \nonumber \\
+	\frac{\partial^3 \omega}{\partial t^3} &=& \nu^2\frac{\partial^4}{\partial x^4}(\nu\frac{\partial^2 \omega}{\partial x^2} - V\frac{\partial \omega}{\partial x}) - 2V\nu\frac{\partial^3}{\partial x^3}(\nu\frac{\partial^2 \omega}{\partial x^2} - V\frac{\partial \omega}{\partial x}) + V^2\frac{\partial^2}{\partial x^2}(\nu\frac{\partial^2 \omega}{\partial x^2} - V\frac{\partial \omega}{\partial x}) \nonumber \\
+	\frac{\partial^3 \omega}{\partial t^3} &=& \nu^3\frac{\partial^6}{\partial x^6} - 3\nu^2V\frac{\partial^5}{\partial x^5} + 3V^2\nu\frac{\partial^4}{\partial x^4} - V^3\frac{\partial^3}{\partial x^3}
+	\label{eqnarray:t3}
+\end{eqnarray}
+
+Plugging Equations \ref{eqnarray:t2} and \ref{eqnarray:t3} into Equation \ref{equation:consistency} the
+right hand side becomes:
+
+\begin{eqnarray}
+	V^2\Delta t \frac{\partial^2 \omega}{\partial x^2} - (2V\nu\Delta t &-&V^3\frac{\Delta t^2}{6} + V\frac{\Delta x^2}{6})\frac{\partial^3 \omega}{\partial x^3} + (\nu^2\Delta t -V^2\nu\frac{\Delta t^2}{2})\frac{\partial^4 \omega}{\partial x^4} \nonumber \\
+	&+& \nu^2V\frac{\Delta t^2}{2}\frac{\partial^5 \omega}{\partial x^5} - \nu^3\frac{\Delta t^2}{6}\frac{\partial^6 \omega}{\partial x^6}
+	\label{eqnarray:leading}
+\end{eqnarray}
+
+It can be concluded from Equation \ref{eqnarray:leading} that the $2^{nd}$, $4^{th}$, and $6^{th}$ derivatives are dissipation errors
+and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
+
+\section{Conclusion}
+
+\end{document}
 
 \newpage
 
