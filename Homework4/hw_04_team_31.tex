@@ -175,6 +175,7 @@ To define a PDE as implicit, it should be discretized at time level $n+1$. So, e
 The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method is obtained:
 \begin{equation}
 	-(\frac{\sigma}{2}+d)w_{i-1}^{n+1}+(2d+1)w_{i}^{n+1}+(\frac{\sigma}{2}-d)w_{i+1}^{n+1} = w_{i}^{n}
+	\label{eqn:implicit}
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \newpage
@@ -424,6 +425,42 @@ As a result, it is concluded that given FDE is unconditionally unstable.
 	\includegraphics[max height=8.5cm]{graphs/Question4/sigma12d06.eps}
 	\caption{Solution of given FDE with $\sigma= 1.2$ and $d=0.6$ at different time steps.}
 	\label{fig:Q4_3}
+\end{figure}
+
+\newpage
+
+\subsection{Bonus: Implicit Solution}
+
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/Bonus/sigma05d05.eps}
+	\caption{Implicit Solution of Convection diffusion equation with $\sigma= 0.5$ and $d=0.5$}
+	\label{fig:b_1}
+\end{figure}
+
+\vspace{1cm}
+
+Implicit FDE derived in Equation \ref{eqn:implicit} is solved for various $\sigma$ and $d$ values. 
+It is found that solition converges for every $\sigma$ and $d$ combination. Therefore implicit method 
+is unconditionally stable. Figures \ref{fig:b_1}, \ref{fig:b_2} and \ref{fig:b_3} shows some of the solutions. 
+As this method is unconditionally stable, larger timestep can be used for calculations. But it should be noted that, 
+accuracy of the solution decreases as timestep increases. Because of that, time step size is still limited if one wants 
+an accurate solution.
+
+\newpage
+
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/Bonus/sigma12d05.eps}
+	\caption{Implicit Solution of Convection diffusion equation with $\sigma= 1.2$ and $d=0.5$}
+	\label{fig:b_2}
+\end{figure}
+
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/Bonus/sigma05d12.eps}
+	\caption{Implicit Solution of Convection diffusion equation with $\sigma= 0.5$ and $d=1.2$}
+	\label{fig:b_3}
 \end{figure}
 
 \newpage
