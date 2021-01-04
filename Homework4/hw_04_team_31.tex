@@ -118,6 +118,7 @@ By substituting Equation \ref{eqn:ft}, \ref{eqn:cs1}, and \ref{eqn:cs2} into Equ
 The explicit FDE of Equation \ref{eqn:cde} based on forward time and central spatial differences is obtained:
 \begin{equation}
 	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n})+O(\Delta x^2,\Delta t)
+	\label{eqn:FTCS}
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \\To derive the explicit FDE of Equation \ref{eqn:ce}, Equation \ref{eqn:ft} and \ref{eqn:cs1} are
@@ -178,6 +179,17 @@ The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method i
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \newpage
 \section{Results and Discussion}
+\subsection{Formulation of explicit FDE based on FTCS }
+
+Explicit FDE is already formulated in Method section. Explicit FDE is given in Equation \ref{eqn:FTCS} as
+
+\begin{equation}
+	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n})+O(\Delta x^2,\Delta t) 
+	\tag*{(11)}
+\end{equation}
+
+\vspace{1cm}
+
 \subsection{Stability of the Solution of the Explicit FDE of Convection Diffusion Equation}
 \begin{figure}[!ht] 
 	\centering 
