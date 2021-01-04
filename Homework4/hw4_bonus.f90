@@ -19,14 +19,9 @@ program IMPLICIT_FDE
          a(i) = -(sigma/2.)-d
          b1(i) = 2.*d + 1. 
          c(i) = (sigma/2.)-d
-         if (i.eq. 2) then
-            a(i)=0
-         elseif (i.eq.imax) then
-            c(i)=0
-         endif
       enddo
 
-      call THOMAS(imax, 2, imax-2, a, b1, c, wave_n(:))
+      call THOMAS(imax, 2, imax-1, a, b1, c, wave_n(:))
       
 !..Output intermediate solutions
       if( MOD(nt,ntout) .eq. 0 .or. nt .eq. ntmax ) call IO(nt)
