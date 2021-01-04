@@ -1,10 +1,10 @@
 !-------------------------------------------------------------------
-!..AN EXPLICIT FD SOLVER FOR THE 1-D LINEAR CONVECTION EQUATION  
+!..AN IMPLICIT FD SOLVER FOR THE 1-D LINEAR CONVECTION EQUATION  
 !-------------------------------------------------------------------
 Module vars
-  integer, parameter :: imax=201, ntout=1 
+  integer, parameter :: imax=401, ntout=1 
   integer :: ntmax
-  real, dimension(imax) :: wave_n, wave_np1, f, wave_n0
+  real, dimension(imax) :: wave_n
   real, dimension(imax) :: a, b1, c 
   real :: sigma, d, dx=0.1, x1 , b=0.025, pi= 3.1415926 !ACOS(-1.)
 End module
@@ -24,16 +24,9 @@ program IMPLICIT_FDE
          elseif (i.eq.imax) then
             c(i)=0
          endif
-            
       enddo
-      if (nt.eq.1) then
-      wave_n(:)=wave_n0(:)
-      endif
-      print*, wave_n0(3)
-      call THOMAS(imax, 3, imax-2, a, b1, c, wave_n)
-      wave_n(:)= f(:)
-      
-      
+
+      call THOMAS(imax, 2, imax-2, a, b1, c, wave_n(:))
       
 !..Output intermediate solutions
       if( MOD(nt,ntout) .eq. 0 .or. nt .eq. ntmax ) call IO(nt)
@@ -54,7 +47,6 @@ subroutine INIT
       wave_n(i) = exp(-b * log(2.) * (x/dx)**2)
       x = x+dx
    enddo
-   wave_n0(:)=wave_n(:)
   call IO(0)
 
   return 
@@ -84,7 +76,6 @@ subroutine  THOMAS(imax, il, iu, a, b, c, f)
    real :: z
    x(il) = c(il) / b(il)
    f(il) = f(il) / b(il)
-   print*, f(il)
    ilp1 = il+1
    do i = ilp1, iu
       z= 1. / (b(i)- a(i)*x(i-1))
