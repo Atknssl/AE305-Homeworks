@@ -115,7 +115,7 @@ By substituting Equation \ref{eqn:ft}, \ref{eqn:cs1}, and \ref{eqn:cs2} into Equ
 	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n}-w_{i-1}^{n}}{2\Delta x}
 	=\frac{w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n}}{\Delta x^2}+O(\Delta x^2, \Delta t)
 \end{equation}
-The explicit FDE of Equation \ref{eqn:cde} based on forward time and central spatial differences is obtained:
+The explicit FDE of Equation \ref{eqn:cde} based on forward time and central spatial differences (FTCS) is obtained:
 \begin{equation}
 	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n})+O(\Delta x^2,\Delta t)
 	\label{eqn:FTCS}
@@ -127,7 +127,7 @@ substituted into Equation \ref{eqn:ce}
 	\frac{w_{i}^{n+1}-{w_{i}^{n}}}{\Delta t}+\frac{w_{i+1}^{n}-w_{i-1}^{n}}{2\Delta x}
 	=0+O(\Delta x^2, \Delta t)
 \end{equation}
-The explicit FDE of Equation \ref{eqn:ce} based on forward time and central spatial differences is obtained:
+The explicit FDE of Equation \ref{eqn:ce} based on forward time and central spatial differences (FTCS) is obtained:
 \begin{equation}
 	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}w_{i+1}^{n}-w_{i-1}^{n}+O(\Delta x^2, \Delta t)
 \end{equation}
@@ -149,7 +149,7 @@ By substituting Equation \ref{eqn:ft}, \ref{eqn:bs1}, and \ref{eqn:bs2} into Equ
 	=\frac{w_{i}^{n}-2w_{i-1}^{n}+w_{i-2}^{n}}{\Delta x^2}+O(\Delta x,\Delta t)
 \end{equation}
 The explicit FDE of Equation \ref{eqn:cde} based on forward time and backward spatial
-differences is obtained:
+differences (FTBS) is obtained:
 \begin{equation}
 	w_{i}^{n+1}= w_{i}^{n}-\sigma(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i}^{n}-2w_{i-1}^{n}+w_{i-2}^{n})+O(\Delta x,\Delta t)
 \end{equation}
@@ -179,6 +179,42 @@ The implicit FDE of Equation \ref{eqn:cde} based on BTCS Euler Implicit method i
 \end{equation}
 where $\sigma = \frac{V\Delta t}{\Delta x }$ and $d = \frac{\nu\Delta t}{\Delta x^2 }$.
 \newpage
+\subsection{Thomas Algorithm}
+As a consequence of the usage of the BTCS Euler Implicit method to solve the convection diffusion
+equation, the tridiagonal system of equations is obtained. The general form of the tridiagonal system
+equation with k unknowns:
+\begin{equation}
+	a_i x_{i-1}+b_i x_i+c_i x_{i+1}=f_i
+\end{equation}
+where $a_1$ and $c_k$ is not used.\\System of equations can be written as following form
+\begin{equation}
+	\begin{bmatrix}
+		b_1 & c_1    & 0      &\dots    &0   \\
+		a_2 & b_2    & c_2    &\dots    &\vdots\\
+		0   & \ddots & \ddots & \ddots	& 0    \\
+		\vdots& \dots&a_{k-1} & b_{k-1} & c_{k-1}\\
+		0   & \dots  & 0      & a_k     & b_k 
+		\end{bmatrix}
+	\begin{Bmatrix}
+		x_1\\
+		x_2\\
+		\vdots\\
+		x_{k-1}\\
+		x_k
+		\end{Bmatrix}
+	=
+	\begin{Bmatrix}
+		f_1\\
+		f_2\\
+		\vdots\\
+		f_{k-1}\\
+		f_k
+	\end{Bmatrix}
+	\label{eqn:matrx}
+\end{equation}
+The first term of Equation \ref{eqn:matrx} has the 3 non-zero diagonals and
+it is the tridiagonal matrix. Equation \ref{eqn:matrx} can be solved with Thomas
+Algorihtm.
 \section{Results and Discussion}
 \subsection{Formulation of explicit FDE based on FTCS }
 
@@ -211,6 +247,19 @@ Explicit FDE is already formulated in Method section. Explicit FDE is given in E
 	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.75$ at $nt=0$ and $nt=25$.}
 	 \label{fig:FTCSsigma05d075}
 \end{figure}
+Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
+Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
+different d value ($d=0.25$) at various time steps. As can be seen from the Figure \ref{fig:FTCSsigma05d05}
+and \ref{fig:FTCSsigma05d025}, as time step increases, both curves continue to oscillate with a decrease in their
+amplitudes. It can be seen that the solution of the explicit FDE is convergent for $d=0.5$
+and $d=0.25$ while keeping $\sigma$ constant and equal to 0.5. Since the stability is a condition
+to be satisfied for convergence, it can be understood that both solutions are stable. \\
+\indent Figure \ref{fig:FTCSsigma05d075} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.75$ at the initial condition
+and $25^{th}$ time step. The curve in the graph has some deterioration at $nt = 25$. Therefore,
+the explicit FDE is unstable for $\sigma= 0.5$ and $d=0.75$.
+\newpage
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma025d05.eps}
@@ -232,19 +281,7 @@ Explicit FDE is already formulated in Method section. Explicit FDE is given in E
 \end{figure}
 \newpage
 
-Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
-method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
-Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
-different d value ($d=0.25$) at various time steps. As can be seen from the Figure \ref{fig:FTCSsigma05d05}
-and \ref{fig:FTCSsigma05d025}, as time step increases, both curves continue to oscillate with a decrease in their
-amplitudes. It can be seen that the solution of the expilicit FDE is convergent for $d=0.5$
-and $d=0.25$ while keeping $\sigma$ constant and equal to 0.5. Since the stability is a condition
-to be satisfied for convergence, it can be understood that both solutions are stable. \\
-\indent Figure \ref{fig:FTCSsigma05d075} shows the solution of the explicit FTCS
-method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.75$ at the initial condition
-and $25^{th}$ time step. The curve in the graph has some deterioration at $nt = 25$. Therefore,
-the explicit FDE is unstable for $\sigma= 0.5$ and $d=0.75$.\\
-\indent Figure \ref{fig:FTCSsigma025d05} and Figure \ref{fig:FTCSsigma075d05} illustrates the solutions of the explicit FTCS
+Figure \ref{fig:FTCSsigma025d05} and Figure \ref{fig:FTCSsigma075d05} illustrates the solutions of the explicit FTCS
 method for Equation \ref{eqn:cde} for $d=0.5$ with different sigma values, $\sigma= 0.25$ and $\sigma=0.75$,
 respectively, at various time steps. In both Figure \ref{fig:FTCSsigma025d05}
 and \ref{fig:FTCSsigma075d05}, the wave lengths of curves increases and the amplitudes of the waves are reduced
@@ -307,20 +344,20 @@ the wave length increases faster for d = 0.5 compared to the increase in the wav
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma025d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.25$ and $d=0.5$ at different time steps.}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.25$ and $d=0.5$ at $nt=0$ and $nt=20$.}
 	 \label{fig:FTBSsigma025d05}
 \end{figure}
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma05d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.5$ and $d=0.5$ at different time steps.}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.5$ and $d=0.5$ at $nt=0$ and $nt=25$.}
 	 \label{fig:FTBSsigma05d05}
 \end{figure}
 \newpage
 \begin{figure}[!ht] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma075d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.75$ and $d=0.5$ at different time steps.}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.75$ and $d=0.5$ at $nt=0$ and $nt=55$.}
 	 \label{fig:FTBSsigma075d05}
 \end{figure}
 \begin{figure}[!ht] 
@@ -431,10 +468,6 @@ right hand side becomes:
 
 It can be concluded from Equation \ref{eqnarray:leading} that the $2^{nd}$, $4^{th}$, and $6^{th}$ derivatives are dissipation errors
 and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
-
-\section{Conclusion}
-
-\end{document}
 
 \newpage
 
