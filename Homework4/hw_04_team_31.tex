@@ -466,5 +466,29 @@ an accurate solution.
 \newpage
 
 \section{Conclusion}
+In this homework, convection diffusion equation was solved by using different
+finite difference equations and convection equation was solved with the explicit
+FTBS equation. First, in the solution of the convection diffusion equation,
+the explicit FTCS equation was used and it was showed that the solution was
+conditionally stable. Because for some combination of $\sigma$ and $d$ values
+convergent ,hence stable solutions were detemined whereas solution were unstable
+for other combinations, such as $\sigma =1.2$ and $d=0.5$ or  $\sigma =0.5$ and $d=0.75$
+Then, the explicit FTBC equation was used to solve the convection equation. The results showed
+that as the value of $\sigma$ increased up to some value, the solutions were stable and 
+the shrinkage in the waves of solution curves is less significant. Also, the solution
+were distorted and unstable for $\sigma=1.2$. Afterwards, the solution of the convection
+diffusion equation were calculated with the explicit FTBS method. It was seen that
+with constant d value ($d=0.5$), unstable and distrupted solution curves were observed
+for some $\sigma$ values such as 0.25, 0.5, and 0.75. On the other hand, for constant 
+$\sigma=1.2$, with increased d value up to some value, the change in the waves of solutions,
+which were convergent, became more insignificant. When $d$ were increased to 0.75, divergent
+solution were observed. At the next part of the homework, consistency analysis were made,
+and it were determined that Equation \ref{equation:q4} is consistent. However,it was seen that
+from the solutions of the Equation \ref{equation:q4} with different $\sigma$ and d values,
+it is divergent and unstable. At the last part of the homework, the solution of the convection
+diffusion equation was calculated with the BTCS Euler implicit method. The all solutions obtained in
+Subsection 4.1 were convergent with different $\sigma$ and d values. Therefore, it may be more
+reasonable to solve the convection diffusion equation with the implicit FDE since it provided convergent
+solutions in more large range of $\sigma$ and d values than the explicit FDEs.
 
 \end{document}
