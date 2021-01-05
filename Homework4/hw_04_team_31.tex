@@ -73,6 +73,7 @@ Equation \ref{eqn:gaussian} by using this FDE:
 Finally, implicit FDE (backward-time central-space) is used to solve Equation \ref{eqn:gaussian}.
 In all solutions the range of x is such that -L/2$\leq$x$\leq$L/2 where L=40.
 
+\newpage
 
 \section{Method}
 \subsection{Finite Difference Method}
@@ -215,186 +216,9 @@ where $a_1$ and $c_k$ is not used.\\System of equations can be written as follow
 The first term of Equation \ref{eqn:matrx} has 3 non-zero diagonals so
 it is a tridiagonal matrix. Equation \ref{eqn:matrx} can be solved with Thomas
 Algorihtm.
-\section{Results and Discussion}
-\subsection{Formulation of explicit FDE based on FTCS }
 
-Explicit FDE is already formulated in Method section. Explicit FDE is given in Equation \ref{eqn:FTCS} as
-
-\begin{equation}
-	w_{i}^{n+1}= w_{i}^{n}-\frac{\sigma}{2}(w_{i+1}^{n}-w_{i-1}^{n})+d(w_{i+1}^{n}-2w_{i}^{n}+w_{i-1}^{n})+O(\Delta x^2,\Delta t) 
-	\tag*{(11)}
-\end{equation}
-
-\vspace{1cm}
-
-\subsection{Stability of the Solution of the Explicit FDE of Convection Diffusion Equation}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d05.eps}
-	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.5$ at different time steps.}
- 	\label{fig:FTCSsigma05d05}
-\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d025.eps}
-	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.25$ at different time steps.}
-	 \label{fig:FTCSsigma05d025}
-\end{figure}
-\newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d075.eps}
-	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.75$ at $nt=0$ and $nt=25$.}
-	 \label{fig:FTCSsigma05d075}
-\end{figure}
-Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
-method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
-Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
-different d value ($d=0.25$) at various time steps. As can be seen from the Figures \ref{fig:FTCSsigma05d05}
-and \ref{fig:FTCSsigma05d025}, as time step increases, both curves continue to oscillate with a decrease in their
-amplitudes. It can be seen that the solution of the explicit FDE is convergent for $d=0.5$
-and $d=0.25$ while keeping $\sigma$ constant and equal to 0.5. Since the stability is a condition
-to be satisfied for convergence, it can be understood that both solutions are stable. \\
-\indent Figure \ref{fig:FTCSsigma05d075} shows the solution of the explicit FTCS
-method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.75$ at the initial condition
-and $25^{th}$ time step. The curve in the graph has some deterioration at $nt = 25$. Therefore,
-the explicit FDE is unstable for $\sigma= 0.5$ and $d=0.75$.
-\newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma025d05.eps}
-	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.25$ and $d=0.5$ at different time steps.}
-	 \label{fig:FTCSsigma025d05}
-\end{figure}
-\newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma075d05.eps}
-	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.75$ and $d=0.5$ at different time steps.}
-	 \label{fig:FTCSsigma075d05}
-\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma12d05.eps}
-	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
-	 \label{fig:FTCSsigma12d05}
-\end{figure}
-\newpage
-
-Figure \ref{fig:FTCSsigma025d05} and Figure \ref{fig:FTCSsigma075d05} illustrates the solutions of the explicit FTCS
-method for Equation \ref{eqn:cde} for $d=0.5$ with different sigma values, $\sigma= 0.25$ and $\sigma=0.75$,
-respectively, at various time steps. In both Figure \ref{fig:FTCSsigma025d05}
-and \ref{fig:FTCSsigma075d05}, the wave lengths of curves increases and the amplitudes of the waves are reduced
-with increasing time steps. Overall, it can be said that the solution of the explicit FDE is convergent, hence stable 
-for $d=0.5$ with $\sigma = 0.25$, and $\sigma = 0.75$ since there is no distortion observed.\\
-\indent Figure \ref{fig:FTCSsigma12d05} demonstrates the solution of the explicit FTCS
-method for Equation \ref{eqn:cde} with $\sigma= 1.2$ and $d=0.5$ at various time steps. For the curve in the
-Figure \ref{fig:FTCSsigma12d05}, the amplitude of the wave increases, and the wave becomes disrupted with
-increasing time step. Consequently, the solution of the explicit FDE is unstable for $\sigma=1.2$ and $d=0.5$\\
-\indent To conclude this subsection since the explicit FDE of the convection-diffusion equation is stable for some $d$ 
-and $\sigma$ values whereas it can be unstable for some other combinations of $d$ and $\sigma$ values, it is conditionally stable.
-\newpage
-\subsection{Comparison of convective eqution with FTBS}
-Figures \ref{fig:FTBSsigma025d0}, \ref{fig:FTBSsigma05d0}, \ref{fig:FTBSsigma075d0}, and \ref{fig:FTBSsigma12d0}
-demonstrate solutions of convection equation using FTBS with different $\sigma$ values at various time
-steps. It can be observed that for $\sigma$ values less than 1.2, the solutions obtained are convergent.
-However, for $\sigma = 1.2$, wave curve is distorted and the solution is divergent. Besides, comparing Figures
-\ref{fig:FTBSsigma025d0}, \ref{fig:FTBSsigma05d0}, and \ref{fig:FTBSsigma075d0}, it can be seen that the
-amplitudes of the wave curves decrease faster, whereas the wave lengths of the curves experience a more rapid
-increase for smaller $\sigma$ values.
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma025d0.eps}
-	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.25$ at different time steps.}
-	 \label{fig:FTBSsigma025d0}
-\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma05d0.eps}
-	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.5$ at different time steps.}
-	 \label{fig:FTBSsigma05d0}
-\end{figure}
-\newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma075d0.eps}
-	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.75$ at different time steps.}
-	 \label{fig:FTBSsigma075d0}
-\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma12d0.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ at $nt=0$ and $nt=55$.}
-	 \label{fig:FTBSsigma12d0}
-\end{figure}
-\newpage
-Figures \ref{fig:FTBSsigma025d05}, \ref{fig:FTBSsigma05d05}, \ref{fig:FTBSsigma075d05}, and \ref{fig:FTBSsigma12d05}
-illustrate the solutions of convection diffusion equation using FTBS with various $\sigma$ values at different time
-steps while keeping d value constant. As can be seen from these figures, for $\sigma = 1.2$, a convergent solution
-is obtained for the convection diffusion equation. Nonetheless, for $\sigma$ values smaller than 1.2, calculations
-gave divergent solutions. 
-\\
-\indent Figures \ref{fig:FTBSsigma12d05}, \ref{fig:FTBSsigma12d025}, and \ref{fig:FTBSsigma12d075} monitor the 
-solutions of convection diffusion equation using FTBS with various d values at different time steps
-while keeping $\sigma$ value constant. When the d value is decreased to 0.25 from 0.5, the solution remains
-convergent. Nevertheless, if the d value is increased, such as 0.75, distortion in wave curve is observed and
-the solution obtained is divergent. Comparing Figures \ref{fig:FTBSsigma12d05} and \ref{fig:FTBSsigma12d025},
-it is observed that the decrease in the amplitude of the waves is more significant for higher d values. In addition,
-the wave length increases faster for d = 0.5 compared to the increase in the wave length for d = 0.25.
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma025d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.25$ and $d=0.5$ at $nt=0$ and $nt=20$.}
-	 \label{fig:FTBSsigma025d05}
-\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma05d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.5$ and $d=0.5$ at $nt=0$ and $nt=25$.}
-	 \label{fig:FTBSsigma05d05}
-\end{figure}
-\newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma075d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.75$ and $d=0.5$ at $nt=0$ and $nt=55$.}
-	 \label{fig:FTBSsigma075d05}
-\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d05.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
-	 \label{fig:FTBSsigma12d05}
-\end{figure}
-\newpage
-%\begin{figure}[!ht] 
-%	\centering 
-%	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma15d05.eps}
-%	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.5$ and $d=0.5$ at different time steps.}
-%	 \label{fig:FTBSsigma15d05}
-%\end{figure}
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d025.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.25$ at different time steps.}
-	 \label{fig:FTBSsigma12d025}
-\end{figure}
-\newpage
-\begin{figure}[!ht] 
-	\centering 
-	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d075.eps}
-	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.75$ at different time steps.}
-	 \label{fig:FTBSsigma12d075}
-\end{figure}
-
-Overall, if the solutions of the convection-diffusion equation and the convection equation are
-compared, it can be denoted that for $\sigma$ values lower than 1.2 the FTBS equation gives convergent
-solutions for the convection equation whereas for the convection-diffusion equation the solutions
-obtained by FTBS equation is divergent.
-
-
-\newpage
 \subsection{Consistency Analysis of the Given FDE}
+\label{sub:cons}
 Consistency is one of the conditions to be able to approximate the PDE. What is meant by consistency is
 that as the step sizes go to zero, FDE should converge to the PDE. For a given FDE written at a point
 (i,n), consistency analysis is to expand the discrete values with Taylor series expansions and leaving
@@ -471,9 +295,199 @@ and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
 
 \newpage
 
+\section{Results and Discussion}
+\subsection{Formulation of explicit FDE based on FTCS }
+
+Explicit FDE is formulated in Method section. Explicit FDE is given in Equation \ref{eqn:FTCS}.
+
+\subsection{Stability of the Solution of the Explicit FDE of Convection Diffusion Equation}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.5$ at different time steps.}
+ 	\label{fig:FTCSsigma05d05}
+\end{figure}
+Figure \ref{fig:FTCSsigma05d05} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.5$ at various time steps.
+Figure \ref{fig:FTCSsigma05d025} shows the solution of the same explicit FDE but with 
+different d value ($d=0.25$) at various time steps. As can be seen from the Figures \ref{fig:FTCSsigma05d05}
+and \ref{fig:FTCSsigma05d025}, as time step increases, both curves continue to oscillate with a decrease in their
+amplitudes. It can be seen that the solution of the explicit FDE is convergent for $d=0.5$
+and $d=0.25$ while keeping $\sigma$ constant and equal to 0.5. Since the stability is a condition
+to be satisfied for convergence, it can be understood that both solutions are stable. \\
+\indent Figure \ref{fig:FTCSsigma05d075} shows the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 0.5$ and $d=0.75$ at the initial condition
+and $25^{th}$ time step. The curve in the graph has some deterioration at $nt = 25$. Therefore,
+the explicit FDE is unstable for $\sigma= 0.5$ and $d=0.75$.
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d025.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.25$ at different time steps.}
+	 \label{fig:FTCSsigma05d025}
+\end{figure}
+\vspace{1cm}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma05d075.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.5$ and $d=0.75$ at $nt=0$ and $nt=25$.}
+	 \label{fig:FTCSsigma05d075}
+\end{figure}
+
+\newpage
+
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma025d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.25$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTCSsigma025d05}
+\end{figure}
+
+Figure \ref{fig:FTCSsigma025d05} and Figure \ref{fig:FTCSsigma075d05} illustrates the solutions of the explicit FTCS
+method for Equation \ref{eqn:cde} for $d=0.5$ with different sigma values, $\sigma= 0.25$ and $\sigma=0.75$,
+respectively, at various time steps. In both Figure \ref{fig:FTCSsigma025d05}
+and \ref{fig:FTCSsigma075d05}, the wave lengths of curves increases and the amplitudes of the waves are reduced
+with increasing time steps. Overall, it can be said that the solution of the explicit FDE is convergent, hence stable 
+for $d=0.5$ with $\sigma = 0.25$, and $\sigma = 0.75$ since there is no distortion observed.
+\vspace{1em}
+
+Figure \ref{fig:FTCSsigma12d05} demonstrates the solution of the explicit FTCS
+method for Equation \ref{eqn:cde} with $\sigma= 1.2$ and $d=0.5$ at various time steps. For the curve in the
+Figure \ref{fig:FTCSsigma12d05}, the amplitude of the wave increases, and the wave becomes disrupted with
+increasing time step. Consequently, the solution of the explicit FDE is unstable for $\sigma=1.2$ and $d=0.5$\\
+\indent To conclude this subsection since the explicit FDE of the convection-diffusion equation is stable for some $d$ 
+and $\sigma$ values whereas it can be unstable for some other combinations of $d$ and $\sigma$ values, it is conditionally stable.
+
+\newpage
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma075d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 0.75$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTCSsigma075d05}
+\end{figure}
+\vspace{1cm}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTCS/ConvectionDiffusion/sigma12d05.eps}
+	\caption{Convection diffusion solution by the explicit FTCS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTCSsigma12d05}
+\end{figure}
+
+\newpage
+
+\subsection{Comparison of convective eqution with FTBS}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma025d0.eps}
+	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.25$ at different time steps.}
+	 \label{fig:FTBSsigma025d0}
+\end{figure}
+
+Figures \ref{fig:FTBSsigma025d0}, \ref{fig:FTBSsigma05d0}, \ref{fig:FTBSsigma075d0}, and \ref{fig:FTBSsigma12d0}
+demonstrate solutions of convection equation using FTBS with different $\sigma$ values at various time
+steps. It can be observed that for $\sigma$ values less than 1.2, the solutions obtained are convergent.
+However, for $\sigma = 1.2$, wave curve is distorted and the solution is divergent. Besides, comparing Figures
+\ref{fig:FTBSsigma025d0}, \ref{fig:FTBSsigma05d0}, and \ref{fig:FTBSsigma075d0}, it can be seen that the
+amplitudes of the wave curves decrease faster, whereas the wave lengths of the curves experience a more rapid
+increase for smaller $\sigma$ values.
+
+\newpage
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma05d0.eps}
+	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.5$ at different time steps.}
+	 \label{fig:FTBSsigma05d0}
+\end{figure}
+\vspace{1cm}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma075d0.eps}
+	\caption{Convection solution by the explicit FTBS method with $\sigma= 0.75$ at different time steps.}
+	 \label{fig:FTBSsigma075d0}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/Convection/sigma12d0.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ at $nt=0$ and $nt=55$.}
+	 \label{fig:FTBSsigma12d0}
+\end{figure}
+
+Figures \ref{fig:FTBSsigma025d05}, \ref{fig:FTBSsigma05d05}, \ref{fig:FTBSsigma075d05}, and \ref{fig:FTBSsigma12d05}
+illustrate the solutions of convection diffusion equation using FTBS with various $\sigma$ values at different time
+steps while keeping d value constant. As can be seen from these figures, for $\sigma = 1.2$, a convergent solution
+is obtained for the convection diffusion equation. Nonetheless, for $\sigma$ values smaller than 1.2, calculations
+gave divergent solutions.
+\vspace{1em}
+
+Figures \ref{fig:FTBSsigma12d05}, \ref{fig:FTBSsigma12d025}, and \ref{fig:FTBSsigma12d075} monitor the 
+solutions of convection diffusion equation using FTBS with various d values at different time steps
+while keeping $\sigma$ value constant. When the d value is decreased to 0.25 from 0.5, the solution remains
+convergent. Nevertheless, if the d value is increased, such as 0.75, distortion in wave curve is observed and
+the solution obtained is divergent. Comparing Figures \ref{fig:FTBSsigma12d05} and \ref{fig:FTBSsigma12d025},
+it is observed that the decrease in the amplitude of the waves is more significant for higher d values. In addition,
+the wave length increases faster for d = 0.5 compared to the increase in the wave length for d = 0.25.
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma025d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.25$ and $d=0.5$ at $nt=0$ and $nt=20$.}
+	 \label{fig:FTBSsigma025d05}
+\end{figure}
+\vspace{1cm}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma05d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.5$ and $d=0.5$ at $nt=0$ and $nt=25$.}
+	 \label{fig:FTBSsigma05d05}
+\end{figure}
+\newpage
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma075d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 0.75$ and $d=0.5$ at $nt=0$ and $nt=55$.}
+	 \label{fig:FTBSsigma075d05}
+\end{figure}
+\vspace{1cm}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d05.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.5$ at different time steps.}
+	 \label{fig:FTBSsigma12d05}
+\end{figure}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d025.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.25$ at different time steps.}
+	 \label{fig:FTBSsigma12d025}
+\end{figure}
+\vspace{1cm}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=8.5cm]{graphs/FTBS/ConvectionDiffusion/sigma12d075.eps}
+	\caption{Convection diffusion solution by the explicit FTBS method with $\sigma= 1.2$ and $d=0.75$ at different time steps.}
+	 \label{fig:FTBSsigma12d075}
+\end{figure}
+
+\newpage
+
+Overall, if the solutions of the convection-diffusion equation and the convection equation are
+compared, it can be denoted that for $\sigma$ values lower than 1.2 the FTBS equation gives convergent
+solutions for the convection equation whereas for the convection-diffusion equation the solutions
+obtained by FTBS equation is divergent.
+
+\subsection{Consistency Analysis of the Given FDE}
+
+Consistency analysis of given FDE is done in Subsection \ref{sub:cons}. Leading error terms are 
+shown in Equation \ref{eqnarray:leading}
+
 \subsection{Solution of the given FDE}
 
-\begin{figure}[!ht] 
+\begin{figure}[!h] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/Question4/sigma03d05.eps}
 	\caption{Solution of given FDE with $\sigma= 0.3$ and $d=0.5$ at different time steps.}
@@ -487,14 +501,14 @@ and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
  As a result, it is concluded that given FDE is unconditionally unstable.
 \newpage
 
-\begin{figure}[!ht] 
+\begin{figure}[!h] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/Question4/sigma08d08.eps}
 	\caption{Solution of given FDE with $\sigma= 0.8$ and $d=0.8$ at different time steps.}
 	\label{fig:Q4_2}
 \end{figure}
 
-\begin{figure}[!ht] 
+\begin{figure}[!h] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/Question4/sigma12d06.eps}
 	\caption{Solution of given FDE with $\sigma= 1.2$ and $d=0.6$ at different time steps.}
@@ -505,7 +519,7 @@ and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
 
 \subsection{Bonus: Implicit Solution}
 
-\begin{figure}[!ht] 
+\begin{figure}[!h] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/Bonus/sigma05d05.eps}
 	\caption{Implicit Solution of Convection diffusion equation with $\sigma= 0.5$ and $d=0.5$}
@@ -523,14 +537,14 @@ an accurate solution.
 
 \newpage
 
-\begin{figure}[!ht] 
+\begin{figure}[!h] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/Bonus/sigma12d05.eps}
 	\caption{Implicit Solution of Convection diffusion equation with $\sigma= 1.2$ and $d=0.5$}
 	\label{fig:b_2}
 \end{figure}
 
-\begin{figure}[!ht] 
+\begin{figure}[!h] 
 	\centering 
 	\includegraphics[max height=8.5cm]{graphs/Bonus/sigma05d12.eps}
 	\caption{Implicit Solution of Convection diffusion equation with $\sigma= 0.5$ and $d=1.2$}
