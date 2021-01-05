@@ -296,10 +296,6 @@ and the $3^{rd}$ and $5^{th}$ derivatives are dispersion errors.
 \newpage
 
 \section{Results and Discussion}
-\subsection{Formulation of explicit FDE based on FTCS }
-
-Explicit FDE is formulated in Method section. Explicit FDE is given in Equation \ref{eqn:FTCS}.
-
 \subsection{Stability of the Solution of the Explicit FDE of Convection Diffusion Equation}
 \begin{figure}[H] 
 	\centering 
@@ -480,11 +476,6 @@ compared, it can be denoted that for $\sigma$ values lower than 1.2 the FTBS equ
 solutions for the convection equation whereas for the convection-diffusion equation the solutions
 obtained by FTBS equation is divergent.
 
-\subsection{Consistency Analysis of the Given FDE}
-
-Consistency analysis of given FDE is done in Subsection \ref{sub:cons}. Leading error terms are 
-shown in Equation \ref{eqnarray:leading}
-
 \subsection{Solution of the given FDE}
 
 \begin{figure}[!h] 
@@ -498,7 +489,8 @@ shown in Equation \ref{eqnarray:leading}
 
  Stability of given FDE is numerically experimented for $\sigma$ and $d$ values between 0 and 2 with 0.05 spacing. 
  Some of the results this experimentation is given in Figures \ref{fig:Q4_1}, \ref{fig:Q4_2} and \ref{fig:Q4_3}. 
- As a result, it is concluded that given FDE is unconditionally unstable.
+ As a result, it is concluded that given FDE is unconditionally unstable. Although given FDE is found consistent 
+ in Section \ref{sub:cons}, as FDE is found to be unstable, numerical solution does not converge.
 \newpage
 
 \begin{figure}[!h] 
