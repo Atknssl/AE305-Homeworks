@@ -2,13 +2,14 @@ Module vars
   integer, parameter :: imax=201, jmax=121
   integer, parameter :: kres=10, kqout=100
   integer :: kmax,irs,ire,jrs,jre
-  real, parameter :: xl=10., yl=6., ck = 0.02, omega=1.2, rl2allow=-5.
+  real, parameter :: xl=10., yl=6., ck = 0.02, rl2allow=-5.
   real, dimension(imax,jmax) :: q_k,q_kp1, qx=0., qy=0.
-  real :: dx,dy,beta2,dx2i,dy2i, x(imax),y(jmax)
+  real :: dx,dy,beta2,dx2i,dy2i, x(imax),y(jmax), omega
+  integer :: boundary,method
 End module
 
 !------------------------------------------------------------------------------|
-!..A POINT/LINE ITERATIVE SOLVER FOR ELLIPTIC PDEs                             |
+!..A POINT ITERATIVE SOLVER FOR ELLIPTIC PDEs                                  |
 !  Course:  AE305                                                              |
 !------------------------------------------------------------------------------|
  program ELLIPTIC
@@ -23,8 +24,6 @@ End module
      call BC()
 !..Point iterative solutions
      call POINT_ITERATE()
-!..or Line iterative solutions
-!    call LINE_ITERATE()
 !..Evaluate the L2 norm of the residual and update q_k
      rl2 = SQRT(SUM((q_kp1-q_k)**2))
      if(k .eq. 2) rl2_1=rl2
@@ -42,12 +41,61 @@ End module
   close(2)
   call QOUT(k)
 
+  open(3,file='x5line.dat',form='formatted')
+  ixline = 5 / dx + 1
+  do j = 1,jmax
+    write(3,*) j * dy  ,q_k(ixline,j)
+  enddo
+  close(3)
+
+  open(4,file='y3line.dat',form='formatted')
+  iyline = 3 / dy + 1
+  do i = 1,imax
+    write(4,*) i * dx  ,q_k(i,iyline)
+  enddo
+  close(4)
+
  stop
 end
 
 !------------------------------------------------------------------------
 subroutine INIT()
  use vars
+
+ write(*,'(a)') 'Select'
+ write(*,'(a)') ' [1] Without Radiator'
+ write(*,'(a)') ' [2] With Radiator'
+ write(*,'(a)',advance='no')'>> '
+ read(*,*) boundary
+
+if(.not.(boundary.eq. 1 .or. boundary.eq.2)) then
+  write(*,'(a)') 'Invalid Selection'
+  stop
+endif
+
+if(boundary .eq. 2) then
+  write(*,'(a)') 'Set radiator position'
+  write(*,'(a)') 'Enter irs, ire, jrs, jre'
+  write(*,'(a)') '(0 < irs,ire < 10) , (0 < jrs,jre < 6)'
+  read(*,*) airs,aire,ajrs,ajre
+endif
+
+write(*,'(a)') 'Select'
+write(*,'(a)') ' [1] Point Jacobi'
+write(*,'(a)') ' [2] Gauss-Seidel'
+write(*,'(a)') ' [3] SOR'
+write(*,'(a)',advance='no')'>> '
+read(*,*) method
+
+if(.not.(method.eq. 1 .or. method.eq.2 .or. method.eq.3)) then
+  write(*,'(a)') 'Invalid Selection'
+  stop
+endif
+
+if(method .eq. 3) then
+  write(*,'(a)') 'Enter omega (0 < omega < 2)'
+  read(*,*) omega
+endif
 
   write(*,'(a)',advance='no') 'Enter kmax: '
   read(*,*) kmax
@@ -66,10 +114,12 @@ subroutine INIT()
   q_k = 0.       !..Initial guess
 
 !..Set radiator location
-  irs = 2/dx + 1
-  ire = 8/dx + 1
-  jrs = 5.6/dy + 1
-  jre = 5.8/dy + 1
+  if(boundary.eq.2) then
+  irs = airs/dx + 1
+  ire = aire/dx + 1
+  jrs = ajrs/dy + 1
+  jre = ajre/dy + 1
+  endif
 
  open(2,file='residual.dat',form='formatted')
  return 
@@ -83,12 +133,19 @@ subroutine POINT_ITERATE()
   do j = 2,jmax-1
   do i = 2,imax-1
 !..Exclude the radiator from the solution domain
-!...
+    if(boundary .eq. 2) then
+      ...
+    endif
 !..Implement, Point Jacobi, Gauss-Seidel and SOR methods
+    if(method .eq. 1) then ! Point Jacobi
    q_kp1(i,j) = cm*( q_k(i-1,j) + q_k(i+1,j) + beta2*(q_k(i,j-1) + q_k(i,j+1)) )
+    elseif(method .eq. 2) then ! Gauss-Seidel
+      ...
+    elseif(method.eq.3) then ! SOR
+      ...
+    endif
   enddo
   enddo
-
  return 
 end
 
@@ -108,9 +165,10 @@ subroutine BC()
   q_kp1(imax,:) = q_k(imax,:)
 
 !..Set BCs for the radiator
-! T_k( irs:ire, jrs:jre )   = 50
-! T_kp1( irs:ire, jrs:jre ) = 50
-
+  if(boundary .eq. 2) then
+  q_k( irs:ire, jrs:jre )   = 50
+  q_kp1( irs:ire, jrs:jre ) = 50
+  endif
  return 
 end
 
@@ -120,8 +178,8 @@ subroutine FLUX()
 !..Compute the heat flux vectors
   do j = 2,jmax-1
   do i = 2,imax-1
-       qx(i,j) = ..
-       qy(i,j) = ..
+    qx(i,j) = ...
+    qy(i,j) = ...
   enddo
   enddo
  return 
