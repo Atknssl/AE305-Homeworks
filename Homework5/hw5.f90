@@ -133,16 +133,18 @@ subroutine POINT_ITERATE()
   do j = 2,jmax-1
   do i = 2,imax-1
 !..Exclude the radiator from the solution domain
-    if(boundary .eq. 2) then
-      ...
-    endif
+     if(boundary.eq.2) then
+     if (((j.ge.jrs).and.(j.le.jre)) .and. ((i.ge.irs).and.(i.le.ire))) then
+       cycle
+     endif
+   endif
 !..Implement, Point Jacobi, Gauss-Seidel and SOR methods
     if(method .eq. 1) then ! Point Jacobi
    q_kp1(i,j) = cm*( q_k(i-1,j) + q_k(i+1,j) + beta2*(q_k(i,j-1) + q_k(i,j+1)) )
     elseif(method .eq. 2) then ! Gauss-Seidel
-      ...
+   q_kp1(i,j) = cm*( q_kp1(i-1,j) + q_k(i+1,j) + beta2*(q_kp1(i,j-1) + q_k(i,j+1)) )
     elseif(method.eq.3) then ! SOR
-      ...
+   q_kp1(i,j) = (1-omega)*q_k(i,j) + omega*cm*( q_kp1(i-1,j) + q_k(i+1,j) + beta2*(q_kp1(i,j-1) + q_k(i,j+1)) )
     endif
   enddo
   enddo
@@ -178,8 +180,8 @@ subroutine FLUX()
 !..Compute the heat flux vectors
   do j = 2,jmax-1
   do i = 2,imax-1
-    qx(i,j) = ...
-    qy(i,j) = ...
+    qx(i,j) = -ck*(q_k(i+1,j)-q_k(i,j))/dx
+    qy(i,j) = -ck*(q_k(i,j+1)-q_k(i,j))/dy
   enddo
   enddo
  return 
