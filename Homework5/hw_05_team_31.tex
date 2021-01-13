@@ -37,6 +37,23 @@ AE 305, 2020-21 Fall \hfill \textbf{HW \HWno} \hfill \textbf{Team \TeamNo} \\
 %Report start
 
 \section{Introduction}
+Elliptic partial differential equations can be solved by using finite difference equations,
+and the most common FDE for the solution of an elliptic PDE is obtained by second-order
+central difference difference approximations of the derivatives. Afterwards, the FDE can
+be solved either by direct solution methods or iterative methods. In this homework, a 2D
+heat equation is given:
+
+\begin{equation}
+	\frac{\partial^2T}{\partial x^2} + \frac{\partial^2T}{\partial y^2} = 0
+\end{equation}
+
+It is requested to compute the steady state temperature distribution on a given 2D model
+of a room by solving the above equation for two different cases, one is with a radiator and
+the other is without a radiator. First, the iterative methods are used; Point 
+Jacobi, Gauss-Seidel, SOR and Line Gauss-Seidel methods, then the solution is obtained
+by the direct solution methods.
+
+It is also asked to compare the convergence rates of the iterative methods.
 \section{Method}
 \section{Results and Discussion}
 \section{Conclusion}
