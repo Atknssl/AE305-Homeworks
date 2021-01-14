@@ -63,9 +63,21 @@ vector is given as follows:
 
 It is also asked to compare the convergence rates of the iterative methods.
 \section{Method}
+
+\newpage
 \section{Results and Discussion}
 
 \subsection{Solution of the Heat Equation in the Absence of a Radiator}
+Figures \ref{fig:pointnorad}, \ref{fig:gaussnorad}, and \ref{fig:sornorad}
+illustrates the solution of the heat equation by using Point Jacobi, Gauss-Seidel,
+and SOR methods, respectively. As can be seen from these figures, all the solutions
+with different methods converged to approximately the same heat flux distributions.
+In all solutions, flux vectors have the same directions, which are from the walls
+with higher temperature to the wall with the lower temperature perpendicularly.
+Moreover, near the insulated wall, these flux vectors are parallel and the temperature
+contours are perpendicular to the wall since the temperature gradient is zero at the
+insulated wall. Therefore, there is no heat transfer across the insulated wall. 
+
 \begin{figure}[H] 
 	\centering 
 	\includegraphics[max height=12cm]{graphs/point_norad/point_norad.png}
@@ -84,14 +96,11 @@ It is also asked to compare the convergence rates of the iterative methods.
 	\caption{Solution of the heat equation by SOR method.}
  	\label{fig:sornorad}
 \end{figure}
-\subsubsection{Comparison of the Convergence Rates}
-\begin{figure}[H] 
-	\centering 
-	\includegraphics[max height=9cm]{graphs/residual_SOR19_norad.eps}
-	\caption{Convergence rates of Point Jacobi, Gauss-Seidel and SOR methods.}
- 	\label{fig:convnorad}
-\end{figure}
+
 \subsubsection{Temperature Distributions along x=5m and y=3m}
+Figures \ref{fig:x5norad} and \ref{fig:y3norad} shows the temperature distributions along
+x=5 and y=3 lines respectively. It can be oberved that all methods gave the same result with
+a negligible difference among them although their convergence rates differ.  
 \begin{figure}[H] 
 	\centering 
 	\includegraphics[max height=9cm]{graphs/x5_SOR19_norad.eps}
@@ -124,13 +133,7 @@ It is also asked to compare the convergence rates of the iterative methods.
 	\caption{Solution of the heat equation by SOR method.}
  	\label{fig:sorrad}
 \end{figure}
-\subsubsection{Comparison of the Convergence Rates}
-\begin{figure}[H] 
-	\centering 
-	\includegraphics[max height=9cm]{graphs/residual_SOR19_defaultrad.eps}
-	\caption{Convergence rates of Point Jacobi, Gauss-Seidel and SOR methods.}
- 	\label{fig:convrad}
-\end{figure}
+
 \subsubsection{Temperature Distributions along x=5m and y=3m}
 \begin{figure}[H] 
 	\centering 
@@ -143,6 +146,32 @@ It is also asked to compare the convergence rates of the iterative methods.
 	\includegraphics[max height=9cm]{graphs/y3_SOR19_defaultrad.eps}
 	\caption{Temperature distributions along y=3m}
  	\label{fig:y3rad}
+\end{figure}
+
+\subsection{Comparison of the Convergence Rates}
+Figures \ref{fig:convnorad} and \ref{fig:convrad} demonstrate the convergence rates of Point
+Jacobi, Gauss-Seidel, and SOR methods for the solutions of the heat equation without and with
+the radiator, respectively. As can be observed from these figure, the responses of Point Jacobi
+method are the slowest. On the other hand, Gauss-Seidel method converges faster for both.
+This is because it uses newly computed values of the unknowns as they become available as 
+mentioned in Subsection ?. Furthermore, SOR method computed the solutions with minimum number
+of iterations which is a result of the use of the relaxation parameter. This is also mentioned
+in Subsection ?. The relaxation parameter is taken 1.9 for both since this is its largest
+possible value which is found experimentally. For higher relaxation parameter values, the
+solutions did not converge.
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=9cm]{graphs/residual_SOR19_norad.eps}
+	\caption{Convergence rates of Point Jacobi, Gauss-Seidel and SOR methods in the absence of the radiator.}
+ 	\label{fig:convnorad}
+\end{figure}
+
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=9cm]{graphs/residual_SOR19_defaultrad.eps}
+	\caption{Convergence rates of Point Jacobi, Gauss-Seidel and SOR methods in the presence of the radiator.}
+ 	\label{fig:convrad}
 \end{figure}
 
 \section{Conclusion}
