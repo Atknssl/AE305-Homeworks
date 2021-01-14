@@ -63,6 +63,65 @@ vector is given as follows:
 
 It is also asked to compare the convergence rates of the iterative methods.
 \section{Method}
+FDE of the governing equation of this homework (Equation \ref{eqn:heateqn}) is obtained by second-order central difference approximations of the derivatives.
+\begin{equation}
+	\frac{T_{i+1,j}-2T_{i,j}+T_{i-1,j}}{\Delta x^2}+\frac{T_{i,j+1}-2T_{i,j}+T_{i,j-1}}{\Delta y^2}
+	\label{eqn:fde}
+\end{equation}
+When $i$ and $j$ coincide with the boundries of the room or the radiator, they are excluded
+from the solution of the heat equation since at these points the temperatures are equal to
+temperatures of the boundries.\\
+When $\beta = \frac{\Delta x}{\Delta y}$ substituted into Equation \ref{eqn:fde}, equation becomes:
+\begin{eqnarray}
+	T_{i+1,j}-2T_{i,j}+T_{i-1,j}+\beta ^2(T_{i,j+1}-2T_{i,j}+T_{i,j-1})&=&0 \nonumber \\
+	\beta^2T_{i,j-1}+T_{i-1,j}-2(1+\beta^2)T_{i,j}+T_{i+1,j}+\beta ^2T_{i,j-1}&=&0 
+	\label{eqn:basic}
+\end{eqnarray}
+This five-point formula gives the system of linear algebraic equations, which can be solved by two methods,
+namely direct solution methods and iterative solution methods.
+\subsection{Direct Solution Method}
+\subsubsection{Gauss Elimination}
+In this homework, Gauss elimination method is used as direct solution method.
+\subsection{Iterative Solution Methods}
+\subsubsection{Point Iterative Methods}
+\paragraph{Point Jacobi Iteration}
+In this method, every terms in Equation \ref{eqn:basic} are kept at $k$
+where $k$ is denoted as iteration level except $T_{i,j}$. $T_{i,j}$ which is kept
+at new iteration level $k+1$. Then equation becomes:
+\begin{equation}
+	T_{i,j}^{k+1}=\frac{1}{2(1+\beta^2)}[T_{i-1,j}^{k}+T_{i+1,j}^{k}+\beta ^2(T_{i,j-1}^{k}+T_{i,j+1}^{k})]
+\label{eqn:jacobi}
+\end{equation}
+where $k$ corresponds previous calculated values or initial guess at the start
+of iteration process of $T$ values over the room except boundary conditions.
+\paragraph{Gauss-Seidel Iteration}
+Differently from Point Jacobi method, in Gauss-Seidel method, the unknown dependent
+variable values of Equation \ref{eqn:basic} are used as soon as they become available
+at the $k+1$ iteration level.
+\begin{equation}
+	T_{i,j}^{k+1}=\frac{1}{2(1+\beta^2)}[T_{i-1,j}^{k+1}+T_{i+1,j}^{k}+\beta ^2(T_{i,j-1}^{k+1}+T_{i,j+1}^{k})]
+\label{eqn:gs}
+\end{equation}
+\paragraph{Successive Over-Relaxation Method}
+In this method, the convergence of solution is can be accelerated by multiplying the relaxation
+parameter,$\omega$, with the amount of the change in each step. First, $T_{i,j}^k$ is substracted
+from the Gauss-Seidel iteration method to obtain $\Delta T$.
+\begin{equation}
+	T_{i,j}^{k+1}\vert_{GS}-T_{i,j}^{k}=\Delta T\vert{GS}=\frac{1}{2(1+\beta^2)}[T_{i-1,j}^{k+1}+T_{i+1,j}^{k}+\beta ^2(T_{i,j-1}^{k+1}+T_{i,j+1}^{k})]-T_{i,j}^{k}
+\label{eqn:sor1}
+\end{equation}
+Then, $\Delta T$ is multiplied by $\omega$
+\begin{eqnarray}
+	T_{i,j}^{k+1}\vert_{SOR}&=&T_{i,j}^{k}+\omega\Delta T\vert{GS} \nonumber \\
+	&=&(1-\omega)T_{i,j}^{k}+\frac{\omega}{2(1+\beta^2)}[T_{i-1,j}^{k+1}+T_{i+1,j}^{k}+\beta^2(T_{i,j-1}^{k+1}+T_{i,j+1}^{k})]
+	\label{eqn:sor}
+\end{eqnarray}
+To obtain convergent solutions, relaxatation parameter,$\omega$, is chosen in (0,2) interval.
+The optimum value of $\omega$ can be determined by numerical experimentations. If $\omega$ is chosen in
+(0,1) interval, under-relaxation occurs, which prevents the divegence by slowing the convergence for the solution of
+certain non-linear partial derivative equations.
+\subsubsection{Line Iterations}
+\paragraph{Line Gauss-Seidel Method}
 
 \newpage
 \section{Results and Discussion}
@@ -133,6 +192,17 @@ a negligible difference among them although their convergence rates differ.
 	\caption{Solution of the heat equation by SOR method.}
  	\label{fig:sorrad}
 \end{figure}
+Figures \ref{fig:pointrad}, \ref{fig:gaussrad}, and \ref{fig:sorrad}
+demonstrates the solution of the heat equation by using Point Jacobi, Gauss-Seidel,
+and SOR methods, respectively.From these figures, it can be observed that all the solutions
+with different methods converged to nearly the same heat flux distributions.
+In all solutions, the directions of the flux vectors are from the highest temperature surface
+,which is the radiator, to the lower temperature surfaces, which is the walls of the room,
+perpendicularly, except the insulated wall. Since the wall is insulated, the temperature
+gradient across the wall is zero; hence the flux vectors are parallel near the surface.
+Also, from the figures, it can be seen that all temperature contours which are intersect
+with the insulated wall are perpendicular to the wall. Thus, it can said that heat transfer
+does not occur from the room to the wall or reverse of it.
 
 \subsubsection{Temperature Distributions along x=5m and y=3m}
 \begin{figure}[H] 
@@ -147,6 +217,12 @@ a negligible difference among them although their convergence rates differ.
 	\caption{Temperature distributions along y=3m}
  	\label{fig:y3rad}
 \end{figure}
+Figures \ref{fig:x5rad} and \ref{fig:y3rad} illustrates the temperature distributions with the
+existence of radiator along x=5m and y=3m lines, respectively. In Figure \ref{fig:x5rad}, sudden
+change is observed near the y = 6m. The reason for this is that there is radiator between y = 5.6m
+and 5.8m. Therefore, a sudden rise in temperature is seen before y=5.8 meters. This causes distortion
+in both figures. However, in Figure \ref{fig:y3rad}, due to the the length of the radiator is 
+longer in x-axis, its effect along y = 3m is less sudden.
 
 \subsection{Comparison of the Convergence Rates}
 Figures \ref{fig:convnorad} and \ref{fig:convrad} demonstrate the convergence rates of Point
