@@ -341,4 +341,30 @@ the coldest wall.
 
 
 \section{Conclusion}
+Given a 2D model of a room, with a size of 10m x 6m, it is requested to solve heat conduction equation for
+the room. For this purpose, various numerical methods for the solution of an elliptic partial differential
+equation are used. First, Point Jacobi, Gauss-Seidel, Line Gauss-Seidel and SOR methods are used for two cases,
+one in the existence of a radiator and the other is in the absence of a radiator. It was concluded that Point
+Jocobi method is the slowest responding method since it does not uses the newly computed values of unknowns in the k+1 iteration
+level as they become available whereas Gauss-Seidel, Line Gauss-Seidel and SOR methods use them. As a result of this, Gauss-Seidel,
+Line Gauss-Seidel and SOR methods converged faster than Point-Jacobi method. Comparing Gauss-Seidel and Line Gauss-Seidel methods,
+Line Gauss-Seidel method converges faster as one more unknown variable is expressed at the k + 1 iteration level and the influence
+of the BC at $i = 1$ and $i = imax$ are reflected into the solution immediately. Furthermore, it was obvious
+from Figures \ref{fig:convnorad} and \ref{fig:convrad}, convergence of SOR method occurs earlier then
+that of all methods. This is because SOR method makes use of the amount of change in each step to 
+estimate the unknown variable at the new iteration level to accelerate the convergence of the solution, and
+it multiplies the change by the relaxation parameter.
+
+According to the experimentations made, the value of $\Delta x$ and $\Delta y$ had an impact on the solution. 
+For the calculations mentioned above, $\Delta x = 0.05$ and $\Delta y = 0.05$ . Then the calculations are 
+repeated for higher and smaller values of $\Delta x$ and $\Delta y$ such that for the former $\Delta x = 0.135$
+and $\Delta y = 0.154$ and for the latter $\Delta x = 0.025$ and $\Delta y = 0.025$. It was observed that the
+medium and higher values yield to more accurate results whereas smaller values lead to distortions in the
+temperature distribution.
+
+The location and the size of the radiator also changed the solution. For the first calculations, the radiator
+was placed near the upper wall and its size was 6m x 0.2m. When it is moved to the middle of the room, the upper
+wall is less heated. While it is still in the middle of the room, but changed in size (2m x 2m), the middle of
+the upper wall is more heated since the radiator is longer vertically, but the edges of the upper wall is less
+heated since the radiator is shorter horizontally.
 \end{document}
