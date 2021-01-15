@@ -150,9 +150,9 @@ The effect of BCs at i=0 and i=imax is instantly visible in the solution.
 \section{Results and Discussion}
 
 \subsection{Solution of the Heat Equation in the Absence of a Radiator}
-Figures \ref{fig:pointnorad}, \ref{fig:gaussnorad}, and \ref{fig:sornorad}
+Figures \ref{fig:pointnorad}, \ref{fig:gaussnorad}, \ref{fig:sornorad}, \ref{fig:linegaussnorad}, and \ref{fig:directnorad}
 illustrates the solution of the heat equation by using Point Jacobi, Gauss-Seidel,
-and SOR methods, respectively. As can be seen from these figures, all the solutions
+SOR, Line Gauss-Seidel, and Direct methods, respectively. As can be seen from these figures, all the solutions
 with different methods converged to approximately the same heat flux distributions.
 In all solutions, flux vectors have the same directions, which are from the walls
 with higher temperature to the wall with the lower temperature perpendicularly.
@@ -178,6 +178,19 @@ insulated wall. Therefore, there is no heat transfer across the insulated wall.
 	\caption{Solution of the heat equation by SOR method.}
  	\label{fig:sornorad}
 \end{figure}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=12cm]{graphs/linegauss_norad/linegauss_norad.png}
+	\caption{Solution of the heat equation by Line Gauss-Seidel method.}
+ 	\label{fig:linegaussnorad}
+\end{figure}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=12cm]{graphs/linegauss_norad/linegauss_norad.png}
+	\caption{Solution of the heat equation by Direct method.}
+ 	\label{fig:directnorad}
+\end{figure}
+
 
 \subsubsection{Temperature Distributions along x=5m and y=3m}
 Figures \ref{fig:x5norad} and \ref{fig:y3norad} shows the temperature distributions along
@@ -215,9 +228,15 @@ a negligible difference among them although their convergence rates differ.
 	\caption{Solution of the heat equation by SOR method.}
  	\label{fig:sorrad}
 \end{figure}
-Figures \ref{fig:pointrad}, \ref{fig:gaussrad}, and \ref{fig:sorrad}
+\begin{figure}[H] 
+	\centering 
+	\includegraphics[max height=12cm]{graphs/linegauss_rad_default/linegauss_rad_default.png}
+	\caption{Solution of the heat equation by Line Gauss-Seidel method.}
+ 	\label{fig:linegaussrad}
+\end{figure}
+Figures \ref{fig:pointrad}, \ref{fig:gaussrad}, \ref{fig:sorrad}, and \ref{fig:linegaussrad}
 demonstrates the solution of the heat equation by using Point Jacobi, Gauss-Seidel,
-and SOR methods, respectively.From these figures, it can be observed that all the solutions
+ SOR,and Line Gauss-Seidel methods, respectively.From these figures, it can be observed that all the solutions
 with different methods converged to nearly the same heat flux distributions.
 In all solutions, the directions of the flux vectors are from the highest temperature surface
 ,which is the radiator, to the lower temperature surfaces, which is the walls of the room,
@@ -249,11 +268,14 @@ longer in x-axis, its effect along y = 3m is less sudden.
 
 \subsection{Comparison of the Convergence Rates}
 Figures \ref{fig:convnorad} and \ref{fig:convrad} demonstrate the convergence rates of Point
-Jacobi, Gauss-Seidel, and SOR methods for the solutions of the heat equation without and with
+Jacobi, Gauss-Seidel,SOR, and Line Gauss-Seidel methods for the solutions of the heat equation without and with
 the radiator, respectively. As can be observed from these figure, the responses of Point Jacobi
 method are the slowest. On the other hand, Gauss-Seidel method converges faster for both.
 This is because it uses newly computed values of the unknowns as they become available as 
-mentioned in Subsection ?. Furthermore, SOR method computed the solutions with minimum number
+mentioned in Subsection ?. Furthermore, Line Gauss-Seidel method gives the faster convergence
+rate than Gauss-Seidel method. Because as mentioned in Subsection ??, in Line-Gauss Seidel method,
+system of equations are solved simultaneously and it includes one more unknown variable than Gaus-Seidel method.
+.However, among all methods, SOR method computed the solutions with minimum number
 of iterations which is a result of the use of the relaxation parameter. This is also mentioned
 in Subsection ?. The relaxation parameter is taken 1.9 for both since this is its largest
 possible value which is found experimentally. For higher relaxation parameter values, the
@@ -315,6 +337,48 @@ would not increase the accuracy of result significantly.
 	\caption{Temperature distribution on a 2D room with radiator at middle of the room with different size}
  	\label{fig:middlelong}
 \end{figure}
+Figure \ref{fig:sorrad} demonstrates the temperature distribution
+on the room with radiator with size $6\times0.2 m^2$, which is
+neighbor to the wall with $0^\circ C$. Figure \ref{fig:middlelong} illustrates the
+temperature distribution on the room with radiator with the same size but at
+the middle of the room. Figure \ref{fig:middle} shows the temperature
+distribution with radiator at the middle of the room with size $2\times2 m^2$.
+It can be obtained from Figure \ref{fig:sorrad} and \ref{fig:middlelong},
+changing the location of the radiator from the coldest wall to the middle
+of the room causes inefficiency to evenly heat the entire room. Since all walls do not have
+the same temperature, putting the source of heat at the middle of the room
+is not reasonable to heat everywhere evenly. Moreover, it can be observed that from Figure
+\ref{fig:middlelong} and \ref{fig:middle}, changing the size of the radiator is not logical.
+Since horizantal line of the radiator is shortened, it can not be sufficient to heat area near to
+the coldest wall. 
+
+
 
 \section{Conclusion}
+Given a 2D model of a room, with a size of 10m x 6m, it is requested to solve heat conduction equation for
+the room. For this purpose, various numerical methods for the solution of an elliptic partial differential
+equation are used. First, Point Jacobi, Gauss-Seidel, Line Gauss-Seidel and SOR methods are used for two cases,
+one in the existence of a radiator and the other is in the absence of a radiator. It was concluded that Point
+Jocobi method is the slowest responding method since it does not uses the newly computed values of unknowns in the k+1 iteration
+level as they become available whereas Gauss-Seidel, Line Gauss-Seidel and SOR methods use them. As a result of this, Gauss-Seidel,
+Line Gauss-Seidel and SOR methods converged faster than Point-Jacobi method. Comparing Gauss-Seidel and Line Gauss-Seidel methods,
+Line Gauss-Seidel method converges faster as one more unknown variable is expressed at the k + 1 iteration level and the influence
+of the BC at $i = 1$ and $i = imax$ are reflected into the solution immediately. Furthermore, it was obvious
+from Figures \ref{fig:convnorad} and \ref{fig:convrad}, convergence of SOR method occurs earlier then
+that of all methods. This is because SOR method makes use of the amount of change in each step to 
+estimate the unknown variable at the new iteration level to accelerate the convergence of the solution, and
+it multiplies the change by the relaxation parameter.
+
+According to the experimentations made, the value of $\Delta x$ and $\Delta y$ had an impact on the solution. 
+For the calculations mentioned above, $\Delta x = 0.05$ and $\Delta y = 0.05$ . Then the calculations are 
+repeated for higher and smaller values of $\Delta x$ and $\Delta y$ such that for the former $\Delta x = 0.135$
+and $\Delta y = 0.154$ and for the latter $\Delta x = 0.025$ and $\Delta y = 0.025$. It was observed that the
+medium and higher values yield to more accurate results whereas smaller values lead to distortions in the
+temperature distribution.
+
+The location and the size of the radiator also changed the solution. For the first calculations, the radiator
+was placed near the upper wall and its size was 6m x 0.2m. When it is moved to the middle of the room, the upper
+wall is less heated. While it is still in the middle of the room, but changed in size (2m x 2m), the middle of
+the upper wall is more heated since the radiator is longer vertically, but the edges of the upper wall is less
+heated since the radiator is shorter horizontally.
 \end{document}
