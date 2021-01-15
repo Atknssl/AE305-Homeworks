@@ -102,6 +102,9 @@ endif
 
   dx = xl/(imax-1)
   dy = yl/(jmax-1)
+
+  print*, "Deltax: ",dx
+  print*, "Deltay: ",dy
   beta2 = (dx/dy)**2
 
 !..Grid generation 
