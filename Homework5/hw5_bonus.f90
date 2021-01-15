@@ -1,5 +1,5 @@
 Module vars
-  integer, parameter :: imax=100, jmax=20
+  integer, parameter :: imax=201, jmax=121
   integer, parameter :: kres=10, kqout=100
   integer :: kmax,irs,ire,jrs,jre
   real, parameter :: xl=10., yl=6., ck = 0.02, rl2allow=-5.
