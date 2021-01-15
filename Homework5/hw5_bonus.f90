@@ -1,6 +1,6 @@
 Module vars
-  integer, parameter :: imax=20, jmax=50
-  integer, parameter :: kres=10, kqout=1
+  integer, parameter :: imax=100, jmax=20
+  integer, parameter :: kres=10, kqout=100
   integer :: kmax,irs,ire,jrs,jre
   real, parameter :: xl=10., yl=6., ck = 0.02, rl2allow=-5.
   real, dimension(imax,jmax) :: q_k,q_kp1, qx=0., qy=0.
@@ -110,7 +110,7 @@ endif
   do j=1,jmax
      y(j)= dy*(j-1) 
   enddo
-  q_k = 0.       !..Initial guess
+  q_k = 0    !..Initial guess
 
 !..Set radiator location
   if(boundary.eq.2) then
@@ -129,11 +129,11 @@ subroutine DIRECT()
 use vars
 real, dimension(:,:), allocatable :: M
 real, dimension(:),allocatable :: B
-integer :: offset = imax - 2
+integer :: offset = imax - 1
 integer :: n = 0
 
 n = 0
-nmax = (imax -2 ) * (jmax - 2)
+nmax = (imax -1 ) * (jmax - 2)
 allocate(M(nmax,nmax))
 allocate(B(nmax))
 
@@ -141,8 +141,14 @@ M = 0
 B = 0
 
 do j = 2, jmax-1
-  do i = 2, imax-1
+  do i = 1, imax-1
     n = n+1
+    if(i .eq. 1) then
+      M(n,n) = 1
+      M(n,n+1) = -1
+      B(n) = 0
+      cycle
+    endif
     M(n,n) = -2 * (1+beta2)  ! b
     if(n .lt. nmax) M(n,n+1) = 1  ! c
     if(n .gt. 1) M(n,n-1) = 1  ! a
@@ -150,33 +156,32 @@ do j = 2, jmax-1
     if(n .lt. nmax - (offset-1)) M(n,n+offset) = beta2
 
     if(i .eq. 2) then
-      B(n) = B(n) - 1 * q_k(i-1,j)
+      B(n) = B(n) - 1 * q_kp1(i-1,j)
       if(n .gt. 1) M(n,n-1) = 0; ! a must disapper from matrix
     endif
 
     if(j .eq. 2) then
-      B(n) = B(n) - beta2 * q_k(i,j-1)
+      B(n) = B(n) - beta2 * q_kp1(i,j-1)
     endif
 
     if(i == imax-1) then
-      B(n) = B(n) - 1 * q_k(i+1,j)
+      B(n) = B(n) - 1 * q_kp1(i+1,j)
       if(n .ne. nmax) M(n,n+1) = 0; ! c must disappear from matrix
     endif
-
     if(j .eq. jmax-1) then
-      B(n) = B(n) - beta2 * q_k(i,j+1)
+      B(n) = B(n) - beta2 * q_kp1(i,j+1)
     endif
   enddo
 enddo
 call GAUSS(n,M,B)
 n = 0
 do j = 2, jmax-1
-  do i = 2, imax-1
+  do i = 1, imax-1
     n = n+1
     q_kp1(i,j) = B(n)
   enddo
 enddo
-call BC()
+if(boundary .eq. 2) q_kp1( irs:ire, jrs:jre ) = 50
 deallocate(M)
 deallocate(B)
 end
