@@ -86,58 +86,9 @@ equations formed by five-point formula (Equation \ref{eqn:basic}).
 \begin{equation}
 	aT_{i-1,j}+bT_{i,j}+cT_{i+1,j}+dT_{i,j-1}+eT_{i,j+1}=0
 \end{equation}
-with Dirichlet type BC for insulated wall and Neumann type BCs for other walls,
+with Neumann type BC for insulated wall and Dirichlet type BCs for other walls,
 the system of equations can be writen in $\underline{A}\mbox{ }\underline{T}=\underline{f}$ form
 where $\underline{A}$ is coefficient matrix.
-\begin{equation}
-	a_i x_{i-1}+b_i x_i+c_i x_{i+1}=f_i
-\end{equation}
-\begin{equation}
-	\begin{bmatrix}
-		b & c &       &   &   &       &       &       &   &   &       &   \\
-		a & b & c     &   &   & e     &       &       &   &   &       &   \\
-		  & a & b     & c &   &       & e     &       &   &   &       &   \\
-		  &   & a     & b & 0 &       &       & e     &   &   &       &   \\
-		d &   &       & 0 & b & c     &       &       & e &   &       &   \\
-		  & d &       &   & a & b     & c     &       &   & e &       &   \\
-		  &   &\ddots &   &   &\ddots &\ddots &\ddots &   &   &\ddots &   \\
-		  &   &       & d &   &       & a     & b     & 0 &   &       & e \\
-		  &   &       &   & d &       &       & 0     & b & c &       &   \\
-		  &   &       &   &   & d     &       &       & a & b & c     &   \\ 
-		  &   &       &   &   &       & d     &       &   & a & b     & c \\
-		  &   &       &   &   &       &       & d     &   &   & a     & b     
-		\end{bmatrix}
-	\begin{bmatrix}
-		T_{2,2}\\
-		T_{3,2} \\
-		 \\
-		T_{imax-1,2} \\
-		T_{2,3} \\
-		 \\
-		 \\
-		 T_{imax-1,jmax-2}\\
-		 T_{2,jmax-1}\\
-		 T_{3,jmax-1} \\ 
-		  \\
-		  T_{imax-1,jmax-1}
-		\end{bmatrix}
-	=
-	\begin{bmatrix}
-		-aT_{1,2}-dT_{2,1}\\
-		-dT_{3,1}\\
-		  \\
-		-cT_{imax,2}-dT_{imax-1,1} \\
-		-aT_{1,3} \\
-		0 \\
-		\vdots\\
-		-cT_{imax,jmax-2}\\
-		-aT_{1,jmax-1}-eT_{2,jmax}\\
-		-eT_{3,jmax}\\ 
-		 \\
-		 -cT_{imax,jmax-1}-eT_{imax-1,jmax}  
-	\end{bmatrix}
-	\label{eqn:matrx}
-\end{equation}
 This equation is solved by Gauss elimination method.
 
 \subsection{Iterative Solution Methods}
