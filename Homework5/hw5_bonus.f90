@@ -1,6 +1,6 @@
 Module vars
-  integer, parameter :: imax=50, jmax=50
-  integer, parameter :: kres=10, kqout=100
+  integer, parameter :: imax=20, jmax=50
+  integer, parameter :: kres=10, kqout=1
   integer :: kmax,irs,ire,jrs,jre
   real, parameter :: xl=10., yl=6., ck = 0.02, rl2allow=-5.
   real, dimension(imax,jmax) :: q_k,q_kp1, qx=0., qy=0.
@@ -133,21 +133,21 @@ integer :: offset = imax - 2
 integer :: n = 0
 
 n = 0
-
-allocate(M((imax -2 ) * (jmax - 2),(imax -2 ) * (jmax - 2)))
-allocate(B((imax -2 ) * (jmax - 2)))
+nmax = (imax -2 ) * (jmax - 2)
+allocate(M(nmax,nmax))
+allocate(B(nmax))
 
 M = 0
 B = 0
 
 do j = 2, jmax-1
-  do i = 3, imax-1
+  do i = 2, imax-1
     n = n+1
     M(n,n) = -2 * (1+beta2)  ! b
-    if(n .lt. (imax -2 ) * (jmax - 2)) M(n,n+1) = 1  ! c
+    if(n .lt. nmax) M(n,n+1) = 1  ! c
     if(n .gt. 1) M(n,n-1) = 1  ! a
     if(n .gt. offset) M(n,n-offset) = beta2
-    if(n .lt. (imax-2)*(jmax-2) - (offset-1)) M(n,n+offset) = beta2
+    if(n .lt. nmax - (offset-1)) M(n,n+offset) = beta2
 
     if(i .eq. 2) then
       B(n) = B(n) - 1 * q_k(i-1,j)
@@ -160,7 +160,7 @@ do j = 2, jmax-1
 
     if(i == imax-1) then
       B(n) = B(n) - 1 * q_k(i+1,j)
-      if(n .ne. (imax-2)*(jmax-2)) M(n,n+1) = 0; ! c must disappear from matrix
+      if(n .ne. nmax) M(n,n+1) = 0; ! c must disappear from matrix
     endif
 
     if(j .eq. jmax-1) then
@@ -168,8 +168,6 @@ do j = 2, jmax-1
     endif
   enddo
 enddo
-print*, n
-print*,"Entering Gauss"
 call GAUSS(n,M,B)
 n = 0
 do j = 2, jmax-1
@@ -179,7 +177,6 @@ do j = 2, jmax-1
   enddo
 enddo
 call BC()
-print*, n
 deallocate(M)
 deallocate(B)
 end
