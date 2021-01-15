@@ -84,10 +84,11 @@ write(*,'(a)') 'Select'
 write(*,'(a)') ' [1] Point Jacobi'
 write(*,'(a)') ' [2] Gauss-Seidel'
 write(*,'(a)') ' [3] SOR'
+write(*,'(a)') ' [4] LGS'
 write(*,'(a)',advance='no')'>> '
 read(*,*) method
 
-if(.not.(method.eq. 1 .or. method.eq.2 .or. method.eq.3)) then
+if(.not.(method.eq. 1 .or. method.eq.2 .or. method.eq.3 .or. method.eq.4)) then
   write(*,'(a)') 'Invalid Selection'
   stop
 endif
@@ -145,8 +146,24 @@ subroutine POINT_ITERATE()
    q_kp1(i,j) = cm*( q_kp1(i-1,j) + q_k(i+1,j) + beta2*(q_kp1(i,j-1) + q_k(i,j+1)) )
     elseif(method.eq.3) then ! SOR
    q_kp1(i,j) = (1-omega)*q_k(i,j) + omega*cm*( q_kp1(i-1,j) + q_k(i+1,j) + beta2*(q_kp1(i,j-1) + q_k(i,j+1)) )
+   elseif(method.eq.4) then !LGS
+    if (i.eq.2)then 
+      lhs(2)=a(i)*q_kp1(1,j)
+    elseif (i.eq.imax-1) then 
+      lhs(imax-1)=c(i)*q_kp1(imax,j)
+    else
+      lhs(i)=0.0
     endif
-  enddo
+  f(i)=q_k(i,j+1)+q_kp1(i,j-1)-lhs(i)
+  endif
+enddo
+  if(method.eq.4) then 
+    call THOMAS(2,imax-1,a,b,c,f)
+    q_kp1(2:imax-1,j)=f(2:imax-1)
+    if(boundary.eq.2) then
+      q_kp1( irs:ire, jrs:jre ) = 50.
+    end if
+  end if
   enddo
  return 
 end

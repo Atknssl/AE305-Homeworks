@@ -74,14 +74,51 @@ temperatures of the boundries.\\
 When $\beta = \frac{\Delta x}{\Delta y}$ substituted into Equation \ref{eqn:fde}, equation becomes:
 \begin{eqnarray}
 	T_{i+1,j}-2T_{i,j}+T_{i-1,j}+\beta ^2(T_{i,j+1}-2T_{i,j}+T_{i,j-1})&=&0 \nonumber \\
-	\beta^2T_{i,j-1}+T_{i-1,j}-2(1+\beta^2)T_{i,j}+T_{i+1,j}+\beta ^2T_{i,j-1}&=&0 
+	\beta^2T_{i,j-1}+T_{i-1,j}-2(1+\beta^2)T_{i,j}+T_{i+1,j}+\beta ^2T_{i,j+1}&=&0 
 	\label{eqn:basic}
 \end{eqnarray}
 This five-point formula gives the system of linear algebraic equations, which can be solved by two methods,
 namely direct solution methods and iterative solution methods.
 \subsection{Direct Solution Method}
 \subsubsection{Gauss Elimination}
-In this homework, Gauss elimination method is used as direct solution method.
+In this homework, Gauss elimination method is used as direct solution method. The system of linear
+equations formed by five-point formula (Equation \ref{eqn:basic}).
+\begin{equation}
+	aT_{i-1,j}+bT_{i,j}+cT_{i+1,j}+dT_{i,j-1}+eT_{i,j+1}=0
+\end{equation}
+with Dirichlet typ BCs, the system of equations can be writen in $\underline{A}\mbox{ }\underline{T}=\underline{f}$ form
+where $\underline{A}$ is coefficient matrix.
+\begin{equation}
+	a_i x_{i-1}+b_i x_i+c_i x_{i+1}=f_i
+\end{equation}
+\begin{equation}
+	\begin{bmatrix}
+		b     & c    & 0    &\dots & e   &\dots &0    &\dots &\dots&\dots \\
+		a     & b    & c    &0    &\dots &e     & 0   &\dots &\dots&\dots \\
+		0     & a    & b    &c    & 0   &\dots &e    &0    &\dots&\dots \\
+		\vdots&    & a    &b    & c   & 0    &\dots &e    &0    &\dots \\
+		d     & 0    & a    &b    & c   & 0    &\dots &\dots &e    &\dots \\
+		0     & d    & a    &b    & c   & 0    &\dots &\dots &\dots &e     \\
+		0     & 0    &\ddots &a    & c   & 0    &\dots &\dots &\dots &e      
+		\end{bmatrix}
+	\begin{Bmatrix}
+		x_1\\
+		x_2\\
+		\vdots\\
+		x_{k-1}\\
+		x_k
+		\end{Bmatrix}
+	=
+	\begin{Bmatrix}
+		f_1\\
+		f_2\\
+		\vdots\\
+		f_{k-1}\\
+		f_k
+	\end{Bmatrix}
+	\label{eqn:matrx}
+\end{equation}
+
 \subsection{Iterative Solution Methods}
 \subsubsection{Point Iterative Methods}
 \paragraph{Point Jacobi Iteration}
@@ -104,7 +141,7 @@ at the $k+1$ iteration level.
 \end{equation}
 \paragraph{Successive Over-Relaxation Method}
 In this method, the convergence of solution is can be accelerated by multiplying the relaxation
-parameter,$\omega$, with the amount of the change in each step. First, $T_{i,j}^k$ is substracted
+parameter, $\omega$, with the amount of the change in each step. First, $T_{i,j}^k$ is substracted
 from the Gauss-Seidel iteration method to obtain $\Delta T$.
 \begin{equation}
 	T_{i,j}^{k+1}\vert_{GS}-T_{i,j}^{k}=\Delta T\vert{GS}=\frac{1}{2(1+\beta^2)}[T_{i-1,j}^{k+1}+T_{i+1,j}^{k}+\beta ^2(T_{i,j-1}^{k+1}+T_{i,j+1}^{k})]-T_{i,j}^{k}
@@ -121,8 +158,22 @@ The optimum value of $\omega$ can be determined by numerical experimentations. I
 (0,1) interval, under-relaxation occurs, which prevents the divegence by slowing the convergence for the solution of
 certain non-linear partial derivative equations.
 \subsubsection{Line Iterations}
-\paragraph{Line Gauss-Seidel Method}
-
+\paragraph{Line Gauss-Seidel Method} In this method, iterations are made line by line, in one direction. One more term of Equation
+\ref{eqn:gs} is expressed at $k+1$ iteration level. Then, equation becomes:
+\begin{equation}
+	T_{i,j}^{k+1}=\frac{1}{2(1+\beta^2)}[T_{i-1,j}^{k+1}+T_{i+1,j}^{k+1}+\beta ^2(T_{i,j-1}^{k+1}+T_{i,j+1}^{k})]
+\end{equation}
+To make iteration line by line, j is kept constant. Therefore, every $T_{ ,j}$ term should be in left
+hand side of the equation.
+\begin{equation}
+	T_{i-1,j}^{k+1}-2(1+\beta^2)T_{i,j}^{k+1}+T_{i+1,j}^{k+1}=-\beta^2(T_{i,j+1}^{k}+T_{i,j-1}^{k+1})]
+\label{eqn:lgs}
+\end{equation}
+For constant j grid lines, Equation \ref{eqn:lgs} is applied to all i's. The
+system of linear equations which includes tridiagonal coefficient matrix is formed. Its
+convergence rate is higher than the Gauss-Seidel method. On the other hand, a system of equations
+is solved every iterations;hence, in each iteration, it requires more computations.
+The effect of BCs at i=0 and i=imax is instantly visible in the solution.
 \newpage
 \section{Results and Discussion}
 
