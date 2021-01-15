@@ -1,5 +1,5 @@
 Module vars
-  integer, parameter :: imax=201, jmax=121
+  integer, parameter :: imax=100, jmax=20
   integer, parameter :: kres=10, kqout=100
   integer :: kmax,irs,ire,jrs,jre
   real, parameter :: xl=10., yl=6., ck = 0.02, rl2allow=-5.
@@ -9,7 +9,7 @@ Module vars
 End module
 
 !------------------------------------------------------------------------------|
-!..A POINT ITERATIVE SOLVER FOR ELLIPTIC PDEs                                  |
+!..A LINE ITERATIVE / DIRECT SOLVER FOR ELLIPTIC PDEs                          |
 !  Course:  AE305                                                              |
 !------------------------------------------------------------------------------|
  program ELLIPTIC
@@ -23,7 +23,12 @@ End module
 !..Apply BCs 
      call BC()
 !..Point iterative solutions
-     call POINT_ITERATE()
+     if(method .eq. 1) then
+     call LINE_ITERATE()
+     endif
+     if(method .eq. 2) then
+      call DIRECT()
+     endif
 !..Evaluate the L2 norm of the residual and update q_k
      rl2 = SQRT(SUM((q_kp1-q_k)**2))
      if(k .eq. 2) rl2_1=rl2
@@ -81,20 +86,14 @@ if(boundary .eq. 2) then
 endif
 
 write(*,'(a)') 'Select'
-write(*,'(a)') ' [1] Point Jacobi'
-write(*,'(a)') ' [2] Gauss-Seidel'
-write(*,'(a)') ' [3] SOR'
+write(*,'(a)') ' [1] Line Gauss-Seidel'
+write(*,'(a)') ' [2] Direct Solution'
 write(*,'(a)',advance='no')'>> '
 read(*,*) method
 
-if(.not.(method.eq. 1 .or. method.eq.2 .or. method.eq.3)) then
+if(.not.(method.eq. 1 .or. method.eq.2)) then
   write(*,'(a)') 'Invalid Selection'
   stop
-endif
-
-if(method .eq. 3) then
-  write(*,'(a)') 'Enter omega (0 < omega < 2)'
-  read(*,*) omega
 endif
 
   write(*,'(a)',advance='no') 'Enter kmax: '
@@ -102,9 +101,6 @@ endif
 
   dx = xl/(imax-1)
   dy = yl/(jmax-1)
-
-  print*, "Deltax: ",dx
-  print*, "Deltay: ",dy
   beta2 = (dx/dy)**2
 
 !..Grid generation 
@@ -114,7 +110,7 @@ endif
   do j=1,jmax
      y(j)= dy*(j-1) 
   enddo
-  q_k = 0.       !..Initial guess
+  q_k = 0    !..Initial guess
 
 !..Set radiator location
   if(boundary.eq.2) then
@@ -129,31 +125,90 @@ endif
 end
 
 !-------------------------------------------------------------------
-subroutine POINT_ITERATE()
- use vars
+subroutine DIRECT()
+use vars
+real, dimension(:,:), allocatable :: M
+real, dimension(:),allocatable :: B
+integer :: offset = imax - 1
+integer :: n = 0
 
-  cm = 1.0/(2.0*(1. + beta2)) 
-  do j = 2,jmax-1
-  do i = 2,imax-1
-!..Exclude the radiator from the solution domain
-     if(boundary.eq.2) then
-     if (((j.ge.jrs).and.(j.le.jre)) .and. ((i.ge.irs).and.(i.le.ire))) then
-       cycle
-     endif
-   endif
-!..Implement, Point Jacobi, Gauss-Seidel and SOR methods
-    if(method .eq. 1) then ! Point Jacobi
-   q_kp1(i,j) = cm*( q_k(i-1,j) + q_k(i+1,j) + beta2*(q_k(i,j-1) + q_k(i,j+1)) )
-    elseif(method .eq. 2) then ! Gauss-Seidel
-   q_kp1(i,j) = cm*( q_kp1(i-1,j) + q_k(i+1,j) + beta2*(q_kp1(i,j-1) + q_k(i,j+1)) )
-    elseif(method.eq.3) then ! SOR
-   q_kp1(i,j) = (1-omega)*q_k(i,j) + omega*cm*( q_kp1(i-1,j) + q_k(i+1,j) + beta2*(q_kp1(i,j-1) + q_k(i,j+1)) )
+n = 0
+nmax = (imax -1 ) * (jmax - 2)
+allocate(M(nmax,nmax))
+allocate(B(nmax))
+
+M = 0
+B = 0
+
+do j = 2, jmax-1
+  do i = 1, imax-1
+    n = n+1
+    if(i .eq. 1) then
+      M(n,n) = 1
+      M(n,n+1) = -1
+      B(n) = 0
+      cycle
+    endif
+    M(n,n) = -2 * (1+beta2)  ! b
+    if(n .lt. nmax) M(n,n+1) = 1  ! c
+    if(n .gt. 1) M(n,n-1) = 1  ! a
+    if(n .gt. offset) M(n,n-offset) = beta2
+    if(n .lt. nmax - (offset-1)) M(n,n+offset) = beta2
+
+    if(i .eq. 2) then
+      B(n) = B(n) - 1 * q_kp1(i-1,j)
+      if(n .gt. 1) M(n,n-1) = 0; ! a must disapper from matrix
+    endif
+
+    if(j .eq. 2) then
+      B(n) = B(n) - beta2 * q_kp1(i,j-1)
+    endif
+
+    if(i == imax-1) then
+      B(n) = B(n) - 1 * q_kp1(i+1,j)
+      if(n .ne. nmax) M(n,n+1) = 0; ! c must disappear from matrix
+    endif
+    if(j .eq. jmax-1) then
+      B(n) = B(n) - beta2 * q_kp1(i,j+1)
     endif
   enddo
+enddo
+call GAUSS(n,M,B)
+n = 0
+do j = 2, jmax-1
+  do i = 1, imax-1
+    n = n+1
+    q_kp1(i,j) = B(n)
   enddo
- return 
+enddo
+if(boundary .eq. 2) q_kp1( irs:ire, jrs:jre ) = 50
+deallocate(M)
+deallocate(B)
 end
+!-------------------------------------------------------------------
+subroutine LINE_ITERATE()
+  use vars
+   real, dimension(imax) :: a,b,c
+   do j = 2,jmax-1
+   do i = 2,imax-1
+ !.. Line Gauss-Seidel
+     a(i) = 1
+     b(i) = -2*(1 + beta2)
+     c(i) = 1
+     q_kp1(i,j) = -beta2 * (q_k(i,j+1) + q_kp1(i,j-1))
+     if(i .eq. 2 ) q_kp1(i,j) = q_kp1(i,j) - a(i) * q_kp1(1,j)
+     if(i .eq. imax-1 ) q_kp1(i,j) = q_kp1(i,j) - c(i) * q_kp1(imax,j)
+   enddo
 
+   call THOMAS(2,imax-1,a,b,c,q_kp1(:,j))
+
+   enddo
+
+   ! Restore temperature inside the radiator
+   if(boundary .eq. 2) q_kp1( irs:ire, jrs:jre ) = 50
+  return 
+ end
+ 
 !-------------------------------------------------------------------
 subroutine BC()
  use vars
