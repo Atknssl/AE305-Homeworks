@@ -63,7 +63,8 @@ vector is given as follows:
 
 It is also asked to compare the convergence rates of the iterative methods.
 \section{Method}
-FDE of the governing equation of this homework (Equation \ref{eqn:heateqn}) is obtained by second-order central difference approximations of the derivatives.
+FDE of the governing equation of this homework (Equation \ref{eqn:heateqn}) is an elliptic partial differential
+equation,and it is obtained by second-order central difference approximations of the derivatives.
 \begin{equation}
 	\frac{T_{i+1,j}-2T_{i,j}+T_{i-1,j}}{\Delta x^2}+\frac{T_{i,j+1}-2T_{i,j}+T_{i,j-1}}{\Delta y^2}
 	\label{eqn:fde}
@@ -316,7 +317,7 @@ would not increase the accuracy of result significantly.
 \begin{figure}[H] 
 	\centering 
 	\includegraphics[max height=12cm]{graphs/imax402jmax242_default/imax402jmax242_default.png}
-	\caption{Temperature distribution in the room with $\Delta x=0.025$ and $\Delta y = 0.025$}
+	\caption{Temperature distribution on the room with $\Delta x=0.025$ and $\Delta y = 0.025$}
  	\label{fig:402242}
 \end{figure}
 \begin{figure}[H] 
@@ -329,29 +330,32 @@ would not increase the accuracy of result significantly.
 \begin{figure}[H] 
 	\centering 
 	\includegraphics[max height=12cm]{graphs/radiator_middle_long/radiator_middle_long.png}
-	\caption{Temperature distribution in the room with radiator at middle of the room}
+	\caption{Temperature distribution on the room with radiator at middle of the room}
  	\label{fig:middle}
 \end{figure}
 \begin{figure}[H] 
 	\centering 
 	\includegraphics[max height=12cm]{graphs/radiator_middle/radiator_middle.png}
-	\caption{Temperature distribution on a 2D room with radiator at middle of the room with different size}
+	\caption{Temperature distribution on the room with radiator at middle of the room with different size}
  	\label{fig:middlelong}
 \end{figure}
 Figure \ref{fig:sorrad} demonstrates the temperature distribution
-on the room with radiator with size $6\times0.2 m^2$, which is
+on the room with radiator with size $6m\times0.2m$, which is
 neighbor to the wall with $0^\circ C$. Figure \ref{fig:middlelong} illustrates the
 temperature distribution on the room with radiator with the same size but at
 the middle of the room. Figure \ref{fig:middle} shows the temperature
-distribution with radiator at the middle of the room with size $2\times2 m^2$.
+distribution with radiator at the middle of the room with size $2m\times2m$.
 It can be obtained from Figure \ref{fig:sorrad} and \ref{fig:middlelong},
 changing the location of the radiator from the coldest wall to the middle
 of the room causes inefficiency to evenly heat the entire room. Since all walls do not have
 the same temperature, putting the source of heat at the middle of the room
-is not reasonable to heat everywhere evenly. Moreover, it can be observed that from Figure
-\ref{fig:middlelong} and \ref{fig:middle}, changing the size of the radiator is not logical.
-Since horizantal line of the radiator is shortened, it can not be sufficient to heat area near to
-the coldest wall. 
+is not reasonable to heat everywhere evenly. Moreover, from Figure \ref{fig:middlelong}
+and \ref{fig:middle}, it can be observed that  changing the size of the radiator is
+not logical. Since horizontal length of the radiator is shortened, it can not be
+sufficient to heat area near to the edges of the coldest wall. But, vertical length
+of the raditor is extended, it is more effective to heat the middle of the coldest
+wall than in Figure \ref{fig:middlelong}. Overall, its effectiveness less than the other radiator
+which is longer in horizontal direction.
 
 
 
@@ -359,10 +363,9 @@ the coldest wall.
 Given a 2D model of a room, with a size of 10m x 6m, it is requested to solve heat conduction equation for
 the room. For this purpose, various numerical methods for the solution of an elliptic partial differential
 equation are used. First, Point Jacobi, Gauss-Seidel, Line Gauss-Seidel and SOR methods are used for two cases,
-one in the existence of a radiator and the other is in the absence of a radiator. It was concluded that Point
-Jocobi method is the slowest responding method since it does not uses the newly computed values of unknowns in the k+1 iteration
+one in the existence of a radiator and the other is in the absence of a radiator. It was concluded that Point Jacobi method is the slowest responding method since it does not uses the newly computed values of unknowns in the k+1 iteration
 level as they become available whereas Gauss-Seidel, Line Gauss-Seidel and SOR methods use them. As a result of this, Gauss-Seidel,
-Line Gauss-Seidel and SOR methods converged faster than Point-Jacobi method. Comparing Gauss-Seidel and Line Gauss-Seidel methods,
+Line Gauss-Seidel and SOR methods converged faster than Point Jacobi method. Comparing Gauss-Seidel and Line Gauss-Seidel methods,
 Line Gauss-Seidel method converges faster as one more unknown variable is expressed at the k + 1 iteration level and the influence
 of the BC at $i = 1$ and $i = imax$ are reflected into the solution immediately. Furthermore, it was obvious
 from Figures \ref{fig:convnorad} and \ref{fig:convrad}, convergence of SOR method occurs earlier then
