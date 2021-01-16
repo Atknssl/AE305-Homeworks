@@ -92,6 +92,7 @@ where $\underline{A}$ is coefficient matrix.
 This equation is solved by Gauss elimination method.
 
 \subsection{Iterative Solution Methods}
+\label{subsec:iterative}
 \subsubsection{Point Iterative Methods}
 \paragraph{Point Jacobi Iteration}
 In this method, every terms in Equation \ref{eqn:basic} are kept at $k$
@@ -272,12 +273,12 @@ Jacobi, Gauss-Seidel,SOR, and Line Gauss-Seidel methods for the solutions of the
 the radiator, respectively. As can be observed from these figure, the responses of Point Jacobi
 method are the slowest. On the other hand, Gauss-Seidel method converges faster for both.
 This is because it uses newly computed values of the unknowns as they become available as 
-mentioned in Subsection ?. Furthermore, Line Gauss-Seidel method gives the faster convergence
-rate than Gauss-Seidel method. Because as mentioned in Subsection ??, in Line-Gauss Seidel method,
+mentioned in Subsection \ref{subsec:iterative}. Furthermore, Line Gauss-Seidel method gives the faster convergence
+rate than Gauss-Seidel method. Because as mentioned in Subsection \ref{subsec:iterative}, in Line-Gauss Seidel method,
 system of equations are solved simultaneously and it includes one more unknown variable than Gaus-Seidel method.
 .However, among all methods, SOR method computed the solutions with minimum number
 of iterations which is a result of the use of the relaxation parameter. This is also mentioned
-in Subsection ?. The relaxation parameter is taken 1.9 for both since this is its largest
+in Subsection \ref{subsec:iterative}. The relaxation parameter is taken 1.9 for both since this is its largest
 possible value which is found experimentally. For higher relaxation parameter values, the
 solutions did not converge.
 
